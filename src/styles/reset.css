@@ -3,8 +3,6 @@
    License: none (public domain)
 */
 
-html,
-body,
 div,
 span,
 applet,
@@ -131,4 +129,8 @@ table {
 html,
 body {
   font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
 }

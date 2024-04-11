@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { BlackFont, GrayFont } from "../Question/Question";
+import { BlackFont, GrayFont } from "../Question/Question.styled";
+import { useState } from "react";
 
 const AnswerContainer = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   align-self: stretch;
 `;
 
-const Profile = styled.div`
+export const Profile = styled.div`
   display: flex;
   width: 48px;
   height: 48px;
@@ -25,7 +26,6 @@ const AnswerContent = styled.div`
   gap: 4px;
   flex: 1 0 0;
   color: var(--Grayscale-60);
-  font-feature-settings: "clig" off, "liga" off;
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
@@ -41,6 +41,8 @@ const Answerinfo = styled.div`
 `;
 
 function Answer() {
+  const [answer, setAnswer] = useState(true);
+
   return (
     <AnswerContainer>
       <Profile>프로필</Profile>
@@ -49,7 +51,7 @@ function Answer() {
           <BlackFont>닉네임</BlackFont>
           <GrayFont>시간</GrayFont>
         </Answerinfo>
-        <p>내용</p>
+        {answer ? <p>내용</p> : "답변 거절"}
       </AnswerContent>
     </AnswerContainer>
   );
