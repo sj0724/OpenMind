@@ -8,7 +8,7 @@ function App() {
     <>
       <Routes>
         <Route path="/answer" element={<AnswerList />} />
-        <Route paht="/question" element={<QuestionList />} />
+        <Route path="/question" element={<QuestionList />} />
       </Routes>
     </>
   );
