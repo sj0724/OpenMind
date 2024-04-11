@@ -4,10 +4,15 @@ import * as SA from "../PostAnswer/PostAnswer.styled";
 import thumbsUp from "../../assets/thumbs-up.svg";
 import thumbsDown from "../../assets/thumbs-down.svg";
 import kebab from "../../assets/kebab.svg";
+import { useGetSubjects } from "../../api/useGetSubject";
 
 function PostAnswer() {
   const [answerStatus, setAnswerStatus] = useState();
   const [answer, setAnswer] = useState(true);
+
+  const { data } = useGetSubjects();
+
+  console.log(data);
 
   return (
     <S.QuestBody>
