@@ -7,14 +7,13 @@ import axiosInstance from "../utils/axios";
  * @author yum
  * @date 23.04
  * @param
- * @return { profileImage, ownerName, folderName, links}
+ * @return { id, name, imageSource, questionCount, createdAt }
  */
 export const useGetSubjects = () => {
   const getSubjects = () => axiosInstance.get(`subjects`);
   const { error, data } = useAsync(getSubjects);
 
   const subjects = data?.data ?? [];
-  // const sortedFolderList = folderList.sort((a, b) => a?.id - b?.id);
 
   return { error, data: subjects };
 };
