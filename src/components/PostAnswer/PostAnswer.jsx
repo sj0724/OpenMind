@@ -25,8 +25,8 @@ function PostAnswer() {
         </SA.KebabButton>
       </SA.AnswerTopLayout>
       <S.QuestionContent>
-        <S.GrayFont>질문 시간</S.GrayFont>
-        <S.BlackFont>질문내용</S.BlackFont>
+        <S.Time>질문 시간</S.Time>
+        <S.QuestionDetail>질문내용</S.QuestionDetail>
       </S.QuestionContent>
       <S.QuestionModal>
         <S.ThumbnsBtn>
