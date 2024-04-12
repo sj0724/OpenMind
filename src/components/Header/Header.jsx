@@ -1,5 +1,5 @@
 import * as S from "./Header.styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DropdownMenu from "./DropdownMenu";
 import arrowDownImage from "../../../images/Arrow-down.png";
 import arrowUpImage from "../../../images/Arrow-up.png";

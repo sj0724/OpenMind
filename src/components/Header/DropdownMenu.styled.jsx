@@ -7,16 +7,18 @@ export const DropdownMenu = styled.div`
   border: 0.1rem solid var(--Grayscale-30);
   border-radius: 0.8rem;
   box-shadow: 0 4rem 4rem 0 #8c8c8c40;
-  margin-top: 0.5rem;
+  position: absolute;
+  z-index: 2;
+  top: 4.5rem;
 `;
 
 export const DropdownMenuItem = styled.li`
-  width: 7.3rem;
-  height: 2.5rem;
+  width: 7.9rem;
+  height: 3rem;
   display: flex;
+  white-space: nowrap;
   justify-content: center;
   align-items: center;
-
   padding: 0.6rem 1.6rem;
   font-size: 1.4rem;
   font-weight: 500;

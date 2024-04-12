@@ -12,13 +12,14 @@ export const DropdownWrapper = styled.ul`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   cursor: pointer;
+  position: relative;
 `;
 
 export const DropdownSelect = styled.li`
   width: 7.9rem;
   display: flex;
+  white-space: nowrap;
   justify-content: center;
   align-items: center;
   list-style: none;

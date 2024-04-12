@@ -15,6 +15,8 @@ export const CardContainer = styled.div`
   padding: 2rem;
   border-radius: 1.6rem;
   border: 0.1rem solid var(--Grayscale-40);
+  position: absolute;
+  z-index: 1;
 `;
 
 export const CardImage = styled.img`
@@ -29,7 +31,7 @@ export const CardName = styled.p`
 `;
 
 export const CardInfo = styled.div`
-  margin-top: 7rem;
+  margin-top: 4rem;
   display: flex;
   justify-content: space-between;
 `;
