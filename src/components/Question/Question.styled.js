@@ -20,12 +20,10 @@ export const QuestionStatus = styled.div`
   gap: 10px;
   border-radius: 8px;
   border: 1px solid
-    ${(props) =>
-      props.complete ? "var(--Brown-40, #542F1A)" : "var(--Grayscale-40)"};
+    ${(props) => (props.complete ? "var(--Brown-40)" : "var(--Grayscale-40)")};
   background: var(--Grayscale-10);
   color: ${(props) =>
-    props.complete ? "var(--Brown-40, #542F1A)" : "var(--Grayscale-40)"};
-  font-feature-settings: "clig" off, "liga" off;
+    props.complete ? "var(--Brown-40)" : "var(--Grayscale-40)"};
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
@@ -41,9 +39,8 @@ export const QuestionContent = styled.div`
   flex-direction: column;
 `;
 
-export const GrayFont = styled.p`
+export const Time = styled.p`
   color: var(--Grayscale-40);
-  font-feature-settings: "clig" off, "liga" off;
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
@@ -51,9 +48,8 @@ export const GrayFont = styled.p`
   line-height: 18px; /* 128.571% */
 `;
 
-export const BlackFont = styled.p`
+export const QuestionDetail = styled.p`
   color: var(--Grayscale-60);
-  font-feature-settings: "clig" off, "liga" off;
   font-family: Actor;
   font-size: 18px;
   font-style: normal;
@@ -70,15 +66,16 @@ export const QuestionModal = styled.div`
   gap: 32px;
 `;
 
-export const ThumbnsBtn = styled.span`
+export const ThumbnsBtn = styled.div`
+  cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  color: var(--Grayscale-40);
-  font-feature-settings: "clig" off, "liga" off;
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px; /* 128.571% */
+  color: var(${(props) => (props.color ? props.color : "--Grayscale-40")});
 `;

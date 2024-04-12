@@ -1,59 +1,20 @@
-import styled from "styled-components";
-import { BlackFont, GrayFont } from "../Question/Question.styled";
 import { useState } from "react";
-
-const AnswerContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  align-self: stretch;
-`;
-
-export const Profile = styled.div`
-  display: flex;
-  width: 48px;
-  height: 48px;
-  justify-content: center;
-  align-items: center;
-  background-color: gray;
-  border-radius: 9999px;
-`;
-
-const AnswerContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  flex: 1 0 0;
-  color: var(--Grayscale-60);
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px; /* 137.5% */
-`;
-
-const Answerinfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1 0 0;
-`;
+import * as S from "./Answer.styled";
 
 function Answer() {
   const [answer, setAnswer] = useState(true);
 
   return (
-    <AnswerContainer>
-      <Profile>프로필</Profile>
-      <AnswerContent>
-        <Answerinfo>
-          <BlackFont>닉네임</BlackFont>
-          <GrayFont>시간</GrayFont>
-        </Answerinfo>
-        {answer ? <p>내용</p> : "답변 거절"}
-      </AnswerContent>
-    </AnswerContainer>
+    <S.AnswerContainer>
+      <S.Profile>프로필</S.Profile>
+      <S.AnswerContent>
+        <S.Answerinfo>
+          <S.UserName>닉네임</S.UserName>
+          <S.AnswerTime>시간</S.AnswerTime>
+        </S.Answerinfo>
+        <p>{answer ? "내용" : "답변 거절"}</p>
+      </S.AnswerContent>
+    </S.AnswerContainer>
   );
 }
 
