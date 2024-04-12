@@ -1,6 +1,6 @@
 import Nav from "../components/Nav/Nav";
 import Header from "../components/Header/Header";
-import Card from "../components/Card/Card";
+import CardList from "../components/Card/CardList";
 import styled from "styled-components";
 
 const PageWrapper = styled.div`
@@ -12,7 +12,7 @@ const List = () => {
     <PageWrapper>
       <Nav />
       <Header />
-      <Card />
+      <CardList />
     </PageWrapper>
   );
 };
