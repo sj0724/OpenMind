@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import headerImage from "../../assets/v872batch5-nunny-04 1.jpg";
+import Image from "../../assets/backgroundImage-removebg.png";
 
 export const Header = styled.div`
   display: flex;
@@ -7,9 +7,8 @@ export const Header = styled.div`
   height: 234px;
   width: 1200px;
   margin: 0 auto;
-  background-image: url(${headerImage});
-  background-size: cover;
-  background-position: center;
+  background: url(${Image}) 0px -267.142px / 100% 515.021% no-repeat;
+  mix-blend-mode: hard-light;
 
   img {
     height: fit-content;

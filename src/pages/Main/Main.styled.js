@@ -16,12 +16,11 @@ export const MainLogo = styled.img`
   width: 456px;
   justify-content: center;
   align-items: center;
-  flex-shrink: 0;
-  padding-top: 160px;
+  margin-top: 160px;
 `;
 
 export const UserForm = styled.form`
-  display: inline-flex;
+  display: flex;
   padding: 32px;
   flex-direction: column;
   align-items: flex-start;
@@ -71,8 +70,6 @@ export const UserSubmitBtn = styled.button`
 `;
 
 export const Background = styled.div`
-  display: flex;
-  justify-content: center;
   position: absolute;
   top: 205px;
   z-index: -1;
@@ -84,6 +81,7 @@ export const Background = styled.div`
 export const ImageArea = styled.div`
   width: 1200px;
   height: 627px;
+  margin: 0 auto;
   background: url(${Image}) var(--Grayscale-20) 0px 0px / 100% 191.388%
     no-repeat;
 `;
