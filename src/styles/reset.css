@@ -132,3 +132,14 @@ html,
 body {
   font-size: 62.5%;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  border: none;
+  padding: unset;
+  background-color: unset;
+  cursor: pointer;
+}
