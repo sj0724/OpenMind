@@ -18,11 +18,12 @@ export const ModalWrapper = styled.div`
   flex-direction: column;
   background-color: var(--Grayscale-10);
   border-radius: 24px;
-  width: 61.2rem;
+  max-width: 61.2rem;
+  width: 100%;
   height: 45.4rem;
   justify-content: center;
   align-items: center;
-  margin-top: 3rem;
+  margin-bottom: 5rem;
   gap: 0.6rem;
 `;
 
