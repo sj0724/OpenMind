@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as S from './Answer.styled';
 
 function Answer() {
-  const [answer, setAnswer] = useState(true);
+  const [answer] = useState(true);
 
   return (
     <S.AnswerContainer>
