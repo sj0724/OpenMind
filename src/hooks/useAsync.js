@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export const useAsync = (asyncFunction) => {
   const [error, setError] = useState(null);
