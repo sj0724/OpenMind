@@ -4,6 +4,7 @@ import DropdownMenu from './DropdownMenu';
 import arrowDownImage from '../../../images/Arrow-down.png';
 import arrowUpImage from '../../../images/Arrow-up.png';
 
+
 function Header() {
   const [view, setView] = useState(false);
   const [selectedItem, setSelectedItem] = useState('최신순');
