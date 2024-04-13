@@ -1,22 +1,15 @@
 import * as S from "./Header.styled";
-import { useEffect, useState } from "react";
 import DropdownMenu from "./DropdownMenu";
 import arrowDownImage from "../../../images/Arrow-down.png";
 import arrowUpImage from "../../../images/Arrow-up.png";
 
-const Header = () => {
-  const [view, setView] = useState(false);
-  const [selectedItem, setSelectedItem] = useState("최신순");
-
-  const toggleDropdown = () => {
-    setView(!view);
-  };
-
-  const handleItemClick = (item) => {
-    setSelectedItem(item);
-    toggleDropdown();
-  };
-
+const Header = ({
+  selectedItem,
+  handleItemClick,
+  view,
+  toggleDropdown,
+  options,
+}) => {
   return (
     <S.HeaderContainer>
       <S.QuestionHeading>누구에게 질문할까요?</S.QuestionHeading>
@@ -29,7 +22,9 @@ const Header = () => {
             <S.ArrowIcon src={arrowDownImage} alt="down arrow" />
           )}
         </S.DropdownSelect>
-        {view && <DropdownMenu handleItemClick={handleItemClick} />}
+        {view && (
+          <DropdownMenu options={options} handleItemClick={handleItemClick} />
+        )}
       </S.DropdownWrapper>
     </S.HeaderContainer>
   );

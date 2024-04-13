@@ -1,14 +1,16 @@
 import * as S from "./DropdownMenu.styled";
 
-function DropdownMenu({ handleItemClick }) {
+function DropdownMenu({ options, handleItemClick }) {
   return (
     <S.DropdownMenu>
-      <S.DropdownMenuItem onClick={() => handleItemClick("최신순")}>
-        최신순
-      </S.DropdownMenuItem>
-      <S.DropdownMenuItem onClick={() => handleItemClick("이름순")}>
-        이름순
-      </S.DropdownMenuItem>
+      {options.map((option) => (
+        <S.DropdownMenuItem
+          key={option.value}
+          onClick={() => handleItemClick(option.value)}
+        >
+          {option.label}
+        </S.DropdownMenuItem>
+      ))}
     </S.DropdownMenu>
   );
 }
