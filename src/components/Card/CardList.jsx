@@ -1,9 +1,9 @@
 import useFetchCardList from '../../hooks/useFetchCardList';
 import Messages from '../../../images/Messages.png';
-import Pagination from '../Pagination/Pagination';
+// import Pagination from '../Pagination/Pagination';
 import * as S from './CardList.styled';
 
-const CardList = () => {
+function CardList() {
   const { cards, loading } = useFetchCardList();
 
   return (
@@ -20,13 +20,13 @@ const CardList = () => {
                 <img src={Messages} alt="QuestionMessage img" />
                 <p>받은 질문</p>
               </S.QuestionCountMessage>
-              <S.QuestionCount>{card.questionCount}개</S.QuestionCount>
+              <S.QuestionCount>{`${card.questionCount}개`}</S.QuestionCount>
             </S.CardInfo>
           </S.CardContainer>
         ))
       )}
     </S.Container>
   );
-};
+}
 
 export default CardList;
