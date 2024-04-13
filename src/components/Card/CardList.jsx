@@ -1,4 +1,4 @@
-import { useFetchCardList } from '../../hooks/useFetchCardList';
+import useFetchCardList from '../../hooks/useFetchCardList';
 import Messages from '../../../images/Messages.png';
 import Pagination from '../Pagination/Pagination';
 import * as S from './CardList.styled';
