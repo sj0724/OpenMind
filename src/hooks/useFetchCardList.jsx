@@ -12,7 +12,7 @@ export const useFetchCardList = () => {
         setCards(response.results);
         setLoading(false);
       } catch (error) {
-        console.log('Error fetching card list:', error);
+        // console.log('Error fetching card list:', error);
         setLoading(false);
       }
     };

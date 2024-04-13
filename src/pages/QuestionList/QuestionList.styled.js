@@ -45,6 +45,6 @@ export const FloatingBtn = styled.span`
   line-height: 25px; /* 125% */
 `;
 
-export const No_Question = styled.img`
+export const NoQuestion = styled.img`
   margin: 111px 283px 65px 283px;
 `;

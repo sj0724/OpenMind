@@ -9,7 +9,7 @@ import Toast from '../../components/Toast/Toast';
 import Modal from '../../components/Modal/Modal';
 
 function QuestionList() {
-  const [question, setQuestion] = useState(true);
+  const [question] = useState(true);
   const [modal, setModal] = useState(false);
 
   const handleModalToggle = () => {
@@ -20,7 +20,7 @@ function QuestionList() {
   const copyUrl = async (url) => {
     await navigator.clipboard.writeText(url);
     setToast(true);
-    console.log(url);
+    // console.log(url);
   };
 
   return (
@@ -31,7 +31,9 @@ function QuestionList() {
       </S.Header>
       <UserProfile copy={copyUrl} />
       <S.Body>
-        <QuestionContainer>{question ? <Question /> : <S.No_Question src={emptyIcon} />}</QuestionContainer>
+        <QuestionContainer>
+          {question ? <Question /> : <S.NoQuestion src={emptyIcon} />}
+        </QuestionContainer>
       </S.Body>
       <S.FloatingBtn onClick={handleModalToggle}>질문 작성하기</S.FloatingBtn>
       {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}

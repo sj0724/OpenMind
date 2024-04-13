@@ -7,7 +7,7 @@ import mainLogo from '../../assets/logo.svg';
 import emptyIcon from '../../assets/emptyIcon.svg';
 
 function AnswerList() {
-  const [answer, setAnswer] = useState(true);
+  const [answer] = useState(true);
 
   return (
     <>
@@ -16,7 +16,9 @@ function AnswerList() {
       </S.Header>
       <UserProfile />
       <S.Body>
-        <QuestionContainer>{answer ? <PostAnswer /> : <S.No_Question src={emptyIcon} />}</QuestionContainer>
+        <QuestionContainer>
+          {answer ? <PostAnswer /> : <S.No_Question src={emptyIcon} />}
+        </QuestionContainer>
       </S.Body>
     </>
   );

@@ -10,7 +10,7 @@ function Main() {
       <S.MainLogo src={mainImage} alt="logo" />
       <S.UserForm>
         <S.UserInput htmlFor="name">
-          <img src={personIcon} />
+          <img src={personIcon} alt="userlogo" />
           <input placeholder="이름을 입력해주세요." id="name" />
         </S.UserInput>
         <S.UserSubmitBtn onClick={(e) => e.preventDefault()}>질문 받기</S.UserSubmitBtn>
