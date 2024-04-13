@@ -10,7 +10,7 @@ import axiosInstance from "../utils/axios";
  * @return { id, name, imageSource, questionCount, createdAt }
  */
 export const useGetSubjects = () => {
-  const getSubjects = () => axiosInstance.get(`subjects`);
+  const getSubjects = () => axiosInstance.get(`subjects/`);
   const { error, data } = useAsync(getSubjects);
 
   const subjects = data?.data ?? [];
