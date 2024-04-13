@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const NavWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
-  padding: 4rem 13rem;
+  padding: 4rem 5rem;
 `;
 
 export const Button = styled.button`

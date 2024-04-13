@@ -6,17 +6,30 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
-  margin: 3rem 12rem;
+  position: relative;
+  margin: 5rem 13rem;
+  max-width: 96rem;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    margin: 5rem 3.2rem;
+    max-width: 90%;
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 export const CardContainer = styled.div`
-  width: 22rem;
+  width: min(22rem, 25vw);
   height: 18.7rem;
   padding: 2rem;
   border-radius: 1.6rem;
   border: 0.1rem solid var(--Grayscale-40);
-  position: absolute;
   z-index: 1;
+  transition: width 0.3s ease;
+
+  @media (max-width: 768px) {
+    min-width: 18.6rem;
+  }
 `;
 
 export const CardImage = styled.img`
