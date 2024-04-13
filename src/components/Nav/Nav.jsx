@@ -1,6 +1,6 @@
 import * as S from "./Nav.styled";
-import arrow from "../../../images/arrow-right.png";
-import logo from "../../../images/openmind-logo.png";
+import arrow from "../../assets/arrow-right.svg";
+import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
 
 const Nav = () => {

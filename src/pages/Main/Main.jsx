@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import mainImage from "../../assets/logo.svg";
 import personIcon from "../../assets/Person.svg";
 import LinkButton from "../../components/LinkButton/LinkButton";
@@ -6,7 +7,9 @@ import * as S from "./Main.styled";
 function Main() {
   return (
     <S.Body>
-      <LinkButton>질문하러 가기</LinkButton>
+      <Link to="/list">
+        <LinkButton>질문하러 가기</LinkButton>
+      </Link>
       <S.MainLogo src={mainImage} alt="logo" />
       <S.UserForm>
         <S.UserInput htmlFor="name">
