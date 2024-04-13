@@ -1,5 +1,5 @@
-import MessageIcon from "../../assets/Messages.svg";
-import * as S from "./QuestionContainer.styled";
+import MessageIcon from '../../assets/Messages.svg';
+import * as S from './QuestionContainer.styled';
 
 function QuestionContainer({ children }) {
   return (

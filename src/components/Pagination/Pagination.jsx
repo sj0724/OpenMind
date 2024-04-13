@@ -1,4 +1,4 @@
-import * as S from "./Pagination.styled";
+import * as S from './Pagination.styled';
 
 const Pagination = () => {};
 

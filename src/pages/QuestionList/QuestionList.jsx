@@ -1,12 +1,12 @@
-import { useState } from "react";
-import Question from "../../components/Question/Question";
-import QuestionContainer from "../../components/QuestionContainer/QuestionContainer";
-import * as S from "./QuestionList.styled";
-import emptyIcon from "../../assets/emptyIcon.svg";
-import mainLogo from "../../assets/logo.svg";
-import UserProfile from "../../components/UserProfile/UserProfile";
-import Toast from "../../components/Toast/Toast";
-import Modal from "../../components/Modal/Modal";
+import { useState } from 'react';
+import Question from '../../components/Question/Question';
+import QuestionContainer from '../../components/QuestionContainer/QuestionContainer';
+import * as S from './QuestionList.styled';
+import emptyIcon from '../../assets/emptyIcon.svg';
+import mainLogo from '../../assets/logo.svg';
+import UserProfile from '../../components/UserProfile/UserProfile';
+import Toast from '../../components/Toast/Toast';
+import Modal from '../../components/Modal/Modal';
 
 function QuestionList() {
   const [question, setQuestion] = useState(true);

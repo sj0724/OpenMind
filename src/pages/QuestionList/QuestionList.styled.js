@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import Image from "../../assets/backgroundImage-removebg.png";
+import styled from 'styled-components';
+import Image from '../../assets/backgroundImage-removebg.png';
 
 export const Header = styled.div`
   display: flex;

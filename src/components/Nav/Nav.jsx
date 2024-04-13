@@ -1,16 +1,16 @@
-import * as S from "./Nav.styled";
-import arrow from "../../../images/arrow-right.png";
-import logo from "../../../images/openmind-logo.png";
-import { Link } from "react-router-dom";
+import * as S from './Nav.styled';
+import arrow from '../../../images/arrow-right.png';
+import logo from '../../../images/openmind-logo.png';
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
-  const storedId = localStorage.getItem("questionId");
+  const storedId = localStorage.getItem('questionId');
 
   const handleAnswerButtonClick = () => {
     if (storedId) {
       window.location.href = `/post/${storedId}/answer`;
     } else {
-      window.location.href = "/";
+      window.location.href = '/';
     }
   };
 

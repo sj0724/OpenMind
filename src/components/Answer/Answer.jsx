@@ -1,5 +1,5 @@
-import { useState } from "react";
-import * as S from "./Answer.styled";
+import { useState } from 'react';
+import * as S from './Answer.styled';
 
 function Answer() {
   const [answer, setAnswer] = useState(true);
@@ -12,7 +12,7 @@ function Answer() {
           <S.UserName>닉네임</S.UserName>
           <S.AnswerTime>시간</S.AnswerTime>
         </S.Answerinfo>
-        <p>{answer ? "내용" : "답변 거절"}</p>
+        <p>{answer ? '내용' : '답변 거절'}</p>
       </S.AnswerContent>
     </S.AnswerContainer>
   );

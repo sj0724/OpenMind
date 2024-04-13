@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import * as S from "./Toast.styled";
+import { useEffect } from 'react';
+import * as S from './Toast.styled';
 
 function Toast({ setToast, text }) {
   useEffect(() => {

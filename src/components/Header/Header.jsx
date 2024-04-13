@@ -1,12 +1,12 @@
-import * as S from "./Header.styled";
-import { useEffect, useState } from "react";
-import DropdownMenu from "./DropdownMenu";
-import arrowDownImage from "../../../images/Arrow-down.png";
-import arrowUpImage from "../../../images/Arrow-up.png";
+import * as S from './Header.styled';
+import { useEffect, useState } from 'react';
+import DropdownMenu from './DropdownMenu';
+import arrowDownImage from '../../../images/Arrow-down.png';
+import arrowUpImage from '../../../images/Arrow-up.png';
 
 const Header = () => {
   const [view, setView] = useState(false);
-  const [selectedItem, setSelectedItem] = useState("최신순");
+  const [selectedItem, setSelectedItem] = useState('최신순');
 
   const toggleDropdown = () => {
     setView(!view);

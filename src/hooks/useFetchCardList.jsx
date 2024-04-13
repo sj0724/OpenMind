@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { fetchCardList } from "../services/fetchCardList";
+import { useState, useEffect } from 'react';
+import { fetchCardList } from '../services/fetchCardList';
 
 export const useFetchCardList = () => {
   const [cards, setCards] = useState([]);
@@ -12,7 +12,7 @@ export const useFetchCardList = () => {
         setCards(response.results);
         setLoading(false);
       } catch (error) {
-        console.log("Error fetching card list:", error);
+        console.log('Error fetching card list:', error);
         setLoading(false);
       }
     };

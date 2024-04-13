@@ -1,5 +1,5 @@
-import * as S from "./LinkButton.styled";
-import arrowIcon from "../../assets/arrow-right.svg";
+import * as S from './LinkButton.styled';
+import arrowIcon from '../../assets/arrow-right.svg';
 
 function LinkButton({ children }) {
   return (

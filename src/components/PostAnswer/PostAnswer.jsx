@@ -1,10 +1,10 @@
-import { useState } from "react";
-import * as S from "../Question/Question.styled";
-import * as SA from "../PostAnswer/PostAnswer.styled";
-import thumbsUp from "../../assets/thumbs-up.svg";
-import thumbsDown from "../../assets/thumbs-down.svg";
-import kebab from "../../assets/kebab.svg";
-import { useGetSubjects } from "../../api/useGetSubject";
+import { useState } from 'react';
+import * as S from '../Question/Question.styled';
+import * as SA from '../PostAnswer/PostAnswer.styled';
+import thumbsUp from '../../assets/thumbs-up.svg';
+import thumbsDown from '../../assets/thumbs-down.svg';
+import kebab from '../../assets/kebab.svg';
+import { useGetSubjects } from '../../api/useGetSubject';
 
 function PostAnswer() {
   const [answerStatus, setAnswerStatus] = useState();
@@ -17,9 +17,7 @@ function PostAnswer() {
   return (
     <S.QuestBody>
       <SA.AnswerTopLayout>
-        <S.QuestionStatus complete={answerStatus}>
-          {answerStatus ? "답변 완료" : "미답변"}
-        </S.QuestionStatus>
+        <S.QuestionStatus complete={answerStatus}>{answerStatus ? '답변 완료' : '미답변'}</S.QuestionStatus>
         <SA.KebabButton onClick={(event) => event.preventDefault()}>
           <img src={kebab} alt="더보기" />
         </SA.KebabButton>

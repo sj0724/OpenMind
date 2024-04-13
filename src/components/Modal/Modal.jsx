@@ -1,6 +1,6 @@
-import * as S from "./Modal.styled";
-import messagesicon from "../../assets/messages-black.svg";
-import xMark from "../../assets/x-mark.svg";
+import * as S from './Modal.styled';
+import messagesicon from '../../assets/messages-black.svg';
+import xMark from '../../assets/x-mark.svg';
 
 function Modal() {
   return (

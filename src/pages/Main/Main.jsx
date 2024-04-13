@@ -1,7 +1,7 @@
-import mainImage from "../../assets/logo.svg";
-import personIcon from "../../assets/Person.svg";
-import LinkButton from "../../components/LinkButton/LinkButton";
-import * as S from "./Main.styled";
+import mainImage from '../../assets/logo.svg';
+import personIcon from '../../assets/Person.svg';
+import LinkButton from '../../components/LinkButton/LinkButton';
+import * as S from './Main.styled';
 
 function Main() {
   return (
@@ -13,9 +13,7 @@ function Main() {
           <img src={personIcon} />
           <input placeholder="이름을 입력해주세요." id="name" />
         </S.UserInput>
-        <S.UserSubmitBtn onClick={(e) => e.preventDefault()}>
-          질문 받기
-        </S.UserSubmitBtn>
+        <S.UserSubmitBtn onClick={(e) => e.preventDefault()}>질문 받기</S.UserSubmitBtn>
       </S.UserForm>
       <S.Background>
         <S.ImageArea />
