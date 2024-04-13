@@ -4,17 +4,26 @@ export const Container = styled.div`
   width: 94rem;
   height: 47.4rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
   gap: 2rem;
   position: relative;
-  margin: 5rem 13rem;
+  margin: 5rem auto;
+
   max-width: 96rem;
   justify-content: center;
 
-  @media (max-width: 768px) {
-    margin: 5rem 3.2rem;
-    max-width: 90%;
-    grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 1199px) {
+    width: 80%;
+    padding-left: 3.2rem;
+    padding-right: 3.2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 769px) {
+    width: 70%;
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 
@@ -27,7 +36,7 @@ export const CardContainer = styled.div`
   z-index: 1;
   transition: width 0.3s ease;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1199px) {
     min-width: 18.6rem;
   }
 `;

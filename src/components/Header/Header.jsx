@@ -18,7 +18,7 @@ const Header = () => {
   };
 
   return (
-    <>
+    <S.HeaderContainer>
       <S.QuestionHeading>누구에게 질문할까요?</S.QuestionHeading>
       <S.DropdownWrapper>
         <S.DropdownSelect onClick={toggleDropdown}>
@@ -31,7 +31,7 @@ const Header = () => {
         </S.DropdownSelect>
         {view && <DropdownMenu handleItemClick={handleItemClick} />}
       </S.DropdownWrapper>
-    </>
+    </S.HeaderContainer>
   );
 };
 
