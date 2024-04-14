@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const LinkBtn = styled.span`
+export const LinkBtn = styled.span`
   position: absolute;
   top: 45px;
   right: 130px;
