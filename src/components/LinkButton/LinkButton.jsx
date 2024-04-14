@@ -1,5 +1,6 @@
-import * as S from "./LinkButton.styled";
-import arrowIcon from "../../assets/arrow-right.svg";
+import PropTypes from 'prop-types';
+import * as S from './LinkButton.styled';
+import arrowIcon from '../../assets/arrow-right.svg';
 
 function LinkButton({ children }) {
   return (
@@ -9,5 +10,9 @@ function LinkButton({ children }) {
     </S.LinkBtn>
   );
 }
+
+LinkButton.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default LinkButton;

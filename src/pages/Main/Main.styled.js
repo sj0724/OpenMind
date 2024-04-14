@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import Image from "../../assets/backgroundImage-removebg.png";
+import styled from 'styled-components';
+import Image from '../../assets/backgroundImage-removebg.png';
 
 export const Body = styled.div`
   width: 100%;
@@ -82,6 +82,5 @@ export const ImageArea = styled.div`
   width: 1200px;
   height: 627px;
   margin: 0 auto;
-  background: url(${Image}) var(--Grayscale-20) 0px 0px / 100% 191.388%
-    no-repeat;
+  background: url(${Image}) var(--Grayscale-20) 0px 0px / 100% 191.388% no-repeat;
 `;

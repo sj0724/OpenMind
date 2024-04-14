@@ -1,7 +1,7 @@
-import Nav from "../components/Nav/Nav";
-import Header from "../components/Header/Header";
-import CardList from "../components/Card/CardList";
-import styled from "styled-components";
+import styled from 'styled-components';
+import Nav from '../components/Nav/Nav';
+import Header from '../components/Header/Header';
+import CardList from '../components/Card/CardList';
 
 const PageContainer = styled.div`
   background-color: var(--Grayscale-20);
@@ -15,7 +15,7 @@ const PageWrapper = styled.div`
   }
 `;
 
-const List = () => {
+function List() {
   return (
     <PageContainer>
       <PageWrapper>
@@ -25,6 +25,6 @@ const List = () => {
       </PageWrapper>
     </PageContainer>
   );
-};
+}
 
 export default List;

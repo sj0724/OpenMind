@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-export const useAsync = (asyncFunction) => {
+function useAsync(asyncFunction) {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
@@ -13,8 +12,10 @@ export const useAsync = (asyncFunction) => {
       const response = await asyncFunction();
       setData(response.data);
       return response;
-    } catch (error) {
-      setError(error);
+    } catch (catchError) {
+      // lint상 같은 스코프내에 같은 이름의 변수가 있는걸 지양한다네요.
+      setError(catchError);
+      return catchError;
     }
   };
 
@@ -24,4 +25,6 @@ export const useAsync = (asyncFunction) => {
   }, []);
 
   return { asyncData, error, data };
-};
+}
+
+export default useAsync;
