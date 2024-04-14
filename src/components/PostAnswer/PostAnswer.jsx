@@ -20,7 +20,7 @@ function PostAnswer() {
         <S.QuestionStatus complete={answerStatus}>
           {answerStatus ? '답변 완료' : '미답변'}
         </S.QuestionStatus>
-        <SA.KebabButton onClick={(event) => event.preventDefault()}>
+        <SA.KebabButton onClick={event => event.preventDefault()}>
           <img src={kebab} alt="더보기" />
         </SA.KebabButton>
       </SA.AnswerTopLayout>
