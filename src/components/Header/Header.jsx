@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import * as S from './Header.styled';
 import DropdownMenu from './DropdownMenu';
-import arrowDownImage from '../../../images/Arrow-down.png';
-import arrowUpImage from '../../../images/Arrow-up.png';
-
+import arrowDownImage from '../../assets/Arrow-down.svg';
+import arrowUpImage from '../../assets/Arrow-up.svg';
 
 function Header() {
   const [view, setView] = useState(false);
