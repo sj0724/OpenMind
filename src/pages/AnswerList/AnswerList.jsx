@@ -1,25 +1,19 @@
 import { useState } from 'react';
-import UserProfile from '../../components/UserProfile/UserProfile';
-import PostAnswer from '../../components/PostAnswer/PostAnswer';
-import QuestionContainer from '../../components/QuestionContainer/QuestionContainer';
-import * as S from '../QuestionList/QuestionList.styled';
+import * as S from './AnswerList.styled';
 import mainLogo from '../../assets/logo.svg';
-import emptyIcon from '../../assets/emptyIcon.svg';
+import { useParams } from 'react-router-dom';
+import { fetchSubject } from '../../services/fetchSubject';
 
 function AnswerList() {
-  const [answer] = useState(true);
+  const { id } = useParams();
+
+  const { data } = fetchSubject({ id });
 
   return (
     <>
       <S.Header>
         <img src={mainLogo} alt="mainLogo" />
       </S.Header>
-      <UserProfile />
-      <S.Body>
-        <QuestionContainer>
-          {answer ? <PostAnswer /> : <S.No_Question src={emptyIcon} />}
-        </QuestionContainer>
-      </S.Body>
     </>
   );
 }

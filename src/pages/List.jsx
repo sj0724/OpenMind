@@ -1,8 +1,8 @@
-import Nav from "../components/Nav/Nav";
-import Header from "../components/Header/Header";
-import CardList from "../components/Card/CardList";
-import styled from "styled-components";
-import { useState } from "react";
+import Nav from '../components/Nav/Nav';
+import Header from '../components/Header/Header';
+import CardList from '../components/Card/CardList';
+import styled from 'styled-components';
+import { useState } from 'react';
 
 const PageContainer = styled.div`
   background-color: var(--Grayscale-20);
@@ -16,13 +16,13 @@ const PageWrapper = styled.div`
   }
 `;
 
-const List = () => {
+function List() {
   const [view, setView] = useState(false);
-  const [selectedItem, setSelectedItem] = useState("최신순");
+  const [selectedItem, setSelectedItem] = useState('최신순');
 
   const options = [
-    { label: "최신순", value: "time" },
-    { label: "이름순", value: "name" },
+    { label: '최신순', value: 'time' },
+    { label: '이름순', value: 'name' },
   ];
 
   const toggleDropdown = () => {
@@ -34,9 +34,8 @@ const List = () => {
     toggleDropdown();
   };
 
-  const mapSelectedItemToSortValue = (selectedItem) => {
-    return options.find((option) => option.label === selectedItem).value;
-  };
+  const mapSelectedItemToSortValue = (selectedItem) =>
+    options.find((option) => option.label === selectedItem).value;
 
   return (
     <PageContainer>
@@ -53,6 +52,6 @@ const List = () => {
       </PageWrapper>
     </PageContainer>
   );
-};
+}
 
 export default List;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Question from '../../components/Question/Question';
 import QuestionContainer from '../../components/QuestionContainer/QuestionContainer';
 import * as S from './QuestionList.styled';
@@ -7,10 +8,13 @@ import mainLogo from '../../assets/logo.svg';
 import UserProfile from '../../components/UserProfile/UserProfile';
 import Toast from '../../components/Toast/Toast';
 import Modal from '../../components/Modal/Modal';
+import useFetchQuestion from '../../hooks/useFetchQuestion';
 
 function QuestionList() {
+  const { id } = useParams();
   const [question] = useState(true);
   const [modal, setModal] = useState(false);
+  const { user } = useFetchQuestion(id);
 
   const handleModalToggle = () => {
     setModal(!modal);
@@ -20,7 +24,6 @@ function QuestionList() {
   const copyUrl = async (url) => {
     await navigator.clipboard.writeText(url);
     setToast(true);
-    // console.log(url);
   };
 
   return (
@@ -29,7 +32,7 @@ function QuestionList() {
       <S.Header>
         <img src={mainLogo} alt="mainLogo" />
       </S.Header>
-      <UserProfile copy={copyUrl} />
+      <UserProfile copy={copyUrl} user={user} />
       <S.Body>
         <QuestionContainer>
           {question ? <Question /> : <S.NoQuestion src={emptyIcon} />}

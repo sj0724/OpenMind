@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import MessageIcon from '../../assets/Messages.svg';
-import * as S from './QuestionContainer.styled';
+import * as S from './AnswerContainer.styled';
 
-function QuestionContainer({ children }) {
+function AnswerContainer({ children }) {
   return (
     <S.Container>
       <S.QuestionCount>
@@ -14,8 +14,8 @@ function QuestionContainer({ children }) {
   );
 }
 
-QuestionContainer.propTypes = {
-  children: PropTypes.func.isRequired,
+AnswerContainer.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
-export default QuestionContainer;
+export default AnswerContainer;

@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+
 import * as S from './Toast.styled';
 
 function Toast({ setToast, text }) {
@@ -23,6 +24,5 @@ Toast.propTypes = {
   setToast: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
 };
-// prop의 type을 지정하였습니다.
 
 export default Toast;

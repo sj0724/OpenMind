@@ -1,7 +1,7 @@
-import StyledPagination from "./Pagination.styled";
-import Pagination from "react-js-pagination";
+import StyledPagination from './Pagination.styled';
+import Pagination from 'react-js-pagination';
 
-const Paging = ({ page, setPage }) => {
+function Paging({ page, setPage }) {
   return (
     <StyledPagination>
       <Pagination
@@ -9,13 +9,13 @@ const Paging = ({ page, setPage }) => {
         itemsCountPerPage={8}
         totalItemsCount={450}
         pageRangeDisplayed={5}
-        prevPageText={"<"}
-        nextPageText={">"}
+        prevPageText="<"
+        nextPageText=">"
         onChange={setPage}
-        hideFirstLastPages={true}
+        hideFirstLastPages
       />
     </StyledPagination>
   );
-};
+}
 
 export default Paging;
