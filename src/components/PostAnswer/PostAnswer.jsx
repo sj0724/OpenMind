@@ -8,7 +8,7 @@ import kebab from '../../assets/kebab.svg';
 
 function PostAnswer() {
   const [answerStatus] = useState();
-  // const [answer, setAnswer] = useState(true);
+  const [answer, setAnswer] = useState(true);
 
   // const { data } = useGetSubjects();
   // console.log(data);
