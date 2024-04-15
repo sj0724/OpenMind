@@ -158,3 +158,90 @@ export const QuestionDetail = styled.p`
   font-weight: 400;
   line-height: 24px; /* 133.333% */
 `;
+
+export const QuestionModal = styled.div`
+  display: flex;
+  align-items: flex-start;
+  padding-top: 24px;
+  align-self: stretch;
+  border-top: 1px solid var(--Grayscale-30);
+  gap: 32px;
+`;
+
+export const ThumbnsBtn = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 128.571% */
+  color: var(${(props) => (props.$color ? props.$color : '--Grayscale-40')});
+`;
+
+// Answer
+export const AnswerContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+`;
+
+export const Profile = styled.div`
+  display: flex;
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${(props) => props.$image});
+  border-radius: 9999px;
+`;
+
+export const AnswerContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  flex: 1 0 0;
+  color: var(--Grayscale-60);
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 137.5% */
+
+  p {
+    font-size: 16px;
+  }
+`;
+
+export const Answerinfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 0 0;
+`;
+
+export const AnswerText = styled.textarea`
+  width: 100%;
+  height: 186px;
+  padding: 1.6rem;
+  resize: none;
+  border-radius: 0.8rem;
+  border: none;
+  color: var(${(props) => props.$color});
+  background-color: var(${(props) => props.$bgColor});
+  margin-bottom: 0.8rem;
+`;
+
+export const AnswerButton = styled.button`
+  width: 100%;
+  height: 46px;
+  padding: 1.2rem 2.4rem;
+  border-radius: 0.8rem;
+  color: var(${(props) => props.$color});
+  background-color: var(${(props) => props.$bgColor});
+`;

@@ -10,6 +10,10 @@ import linkIcon from '../../assets/Link.svg';
 import facebookIcon from '../../assets/Facebook.svg';
 import MessageIcon from '../../assets/Messages.svg';
 import emptyIcon from '../../assets/emptyIcon.svg';
+import thumbsUp from '../../assets/thumbs-up.svg';
+import thumbsUpSelect from '../../assets/thumbs-up-blue.svg';
+import thumbsDown from '../../assets/thumbs-down.svg';
+import thumbsDownSelect from '../../assets/thumbs-down-red.svg';
 
 /** 작업완료 후 주석은 다 지울 예정 */
 function AnswerList() {
@@ -66,6 +70,37 @@ function AnswerList() {
     return createdText;
   };
 
+  const [like, setLike] = useState(false);
+  const [disLike, setDisLike] = useState(false);
+
+  const toggleThumbs = () => {
+    if (like) {
+      setLike(!like);
+      setDisLike(like);
+    } else if (disLike) {
+      setDisLike(!disLike);
+      setLike(disLike);
+    }
+  };
+
+  const handleLike = () => {
+    if (like) {
+      setLike(!like);
+      return;
+    }
+    setLike(!like);
+    toggleThumbs();
+  };
+
+  const handleDisLike = () => {
+    if (disLike) {
+      setDisLike(!disLike);
+      return;
+    }
+    setDisLike(!disLike);
+    toggleThumbs();
+  };
+
   if (!user) {
     return <div>hi</div>;
   }
@@ -103,6 +138,31 @@ function AnswerList() {
                   </S.Time>
                   <S.QuestionDetail>{item.content}</S.QuestionDetail>
                 </S.QuestionContent>
+                <S.AnswerContainer>
+                  <S.Profile $image={user.imageSource} />
+                  <S.AnswerContent>
+                    <S.Answerinfo>
+                      <S.QuestionDetail>{user.name}</S.QuestionDetail>
+                    </S.Answerinfo>
+                    <S.AnswerText
+                      $bgColor="--Grayscale-20"
+                      $color="--Grayscale-40"
+                      placeholder="답변을 입력해주세요"></S.AnswerText>
+                    <S.AnswerButton $color="--Grayscale-10" $bgColor="--Brown-30">
+                      답변 완료
+                    </S.AnswerButton>
+                  </S.AnswerContent>
+                </S.AnswerContainer>
+                <S.QuestionModal>
+                  <S.ThumbnsBtn onClick={handleLike} $color={like ? '--Blue-50' : null}>
+                    <img src={like ? thumbsUpSelect : thumbsUp} alt="up" />
+                    <span>좋아요 {item.like}</span>
+                  </S.ThumbnsBtn>
+                  <S.ThumbnsBtn onClick={handleDisLike} $color={disLike ? '--Red-50' : null}>
+                    <img src={disLike ? thumbsDownSelect : thumbsDown} alt="down" />
+                    <span>싫어요 {item.dislike}</span>
+                  </S.ThumbnsBtn>
+                </S.QuestionModal>
               </S.QuestBody>
             ))
           ) : (
