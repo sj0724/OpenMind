@@ -21,7 +21,10 @@ function UserProfile({ copy, user }) {
 
 UserProfile.propTypes = {
   copy: PropTypes.func.isRequired,
-  user: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    imageSource: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default UserProfile;
