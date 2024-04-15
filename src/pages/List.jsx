@@ -16,6 +16,7 @@ const PageWrapper = styled.div`
   }
 `;
 
+<<<<<<< HEAD
 const List = () => {
   const [view, setView] = useState(false);
   const [selectedItem, setSelectedItem] = useState("최신순");
@@ -38,6 +39,9 @@ const List = () => {
     return options.find((option) => option.label === selectedItem).value;
   };
 
+=======
+function List() {
+>>>>>>> 0e33214581dacfe74ef0572a8d3a3ef3754b9a6f
   return (
     <PageContainer>
       <PageWrapper>
@@ -53,6 +57,6 @@ const List = () => {
       </PageWrapper>
     </PageContainer>
   );
-};
+}
 
 export default List;

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { QuestionDetail, Time } from "../Question/Question.styled";
+import styled from 'styled-components';
+import { QuestionDetail, Time } from '../Question/Question.styled';
 
 export const AnswerContainer = styled.div`
   display: flex;

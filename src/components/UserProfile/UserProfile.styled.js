@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Profile } from "../Answer/Answer.styled";
+import styled from 'styled-components';
+import { Profile } from '../Answer/Answer.styled';
 
 export const UserInfo = styled.div`
   position: absolute;

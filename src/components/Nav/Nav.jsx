@@ -1,16 +1,17 @@
-import * as S from "./Nav.styled";
-import arrow from "../../../images/arrow-right.png";
-import logo from "../../../images/openmind-logo.png";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import arrow from '../../../images/arrow-right.png';
+import logo from '../../../images/openmind-logo.png';
+import * as S from './Nav.styled';
 
-const Nav = () => {
-  const storedId = localStorage.getItem("questionId");
+
+function Nav() {
+  const storedId = localStorage.getItem('questionId');
 
   const handleAnswerButtonClick = () => {
     if (storedId) {
       window.location.href = `/post/${storedId}/answer`;
     } else {
-      window.location.href = "/";
+      window.location.href = '/';
     }
   };
 
@@ -20,10 +21,11 @@ const Nav = () => {
         <img src={logo} alt="openmind-logo" />
       </Link>
       <S.Button onClick={handleAnswerButtonClick}>
-        답변하러 가기 <img src={arrow} alt="arrow-right" />
+        답변하러 가기
+        <img src={arrow} alt="arrow-right" />
       </S.Button>
     </S.NavWrapper>
   );
-};
+}
 
 export default Nav;
