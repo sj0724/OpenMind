@@ -66,7 +66,7 @@ export const ToUser = styled.div`
 export const Profile = styled.div`
   width: 28px;
   height: 28px;
-  background-color: gray;
+  background-image: url(${(props) => props.image});
   border-radius: 9999px;
 `;
 

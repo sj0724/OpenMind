@@ -1,10 +1,14 @@
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import kakaoIcon from '../../assets/Kakaotalk.svg';
 import linkIcon from '../../assets/Link.svg';
 import facebookIcon from '../../assets/Facebook.svg';
 import * as S from './UserProfile.styled';
+import UserContext from '../../utils/contexts/UserContext';
 
-function UserProfile({ copy, user }) {
+function UserProfile({ copy }) {
+  const user = useContext(UserContext);
+
   return (
     <S.UserInfo>
       <S.UserImage image={user.imageSource} />
@@ -21,10 +25,6 @@ function UserProfile({ copy, user }) {
 
 UserProfile.propTypes = {
   copy: PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    imageSource: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default UserProfile;

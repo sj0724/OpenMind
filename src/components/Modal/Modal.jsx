@@ -1,8 +1,12 @@
+import { useContext } from 'react';
 import * as S from './Modal.styled';
 import messagesIcon from '../../assets/messages-black.svg';
 import xMark from '../../assets/x-mark.svg';
+import UserContext from '../../utils/contexts/UserContext';
 
 function Modal() {
+  const user = useContext(UserContext);
+
   return (
     <S.StyledModal>
       <S.ModalWrapper>
@@ -15,8 +19,8 @@ function Modal() {
         </S.Header>
         <S.ToUser>
           <span>To.</span>
-          <S.Profile />
-          <p>username</p>
+          <S.Profile image={user.imageSource} />
+          <p>{user.name}</p>
         </S.ToUser>
         <S.Content>
           <textarea placeholder="내용을 입력해주세요" />
