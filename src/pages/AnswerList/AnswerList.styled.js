@@ -55,7 +55,7 @@ export const UserImage = styled.img`
   width: 136px;
   height: 136px;
   border-radius: 50%;
-  background-image: url(${(props) => props.image});
+  background-image: url(${(props) => props.$image});
 `;
 
 export const BtnContainer = styled.div`
@@ -74,8 +74,8 @@ export const SnsBtn = styled.span`
   justify-content: center;
   align-items: center;
   border-radius: 200px;
-  background-color: var(${(props) => props.color});
-  background-image: url(${(props) => props.image});
+  background-color: var(${(props) => props.$color});
+  background-image: url(${(props) => props.$image});
   background-repeat: no-repeat;
   background-position: center;
 `;
@@ -123,12 +123,38 @@ export const QuestionStatus = styled.div`
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  border: 1px solid ${(props) => (props.complete ? 'var(--Brown-40)' : 'var(--Grayscale-40)')};
+  border: 1px solid ${(props) => (props.$complete ? 'var(--Brown-40)' : 'var(--Grayscale-40)')};
   background: var(--Grayscale-10);
-  color: ${(props) => (props.complete ? 'var(--Brown-40)' : 'var(--Grayscale-40)')};
+  color: ${(props) => (props.$complete ? 'var(--Brown-40)' : 'var(--Grayscale-40)')};
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px; /* 128.571% */
+`;
+
+export const QuestionContent = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+  flex-direction: column;
+`;
+
+export const Time = styled.p`
+  color: var(--Grayscale-40);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 128.571% */
+`;
+
+export const QuestionDetail = styled.p`
+  color: var(--Grayscale-60);
+  font-family: Actor;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 133.333% */
 `;
