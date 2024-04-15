@@ -14,7 +14,7 @@ function CardList() {
       ) : (
         cards.map((card) => (
           <S.CardContainer key={card.id}>
-            <Link to={`/question/${card.id}`}>
+            <Link to={`/question/${card.id}`} style={{ textDecoration: 'none' }}>
               <S.CardImage src={card.imageSource} alt={card.name} />
               <S.CardName>{card.name}</S.CardName>
               <S.CardInfo>

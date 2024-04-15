@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import propTypes from 'prop-types';
 import * as S from './Modal.styled';
 import messagesIcon from '../../assets/messages-black.svg';
 import xMark from '../../assets/x-mark.svg';
+import UserContext from '../../utils/contexts/UserContext';
 
 function Modal({ setModal }) {
   const [text, setText] = useState('');
+  const user = useContext(UserContext);
 
   return (
     <S.StyledModal>
@@ -21,8 +23,8 @@ function Modal({ setModal }) {
         </S.Header>
         <S.ToUser>
           <span>To.</span>
-          <S.Profile />
-          <p>username</p>
+          <S.Profile image={user.imageSource} />
+          <p>{user.name}</p>
         </S.ToUser>
         <S.Content>
           <textarea

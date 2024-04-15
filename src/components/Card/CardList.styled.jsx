@@ -39,6 +39,7 @@ export const CardImage = styled.img`
 `;
 
 export const CardName = styled.p`
+  color: #000;
   margin-top: 1rem;
   font-size: 2rem;
 `;
