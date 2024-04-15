@@ -28,7 +28,7 @@ function QuestionList() {
 
   return (
     <>
-      {modal && <Modal />}
+      {modal && <Modal setModal={setModal} />}
       <S.Header>
         <img src={mainLogo} alt="mainLogo" />
       </S.Header>
