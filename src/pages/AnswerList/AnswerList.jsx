@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchSubject } from '../../services/fetchSubject';
+import useFetchQuestionList from '../../hooks/useFetchQuestionList';
 import * as S from './AnswerList.styled';
 import mainLogo from '../../assets/logo.svg';
 import kakaoIcon from '../../assets/Kakaotalk.svg';
@@ -9,10 +10,16 @@ import facebookIcon from '../../assets/Facebook.svg';
 import MessageIcon from '../../assets/Messages.svg';
 
 function AnswerList() {
+  // user
   const { id } = useParams();
+  const { data: user } = fetchSubject(id);
 
-  const { data } = fetchSubject({ id });
+  // questionList
+  const { data, question } = useFetchQuestionList(id);
+  console.log(data);
+  console.log(question);
 
+  // answer
   const [answerStatus] = useState();
 
   // {
@@ -23,7 +30,7 @@ function AnswerList() {
   //     "createdAt": "2024-04-09T01:12:41.641885Z"
   // }
 
-  if (!data) {
+  if (!user) {
     return <div>hi</div>;
   }
 
@@ -33,8 +40,8 @@ function AnswerList() {
         <img src={mainLogo} alt="mainLogo" />
       </S.Header>
       <S.UserInfo>
-        <S.UserImage image={data.imageSource} />
-        <span>{data.name}</span>
+        <S.UserImage image={user.imageSource} />
+        <span>{user.name}</span>
         <S.BtnContainer>
           <S.SnsBtn color="--Brown-40" image={linkIcon} />
           <S.SnsBtn color="--Yellow-50" image={kakaoIcon} />
@@ -45,7 +52,7 @@ function AnswerList() {
         <S.Container>
           <S.QuestionCount>
             <img src={MessageIcon} alt="MessageIcon" />
-            {data.questionCount}개의 질문이 있습니다.
+            {user.questionCount}개의 질문이 있습니다.
           </S.QuestionCount>
           <S.QuestBody>
             <S.QuestionStatus complete={answerStatus}>
