@@ -13,6 +13,8 @@ function AnswerList() {
 
   const { data } = fetchSubject({ id });
 
+  const [answerStatus] = useState();
+
   // {
   //     "id": 4838,
   //     "name": "test",
@@ -45,6 +47,11 @@ function AnswerList() {
             <img src={MessageIcon} alt="MessageIcon" />
             {data.questionCount}개의 질문이 있습니다.
           </S.QuestionCount>
+          <S.QuestBody>
+            <S.QuestionStatus complete={answerStatus}>
+              {answerStatus ? '답변 완료' : '미답변'}
+            </S.QuestionStatus>
+          </S.QuestBody>
         </S.Container>
       </S.Body>
     </>

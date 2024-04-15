@@ -102,3 +102,33 @@ export const QuestionCount = styled.span`
   font-weight: 400;
   line-height: 25px; /* 125% */
 `;
+
+// Question
+export const QuestBody = styled.div`
+  display: flex;
+  width: 684px;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  border-radius: 16px;
+  background: var(--Grayscale-10);
+  box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+`;
+
+export const QuestionStatus = styled.div`
+  display: flex;
+  padding: 4px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid ${(props) => (props.complete ? 'var(--Brown-40)' : 'var(--Grayscale-40)')};
+  background: var(--Grayscale-10);
+  color: ${(props) => (props.complete ? 'var(--Brown-40)' : 'var(--Grayscale-40)')};
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 128.571% */
+`;
