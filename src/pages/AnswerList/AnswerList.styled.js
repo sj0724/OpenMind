@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+// import { Profile } from '../../components/Answer/Answer.styled';
 import backgroundImage from '../../assets/backgroundImage-removebg.png';
 
 export const Header = styled.div`
@@ -27,27 +28,77 @@ export const Body = styled.div`
   padding: 189px 0 136px 0;
 `;
 
-export const FloatingBtn = styled.span`
-  position: fixed;
-  right: 25px;
-  bottom: 25px;
+export const NoQuestion = styled.img`
+  margin: 111px 283px 65px 283px;
+`;
+
+// UserProfile
+export const UserInfo = styled.div`
+  position: absolute;
+  top: 129px;
+  left: 50%;
+  transform: translate(-50%, 0);
   display: flex;
-  width: 208px;
-  height: 54px;
-  padding: 12px 24px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--Grayscale-60);
+  font-family: Pretendard;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px; /* 125% */
+  gap: 12px;
+`;
+
+export const UserImage = styled.img`
+  width: 136px;
+  height: 136px;
+  border-radius: 50%;
+  background-image: url(${(props) => props.image});
+`;
+
+export const BtnContainer = styled.div`
+  display: flex;
+  align-items: center;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const SnsBtn = styled.span`
+  cursor: pointer;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  padding: 12px 16px;
   justify-content: center;
   align-items: center;
   border-radius: 200px;
-  background: var(--Brown-40);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: var(--Grayscale-10);
+  background-color: var(${(props) => props.color});
+  background-image: url(${(props) => props.image});
+  background-repeat: no-repeat;
+  background-position: center;
+`;
+
+export const Container = styled.div`
+  display: inline-flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--Brown-30);
+  background: var(--Brown-10);
+`;
+
+export const QuestionCount = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--Brown-40);
   font-family: Pretendard;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: 25px; /* 125% */
-`;
-
-export const NoQuestion = styled.img`
-  margin: 111px 283px 65px 283px;
 `;
