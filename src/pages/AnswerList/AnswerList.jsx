@@ -17,7 +17,7 @@ function AnswerList() {
       <UserProfile />
       <S.Body>
         <QuestionContainer>
-          {answer ? <PostAnswer /> : <S.No_Question src={emptyIcon} />}
+          {answer ? <PostAnswer /> : <S.NoQuestion src={emptyIcon} />}
         </QuestionContainer>
       </S.Body>
     </>

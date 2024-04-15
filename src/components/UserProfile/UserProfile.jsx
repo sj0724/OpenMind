@@ -21,6 +21,6 @@ function UserProfile({ copy }) {
 
 UserProfile.propTypes = {
   copy: PropTypes.func.isRequired,
-}; // prop의 type을 지정하였습니다. 이 부분은 저도 잘 모르겠어서 멘토님에게 질문하면좋을거같습니다 7 번줄의 UserProfile의 type을 지정하였습니다.
+};
 
 export default UserProfile;

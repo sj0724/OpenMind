@@ -15,7 +15,7 @@ function QuestionContainer({ children }) {
 }
 
 QuestionContainer.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.func.isRequired,
 };
 
 export default QuestionContainer;
