@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import * as S from './DropdownMenu.styled';
 
 function DropdownMenu({ handleItemClick }) {
@@ -8,5 +9,9 @@ function DropdownMenu({ handleItemClick }) {
     </S.DropdownMenu>
   );
 }
+
+DropdownMenu.propTypes = {
+  handleItemClick: PropTypes.func.isRequired,
+};
 
 export default DropdownMenu;

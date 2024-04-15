@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
 import * as S from './Toast.styled';
@@ -18,5 +19,10 @@ function Toast({ setToast, text }) {
     </S.ToastBody>
   );
 }
+
+Toast.propTypes = {
+  setToast: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+};
 
 export default Toast;
