@@ -99,7 +99,7 @@ export const Footer = styled.button`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  background-color: var(--Brown-30);
+  background-color: ${(props) => props.color};
   font-size: 1.6rem;
   color: var(--Grayscale-10);
 `;
