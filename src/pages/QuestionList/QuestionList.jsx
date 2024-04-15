@@ -1,20 +1,20 @@
-import { useState } from "react";
-import Question from "../../components/Question/Question";
-import QuestionContainer from "../../components/QuestionContainer/QuestionContainer";
-import * as S from "./QuestionList.styled";
-import emptyIcon from "../../assets/emptyIcon.svg";
-import mainLogo from "../../assets/logo.svg";
-import UserProfile from "../../components/UserProfile/UserProfile";
-import Toast from "../../components/Toast/Toast";
-import Modal from "../../components/Modal/Modal";
-import useFetchQuestion from "../../hooks/useFetchQuestion";
-import { useParams } from "react-router-dom";
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Question from '../../components/Question/Question';
+import QuestionContainer from '../../components/QuestionContainer/QuestionContainer';
+import * as S from './QuestionList.styled';
+import emptyIcon from '../../assets/emptyIcon.svg';
+import mainLogo from '../../assets/logo.svg';
+import UserProfile from '../../components/UserProfile/UserProfile';
+import Toast from '../../components/Toast/Toast';
+import Modal from '../../components/Modal/Modal';
+import useFetchQuestion from '../../hooks/useFetchQuestion';
 
 function QuestionList() {
   const { id } = useParams();
   const [question] = useState(true);
   const [modal, setModal] = useState(false);
-  const { user, loading } = useFetchQuestion(id);
+  const { user } = useFetchQuestion(id);
 
   const handleModalToggle = () => {
     setModal(!modal);

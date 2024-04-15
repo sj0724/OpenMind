@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
-import kakaoIcon from "../../assets/Kakaotalk.svg";
-import linkIcon from "../../assets/Link.svg";
-import facebookIcon from "../../assets/Facebook.svg";
-import * as S from "./UserProfile.styled";
+import PropTypes from 'prop-types';
+import kakaoIcon from '../../assets/Kakaotalk.svg';
+import linkIcon from '../../assets/Link.svg';
+import facebookIcon from '../../assets/Facebook.svg';
+import * as S from './UserProfile.styled';
 
 function UserProfile({ copy, user }) {
   return (
@@ -21,6 +21,7 @@ function UserProfile({ copy, user }) {
 
 UserProfile.propTypes = {
   copy: PropTypes.func.isRequired,
+  user: PropTypes.string.isRequired,
 };
 
 export default UserProfile;

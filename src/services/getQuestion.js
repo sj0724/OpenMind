@@ -1,4 +1,4 @@
-import axiosInstance from "../utils/axios";
+import axiosInstance from '../utils/axios';
 
 const getQuestion = async (id) => {
   try {

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import getQuestion from "../services/getQuestion";
+import { useState, useEffect } from 'react';
+import getQuestion from '../services/getQuestion';
 
 function useFetchQuestion(id) {
   const [user, setUser] = useState({});
@@ -12,13 +12,13 @@ function useFetchQuestion(id) {
         setUser(response);
         setLoading(false);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
         setLoading(false);
       }
     };
 
     fetchCardListData();
-  }, []);
+  }, [id]);
 
   return { user, loading };
 }
