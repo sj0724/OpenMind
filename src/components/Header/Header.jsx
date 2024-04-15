@@ -1,7 +1,7 @@
 import * as S from "./Header.styled";
 import DropdownMenu from "./DropdownMenu";
-import arrowDownImage from "../../../images/Arrow-down.png";
-import arrowUpImage from "../../../images/Arrow-up.png";
+import arrowDownImage from "../../assets/Arrow-down.svg";
+import arrowUpImage from "../../assets/Arrow-up.svg";
 
 const Header = ({
   selectedItem,
