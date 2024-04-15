@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Profile } from '../Answer/Answer.styled';
+import styled from "styled-components";
+import { Profile } from "../Answer/Answer.styled";
 
 export const UserInfo = styled.div`
   position: absolute;
@@ -22,6 +22,7 @@ export const UserInfo = styled.div`
 export const UserImage = styled(Profile)`
   width: 136px;
   height: 136px;
+  background-image: url(${(props) => props.image});
 `;
 
 export const BtnContainer = styled.div`

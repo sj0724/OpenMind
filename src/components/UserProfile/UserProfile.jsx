@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types';
-import kakaoIcon from '../../assets/Kakaotalk.svg';
-import linkIcon from '../../assets/Link.svg';
-import facebookIcon from '../../assets/Facebook.svg';
-import * as S from './UserProfile.styled';
+import PropTypes from "prop-types";
+import kakaoIcon from "../../assets/Kakaotalk.svg";
+import linkIcon from "../../assets/Link.svg";
+import facebookIcon from "../../assets/Facebook.svg";
+import * as S from "./UserProfile.styled";
 
-function UserProfile({ copy }) {
+function UserProfile({ copy, user }) {
   return (
     <S.UserInfo>
-      <S.UserImage />
-      <span>test</span>
+      <S.UserImage image={user.imageSource} />
+      <span>{user.name}</span>
       <S.BtnContainer>
         <S.SnsBtn color="--Brown-40" image={linkIcon} onClick={copy} />
         <S.SnsBtn color="--Yellow-50" image={kakaoIcon} />
