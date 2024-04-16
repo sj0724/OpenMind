@@ -17,6 +17,7 @@ export const MainLogo = styled.img`
   justify-content: center;
   align-items: center;
   margin-top: 160px;
+  z-index: 10;
 `;
 
 export const UserForm = styled.form`
@@ -27,6 +28,7 @@ export const UserForm = styled.form`
   gap: 10px;
   border-radius: 16px;
   background: var(--Grayscale-10);
+  z-index: 10;
 
   img {
     height: 20px;
@@ -53,6 +55,7 @@ export const UserInput = styled.label`
 `;
 
 export const UserSubmitBtn = styled.button`
+  height: 46px;
   display: flex;
   padding: 12px 24px;
   justify-content: center;
@@ -67,12 +70,20 @@ export const UserSubmitBtn = styled.button`
   font-style: normal;
   font-weight: 400;
   line-height: 22px; /* 137.5% */
+
+  &:hover {
+    border: 2px solid var(--Brown-50);
+    background: var(--Brown-40);
+  }
+
+  &:active {
+    background: var(--Brown-50);
+  }
 `;
 
 export const Background = styled.div`
   position: absolute;
-  top: 205px;
-  z-index: -1;
+  bottom: 0;
   width: 100%;
   flex-shrink: 0;
   background-color: var(--Grayscale-20);

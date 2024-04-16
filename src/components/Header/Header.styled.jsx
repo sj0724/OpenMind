@@ -17,13 +17,14 @@ export const DropdownWrapper = styled.ul`
 `;
 
 export const DropdownSelect = styled.li`
-  width: 7.9rem;
   display: flex;
   white-space: nowrap;
   justify-content: center;
   align-items: center;
   list-style: none;
-  border: 0.2rem solid var(--Grayscale-60);
+  border: 0.1rem solid ${(props) => (props.$fold ? ' var(--Grayscale-60)' : 'var(--Grayscale-40)')};
+  background: var(--Grayscale-10);
+  color: ${(props) => (props.$fold ? ' var(--Grayscale-60)' : 'var(--Grayscale-40)')};
   border-radius: 0.8rem;
   padding: 0.8rem 1.2rem;
   display: flex;
