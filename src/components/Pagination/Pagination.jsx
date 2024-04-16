@@ -1,5 +1,5 @@
-import StyledPagination from './Pagination.styled';
 import Pagination from 'react-js-pagination';
+import StyledPagination from './Pagination.styled';
 
 function Paging({ page, setPage }) {
   return (

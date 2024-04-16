@@ -1,8 +1,8 @@
+import styled from 'styled-components';
+import { useState } from 'react';
 import Nav from '../components/Nav/Nav';
 import Header from '../components/Header/Header';
 import CardList from '../components/Card/CardList';
-import styled from 'styled-components';
-import { useState } from 'react';
 
 const PageContainer = styled.div`
   background-color: var(--Grayscale-20);

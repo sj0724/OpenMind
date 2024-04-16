@@ -1,12 +1,11 @@
-import useFetchCardList from '../../hooks/useFetchCardList';
+import { useState } from 'react';
+import { useFetchCardList } from '../../hooks/useFetchCardList';
 import Messages from '../../assets/Messages.svg';
 import Paging from '../Pagination/Pagination';
 import * as S from './CardList.styled';
-import { useState } from 'react';
 
 function CardList({ limit, offset, sort }) {
-  const { cards, loading } = useFetchCardList(limit, offset, sort);
-  const [currentPage, setCurrentPage] = useState(1);
+  const { cards, loading, currentPage, setCurrentPage } = useFetchCardList(limit, offset, sort);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
