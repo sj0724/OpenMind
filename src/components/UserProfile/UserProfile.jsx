@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import kakaoIcon from '../../assets/Kakaotalk.svg';
 import linkIcon from '../../assets/Link.svg';
@@ -8,13 +9,18 @@ import UserContext from '../../utils/contexts/UserContext';
 
 function UserProfile({ copy }) {
   const user = useContext(UserContext);
+  const location = useLocation();
 
   return (
     <S.UserInfo>
       <S.UserImage $image={user.imageSource} />
       <span>{user.name}</span>
       <S.BtnContainer>
-        <S.SnsBtn color="--Brown-40" $image={linkIcon} onClick={copy} />
+        <S.SnsBtn
+          color="--Brown-40"
+          $image={linkIcon}
+          onClick={() => copy(`${import.meta.env.VITE_API_URL}${location.pathname}`)}
+        />
         <S.SnsBtn color="--Yellow-50" $image={kakaoIcon} />
         <S.SnsBtn color="--Blue-50" $image={facebookIcon} />
       </S.BtnContainer>
