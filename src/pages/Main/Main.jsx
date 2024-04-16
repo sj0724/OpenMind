@@ -16,10 +16,12 @@ function Main() {
 
   return (
     <S.Body>
-      <Link to="/list">
-        <LinkButton>질문하러 가기</LinkButton>
-      </Link>
       <S.MainLogo src={mainImage} alt="logo" />
+      <Link to="/list" style={{ textDecoration: 'none' }}>
+        <S.LinkQuestion>
+          <LinkButton>질문하러 가기</LinkButton>
+        </S.LinkQuestion>
+      </Link>
       <S.UserForm onSubmit={createUser}>
         <S.UserInput htmlFor="name">
           <img src={personIcon} alt="userlogo" />

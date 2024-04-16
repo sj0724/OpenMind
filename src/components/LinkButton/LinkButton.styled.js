@@ -3,10 +3,6 @@ import styled from 'styled-components';
 const LinkBtn = styled.span`
   height: 46px;
   width: 170px;
-  position: absolute;
-  top: 45px;
-  right: 130px;
-  z-index: 10;
   display: flex;
   padding: 12px 24px;
   justify-content: center;
@@ -35,6 +31,15 @@ const LinkBtn = styled.span`
   &:active {
     border: 2px solid var(--Brown-40);
     background: var(--Brown-20);
+  }
+
+  @media (max-width: 769px) {
+    width: 130px;
+    height: 34px;
+    padding: 8px 12px;
+    gap: 4px;
+    font-size: 14px;
+    line-height: 18px;
   }
 `;
 

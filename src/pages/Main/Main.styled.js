@@ -8,7 +8,6 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
 `;
 
 export const MainLogo = styled.img`
@@ -18,6 +17,12 @@ export const MainLogo = styled.img`
   align-items: center;
   margin-top: 160px;
   z-index: 10;
+  margin-bottom: 24px;
+
+  @media (max-width: 769px) {
+    width: 248px;
+    height: 98px;
+  }
 `;
 
 export const UserForm = styled.form`
@@ -94,4 +99,25 @@ export const ImageArea = styled.div`
   height: 627px;
   margin: 0 auto;
   background: url(${Image}) var(--Grayscale-20) 0px 0px / 100% 191.388% no-repeat;
+
+  @media (max-width: 1199px) {
+    width: 768px;
+    height: 401px;
+  }
+  @media (max-width: 769px) {
+    width: 456px;
+    height: 239px;
+  }
+`;
+
+export const LinkQuestion = styled.div`
+  z-index: 10;
+  position: absolute;
+  top: 45px;
+  right: 130px;
+
+  @media (max-width: 769px) {
+    position: static;
+    margin-bottom: 24px;
+  }
 `;
