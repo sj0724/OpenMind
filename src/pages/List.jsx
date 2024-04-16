@@ -3,16 +3,13 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import Nav from '../components/Nav/Nav';
 import Header from '../components/Header/Header';
+// eslint-disable-next-line import/no-named-as-default
 import CardList from '../components/Card/CardList';
 
-const PageContainer = styled.div`
-  background-color: var(--Grayscale-20);
-  margin-top: 0;
-`;
-
 const PageWrapper = styled.div`
-  @media (min-width: 1200px) {
-    max-width: 120rem;
+  background-color: var(--Grayscale-20);
+  margin: 0;
+  @media (max-width: 1199px) {
     margin: 0 auto;
   }
 `;
@@ -41,19 +38,17 @@ function List() {
     options.find((option) => option.label === selectedItem).value;
 
   return (
-    <PageContainer>
-      <PageWrapper>
-        <Nav />
-        <Header
-          selectedItem={selectedItem}
-          toggleDropdown={toggleDropdown}
-          handleItemClick={handleItemClick}
-          view={view}
-          options={options}
-        />
-        <CardList sort={mapSelectedItemToSortValue(selectedItem)} />
-      </PageWrapper>
-    </PageContainer>
+    <PageWrapper>
+      <Nav />
+      <Header
+        selectedItem={selectedItem}
+        toggleDropdown={toggleDropdown}
+        handleItemClick={handleItemClick}
+        view={view}
+        options={options}
+      />
+      <CardList sort={mapSelectedItemToSortValue(selectedItem)} />
+    </PageWrapper>
   );
 }
 

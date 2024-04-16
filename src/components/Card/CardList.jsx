@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useFetchCardList } from '../../hooks/useFetchCardList';
 import Messages from '../../assets/Messages.svg';
 import Paging from '../Pagination/Pagination';
@@ -12,13 +13,14 @@ function CardList({ limit, offset, sort }) {
   };
 
   return (
-    <>
+    <S.OuterContainer>
       <S.Container>
         {loading ? (
           <p>Loading...</p>
         ) : (
           cards.map((card) => (
             <S.CardContainer key={card.id}>
+              <Link to={`/question/${card.id}`} style={{ textDecoration: 'none' }} />
               <S.CardImage src={card.imageSource} alt={card.name} />
               <S.CardName>{card.name}</S.CardName>
               <S.CardInfo>
@@ -33,7 +35,7 @@ function CardList({ limit, offset, sort }) {
         )}
       </S.Container>
       <Paging page={currentPage} setPage={handlePageChange} />
-    </>
+    </S.OuterContainer>
   );
 }
 

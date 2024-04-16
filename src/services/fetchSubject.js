@@ -9,7 +9,7 @@ import axiosinstance from '../utils/axios';
  * @param
  * @return { id, name, imageSource, qeustionCount, createdAt }
  */
-export const fetchSubject = ({ id }) => {
+export const fetchSubject = (id) => {
   const subject = () => axiosinstance.get(`/subjects/${id}/`);
   const { error, loading, data } = useAsync(subject);
 

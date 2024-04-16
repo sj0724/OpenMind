@@ -11,7 +11,7 @@ function App() {
       <Route path="/" element={<Main />} />
       <Route path="/list" element={<List />} />
       <Route path="/post/:id/answer" element={<AnswerList />} />
-      <Route path="/question" element={<QuestionList />} />
+      <Route path="/question/:id" element={<QuestionList />} />
     </Routes>
   );
 }

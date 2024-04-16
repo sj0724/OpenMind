@@ -1,5 +1,16 @@
 import styled from 'styled-components';
 
+export const OuterContainer = styled.div`
+  margin: 0 auto;
+  padding-left: 3.2rem;
+  padding-right: 3.2rem;
+
+  @media (max-width: 769px) {
+    padding-left: 2.4rem;
+    padding-right: 2.4rem;
+  }
+`;
+
 export const Container = styled.div`
   width: 94rem;
   height: 47.4rem;
@@ -8,27 +19,22 @@ export const Container = styled.div`
   gap: 2rem;
   position: relative;
   margin: 5rem auto;
-
   max-width: 96rem;
   justify-content: center;
 
   @media (max-width: 1199px) {
-    width: 80%;
-    padding-left: 3.2rem;
-    padding-right: 3.2rem;
+    width: 90%;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   @media (max-width: 769px) {
-    width: 70%;
-    padding-left: 2.4rem;
-    padding-right: 2.4rem;
-    grid-template-columns: repeat(2, 1fr);
+    width: 80%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 `;
-
 export const CardContainer = styled.div`
-  width: min(22rem, 25vw);
+  width: 100%;
+  max-width: min(22rem, 25vw);
   height: 18.7rem;
   padding: 2rem;
   border-radius: 1.6rem;
@@ -39,6 +45,10 @@ export const CardContainer = styled.div`
   @media (max-width: 1199px) {
     min-width: 18.6rem;
   }
+
+  @media (max-width: 769px) {
+    min-width: 16rem;
+  }
 `;
 
 export const CardImage = styled.img`
@@ -48,6 +58,7 @@ export const CardImage = styled.img`
 `;
 
 export const CardName = styled.p`
+  color: #000;
   margin-top: 1rem;
   font-size: 2rem;
 `;

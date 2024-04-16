@@ -1,6 +1,6 @@
 import axiosInstance from '../utils/axios';
 
-const getQuestion = async (id) => {
+const fetchUser = async (id) => {
   try {
     const response = await axiosInstance.get(`/subjects/${id}/`);
     return response.data;
@@ -11,4 +11,4 @@ const getQuestion = async (id) => {
   }
 };
 
-export default getQuestion;
+export default fetchUser;

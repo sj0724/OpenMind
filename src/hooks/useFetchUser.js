@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
-import getQuestion from '../services/getQuestion';
+import fetchUser from '../services/fetchUser';
 
-function useFetchQuestion(id) {
+function useFetchUser(id) {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCardListData = async () => {
       try {
-        const response = await getQuestion(id);
+        const response = await fetchUser(id);
         setUser(response);
         setLoading(false);
       } catch (error) {
-        // console.error(error);
         setLoading(false);
       }
     };
@@ -23,4 +22,4 @@ function useFetchQuestion(id) {
   return { user, loading };
 }
 
-export default useFetchQuestion;
+export default useFetchUser;
