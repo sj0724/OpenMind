@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useFetchCardList } from '../../hooks/useFetchCardList';
 import Messages from '../../assets/Messages.svg';
 import Paging from '../Pagination/Pagination';
 import * as S from './CardList.styled';
 
-// eslint-disable-next-line react/prop-types
 function CardList({ limit, offset, sort }) {
   const { cards, loading, currentPage, setCurrentPage } = useFetchCardList(limit, offset, sort);
 
@@ -38,5 +38,11 @@ function CardList({ limit, offset, sort }) {
     </S.OuterContainer>
   );
 }
+
+CardList.propTypes = {
+  limit: PropTypes.number.isRequired,
+  offset: PropTypes.number.isRequired,
+  sort: PropTypes.string.isRequired,
+};
 
 export default CardList;

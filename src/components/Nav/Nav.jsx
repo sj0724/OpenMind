@@ -4,11 +4,11 @@ import logo from '../../assets/logo.svg';
 import * as S from './Nav.styled';
 
 function Nav() {
-  const storedId = localStorage.getItem('questionId');
+  const questionId = localStorage.getItem('questionId');
 
   const handleAnswerButtonClick = () => {
-    if (storedId) {
-      window.location.href = `/post/${storedId}/answer`;
+    if (questionId) {
+      window.location.href = `/post/${questionId}/answer`;
     } else {
       window.location.href = '/';
     }
