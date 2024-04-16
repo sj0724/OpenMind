@@ -22,7 +22,7 @@ export const UserInfo = styled.div`
 export const UserImage = styled(Profile)`
   width: 136px;
   height: 136px;
-  background-image: url(${(props) => props.image});
+  background-image: url(${(props) => props.$image});
 `;
 
 export const BtnContainer = styled.div`
@@ -42,7 +42,7 @@ export const SnsBtn = styled.span`
   align-items: center;
   border-radius: 200px;
   background-color: var(${(props) => props.color});
-  background-image: url(${(props) => props.image});
+  background-image: url(${(props) => props.$image});
   background-repeat: no-repeat;
   background-position: center;
 `;

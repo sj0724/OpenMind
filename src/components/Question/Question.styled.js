@@ -19,9 +19,9 @@ export const QuestionStatus = styled.div`
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  border: 1px solid ${(props) => (props.complete ? 'var(--Brown-40)' : 'var(--Grayscale-40)')};
+  border: 1px solid ${(props) => (props.$complete ? 'var(--Brown-40)' : 'var(--Grayscale-40)')};
   background: var(--Grayscale-10);
-  color: ${(props) => (props.complete ? 'var(--Brown-40)' : 'var(--Grayscale-40)')};
+  color: ${(props) => (props.$complete ? 'var(--Brown-40)' : 'var(--Grayscale-40)')};
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;

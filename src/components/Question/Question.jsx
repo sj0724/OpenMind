@@ -53,7 +53,7 @@ function Question({ question }) {
 
   return (
     <S.QuestBody>
-      <S.QuestionStatus complete={question.answer}>
+      <S.QuestionStatus $complete={question.answer}>
         {question.answer ? '답변 완료' : '미답변'}
       </S.QuestionStatus>
       <S.QuestionContent>
@@ -67,11 +67,13 @@ function Question({ question }) {
       <S.QuestionModal>
         <S.ThumbnsBtn onClick={handleLike} color={like ? '--Blue-50' : null}>
           <img src={like ? thumbsUpSelect : thumbsUp} alt="up" />
-          <span>{question.like}</span>
+          <span>좋아요</span>
+          {question.like}
         </S.ThumbnsBtn>
         <S.ThumbnsBtn onClick={handleDisLike} color={disLike ? '--Red-50' : null}>
           <img src={disLike ? thumbsDownSelect : thumbsDown} alt="down" />
-          <span>{question.dislike}</span>
+          <span>싫어요</span>
+          {question.dislike}
         </S.ThumbnsBtn>
       </S.QuestionModal>
     </S.QuestBody>

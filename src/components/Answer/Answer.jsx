@@ -8,7 +8,7 @@ function Answer() {
 
   return (
     <S.AnswerContainer>
-      <S.Profile image={user.imageSource} />
+      <S.Profile $image={user.imageSource} />
       <S.AnswerContent>
         <S.Answerinfo>
           <S.UserName>{user.name}</S.UserName>

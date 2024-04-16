@@ -14,7 +14,7 @@ export const Profile = styled.div`
   height: 48px;
   justify-content: center;
   align-items: center;
-  background-image: url(${(props) => props.image});
+  background-image: url(${(props) => props.$image});
   border-radius: 9999px;
 `;
 
