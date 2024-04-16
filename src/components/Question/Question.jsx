@@ -63,7 +63,7 @@ function Question({ question }) {
         </S.Time>
         <S.QuestionDetail>{question.content}</S.QuestionDetail>
       </S.QuestionContent>
-      {answer && <Answer />}
+      {answer && <Answer answer={answer} />}
       <S.QuestionModal>
         <S.ThumbnsBtn onClick={handleLike} color={like ? '--Blue-50' : null}>
           <img src={like ? thumbsUpSelect : thumbsUp} alt="up" />
