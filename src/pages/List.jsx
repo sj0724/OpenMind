@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import styled from 'styled-components';
 import { useState } from 'react';
 import Nav from '../components/Nav/Nav';
@@ -34,7 +35,9 @@ function List() {
     toggleDropdown();
   };
 
+  // eslint-disable-next-line no-shadow
   const mapSelectedItemToSortValue = (selectedItem) =>
+    // eslint-disable-next-line implicit-arrow-linebreak
     options.find((option) => option.label === selectedItem).value;
 
   return (

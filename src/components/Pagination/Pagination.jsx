@@ -1,6 +1,7 @@
 import Pagination from 'react-js-pagination';
 import StyledPagination from './Pagination.styled';
 
+// eslint-disable-next-line react/prop-types
 function Paging({ page, setPage }) {
   return (
     <StyledPagination>

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import * as S from './DropdownMenu.styled';
 
+// eslint-disable-next-line react/prop-types
 function DropdownMenu({ options, handleItemClick }) {
   return (
     <S.DropdownMenu>

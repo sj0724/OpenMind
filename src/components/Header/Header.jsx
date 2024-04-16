@@ -3,6 +3,7 @@ import DropdownMenu from './DropdownMenu';
 import arrowDownImage from '../../assets/Arrow-down.svg';
 import arrowUpImage from '../../assets/Arrow-up.svg';
 
+// eslint-disable-next-line react/prop-types
 function Header({ selectedItem, handleItemClick, view, toggleDropdown, options }) {
   return (
     <S.HeaderContainer>
