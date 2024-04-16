@@ -25,6 +25,7 @@ export const Body = styled.div`
 `;
 
 export const FloatingBtn = styled.span`
+  cursor: pointer;
   position: fixed;
   right: 25px;
   bottom: 25px;

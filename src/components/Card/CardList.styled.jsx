@@ -42,6 +42,10 @@ export const CardContainer = styled.div`
   z-index: 1;
   transition: width 0.3s ease;
 
+  &: hover {
+    background-color: var(--Grayscale-30);
+  }
+
   @media (max-width: 1199px) {
     min-width: 18.6rem;
   }

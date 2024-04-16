@@ -86,7 +86,7 @@ Question.propTypes = {
     like: PropTypes.number.isRequired,
     dislike: PropTypes.number.isRequired,
     createdAt: PropTypes.string.isRequired,
-    answer: PropTypes.string.isRequired,
+    answer: PropTypes.object.isRequired,
   }).isRequired,
 };
 
