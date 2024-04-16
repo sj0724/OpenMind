@@ -47,7 +47,7 @@ function List() {
         view={view}
         options={options}
       />
-      <CardList sort={mapSelectedItemToSortValue(selectedItem)} />
+      <CardList limit={8} offset={0} sort={mapSelectedItemToSortValue(selectedItem)} />
     </PageWrapper>
   );
 }
