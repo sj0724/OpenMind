@@ -1,10 +1,26 @@
 import styled from 'styled-components';
 
+export const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media (max-width: 769px) {
+    flex-direction: row;
+  }
+`;
+
 export const QuestionHeading = styled.h1`
   font-size: 4rem;
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
+
+  @media (max-width: 769px) {
+    font-size: 2.4rem;
+    margin-left: 2.4rem;
+    white-space: nowrap;
+  }
 `;
 
 export const DropdownWrapper = styled.ul`
@@ -14,6 +30,10 @@ export const DropdownWrapper = styled.ul`
   align-items: center;
   cursor: pointer;
   position: relative;
+
+  @media (max-width: 769px) {
+    margin-right: 2.4rem;
+  }
 `;
 
 export const DropdownSelect = styled.li`

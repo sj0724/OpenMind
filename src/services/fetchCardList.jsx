@@ -1,6 +1,6 @@
 import axiosinstance from '../utils/axios';
 
-const fetchCardList = async (limit = 8, offset = 0, sort = 'time') => {
+const fetchCardList = async (limit, offset, sort) => {
   try {
     const response = await axiosinstance.get(
       `/subjects/?limit=${limit}&offset=${offset}&sort=${sort}`,

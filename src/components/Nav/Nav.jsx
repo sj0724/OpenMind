@@ -17,7 +17,7 @@ function Nav() {
   return (
     <S.NavWrapper>
       <Link to="/">
-        <img src={logo} alt="openmind-logo" />
+        <img src={logo} alt="logo" />
       </Link>
       <S.Button onClick={handleAnswerButtonClick}>
         답변하러 가기
