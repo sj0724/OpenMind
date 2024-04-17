@@ -114,6 +114,9 @@ export const QuestBody = styled.div`
   border-radius: 16px;
   background: var(--Grayscale-10);
   box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+
+  border: 1px solid black;
+  margin-bottom: 1rem;
 `;
 
 export const QuestionStatus = styled.div`

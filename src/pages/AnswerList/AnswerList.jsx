@@ -8,7 +8,7 @@ import emptyIcon from '../../assets/emptyIcon.svg';
 function AnswerList() {
   const { id } = useParams();
 
-  // questionList
+  // questionlist
   //   {
   //     "count": 2,
   //     "next": null,
@@ -21,7 +21,13 @@ function AnswerList() {
   //             "like": 0,
   //             "dislike": 0,
   //             "createdAt": "2024-04-15T08:22:23.809788Z",
-  //             "answer": null
+  //             "answer": {
+  //                 "id": 3739,
+  //                 "questionId": 8257,
+  //                 "content": "테스트 답변",
+  //                 "isRejected": true,
+  //                 "createdAt": "2024-04-16T01:38:50.614766Z"
+  //             }
   //         },
   //         {
   //             "id": 8160,
@@ -36,6 +42,21 @@ function AnswerList() {
   // }
   const { data: list, question } = useFetchQuestionList(id);
 
+  const [answerTexts, setAnswerTexts] = useState(Array(question.length).fill(''));
+
+  const handleAnswerChange = (index, event) => {
+    const newTexts = [...answerTexts];
+    newTexts[index] = event.target.value;
+    setAnswerTexts(newTexts);
+  };
+
+  const handleSubmitAnswer = (index) => {
+    const questionId = question[index].id;
+    const answerText = answerTexts[index];
+
+    console.log(`질문 ${questionId}의 답변 : `, answerText);
+  };
+
   return (
     <>
       {list.count ? (
@@ -45,21 +66,30 @@ function AnswerList() {
               {item.answer ? '답변 완료' : '미답변'}
             </S.QuestionStatus>
             <S.QuestionContent>
-              <S.Time>
-                질문
-                {item.createdAt}
-              </S.Time>
+              <S.Time>질문 (id : {item.id})</S.Time>
               <S.QuestionDetail>{item.content}</S.QuestionDetail>
             </S.QuestionContent>
             <S.AnswerContainer>
               <S.AnswerContent>
-                <S.AnswerText
-                  $bgColor="--Grayscale-20"
-                  $color="--Grayscale-40"
-                  placeholder="답변을 입력해주세요"></S.AnswerText>
-                <S.AnswerButton $color="--Grayscale-10" $bgColor="--Brown-30">
-                  답변 완료
-                </S.AnswerButton>
+                {item.answer ? (
+                  <p>{item.answer.content}</p>
+                ) : (
+                  <>
+                    <S.AnswerText
+                      $bgColor="--Grayscale-20"
+                      $color="--Grayscale-40"
+                      placeholder="답변을 입력해주세요"
+                      value={answerTexts[index] || ''}
+                      onChange={(event) => handleAnswerChange(index, event)}></S.AnswerText>
+                    <S.AnswerButton
+                      $color="--Grayscale-10"
+                      $bgColor={answerTexts[index]?.trim() ? '--Brown-40' : '--Brown-30'}
+                      onClick={() => handleSubmitAnswer(index)}
+                      disabled={!answerTexts[index]?.trim()}>
+                      답변 완료
+                    </S.AnswerButton>
+                  </>
+                )}
               </S.AnswerContent>
             </S.AnswerContainer>
           </S.QuestBody>
