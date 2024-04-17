@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
 import propTypes from 'prop-types';
 import * as S from './Modal.styled';
 import messagesIcon from '../../assets/messages-black.svg';
@@ -8,10 +8,24 @@ import UserContext from '../../utils/contexts/UserContext';
 function Modal({ setModal }) {
   const [text, setText] = useState('');
   const user = useContext(UserContext);
+  const modalRef = useRef();
 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setModal(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [setModal]);
   return (
     <S.StyledModal>
-      <S.ModalWrapper>
+      <S.ModalWrapper ref={modalRef}>
         <S.Header>
           <div>
             <img src={messagesIcon} alt="Modal창 header 좌측 메시지모양 아이콘" />
