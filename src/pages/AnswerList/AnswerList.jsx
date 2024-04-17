@@ -36,6 +36,21 @@ function AnswerList() {
   // }
   const { data: list, question } = useFetchQuestionList(id);
 
+  const [answerTexts, setAnswerTexts] = useState(Array(question.length).fill(''));
+
+  const handleAnswerChange = (index, event) => {
+    const newTexts = [...answerTexts];
+    newTexts[index] = event.target.value;
+    setAnswerTexts(newTexts);
+  };
+
+  const handleSubmitAnswer = (index) => {
+    const questionId = question[index].id;
+    const answerText = answerTexts[index];
+
+    console.log(`질문 ${questionId}의 답변 : `, answerText);
+  };
+
   return (
     <>
       {list.count ? (
@@ -45,10 +60,7 @@ function AnswerList() {
               {item.answer ? '답변 완료' : '미답변'}
             </S.QuestionStatus>
             <S.QuestionContent>
-              <S.Time>
-                질문
-                {item.createdAt}
-              </S.Time>
+              <S.Time>질문 (id : {item.id})</S.Time>
               <S.QuestionDetail>{item.content}</S.QuestionDetail>
             </S.QuestionContent>
             <S.AnswerContainer>
@@ -56,8 +68,14 @@ function AnswerList() {
                 <S.AnswerText
                   $bgColor="--Grayscale-20"
                   $color="--Grayscale-40"
-                  placeholder="답변을 입력해주세요"></S.AnswerText>
-                <S.AnswerButton $color="--Grayscale-10" $bgColor="--Brown-30">
+                  placeholder="답변을 입력해주세요"
+                  value={answerTexts[index] || ''}
+                  onChange={(event) => handleAnswerChange(index, event)}></S.AnswerText>
+                <S.AnswerButton
+                  $color="--Grayscale-10"
+                  $bgColor={answerTexts[index]?.trim() ? '--Brown-40' : '--Brown-30'}
+                  onClick={() => handleSubmitAnswer(index)}
+                  disabled={!answerTexts[index]?.trim()}>
                   답변 완료
                 </S.AnswerButton>
               </S.AnswerContent>
