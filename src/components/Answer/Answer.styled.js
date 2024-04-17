@@ -14,7 +14,9 @@ export const Profile = styled.div`
   height: 48px;
   justify-content: center;
   align-items: center;
-  background-image: url(${(props) => props.image});
+  background-image: url(${(props) => props.$image});
+  background-size: cover;
+  background-position: center;
   border-radius: 9999px;
 `;
 
@@ -24,16 +26,12 @@ export const AnswerContent = styled.div`
   align-items: flex-start;
   gap: 4px;
   flex: 1 0 0;
-  color: var(--Grayscale-60);
+  color: ${(props) => (props.$rejected ? 'var(--Grayscale-60)' : 'var(--Red-50)')};
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px; /* 137.5% */
-
-  p {
-    font-size: 16px;
-  }
 `;
 
 export const Answerinfo = styled.div`

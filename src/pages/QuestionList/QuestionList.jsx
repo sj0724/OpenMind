@@ -31,7 +31,8 @@ function QuestionList() {
   return (
     <>
       <S.Header>
-        <img src={mainLogo} alt="mainLogo" />
+        <S.HeaderLogo src={mainLogo} alt="mainLogo" />
+        <S.HeaderImage />
       </S.Header>
       <UserContext.Provider value={user}>
         <UserProfile copy={copyUrl} />

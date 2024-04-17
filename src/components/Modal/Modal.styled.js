@@ -19,16 +19,22 @@ export const ModalWrapper = styled.div`
   background-color: var(--Grayscale-10);
   border-radius: 24px;
   max-width: 61.2rem;
-  width: 100%;
+  width: 90%;
   height: 45.4rem;
   justify-content: center;
   align-items: center;
   margin-bottom: 5rem;
   gap: 0.6rem;
+
+  @media (max-width: 375px) {
+    height: 56.8rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 export const Header = styled.div`
-  width: 53.2rem;
+  width: 90%;
+  max-width: 53.2rem;
   height: 3rem;
   display: flex;
   justify-content: space-between;
@@ -44,12 +50,17 @@ export const Header = styled.div`
     font-size: 2.4rem;
     color: var(--Grayscale-90);
   }
+
+  @media (max-width: 375px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 export const ToUser = styled.div`
   display: flex;
   align-items: center;
-  width: 53.2rem;
+  width: 90%;
+  max-width: 53.2rem;
   gap: 0.4rem;
   margin-bottom: 1rem;
 
@@ -67,11 +78,14 @@ export const Profile = styled.div`
   width: 28px;
   height: 28px;
   background-image: url(${(props) => props.image});
+  background-size: cover;
+  background-position: center;
   border-radius: 9999px;
 `;
 
 export const Content = styled.div`
-  width: 53.2rem;
+  max-width: 53.2rem;
+  width: 90%;
   height: 18rem;
   border-radius: 0.8rem;
   padding: 1.6rem;
@@ -79,7 +93,7 @@ export const Content = styled.div`
   background-color: var(--Grayscale-20);
 
   & textarea {
-    width: 50rem;
+    width: 100%;
     height: 14.8rem;
     font-size: 1.6rem;
     background-color: var(--Grayscale-20);
@@ -88,11 +102,20 @@ export const Content = styled.div`
     outline: none;
     resize: none;
   }
+
+  @media (max-width: 375px) {
+    height: 35.8rem;
+    margin-bottom: 2rem;
+    textarea {
+      height: 35.8rem;
+    }
+  }
 `;
 
 export const Footer = styled.button`
   display: flex;
-  width: 53.2rem;
+  width: 90%;
+  max-width: 53.2rem;
   height: 4.6rem;
   border-radius: 0.8rem;
   padding: 1.2rem, 2.4rem;

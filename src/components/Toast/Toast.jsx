@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-
-import * as S from './Toast.styled';
+import ToastBody from './Toast.styled';
 
 function Toast({ setToast, text }) {
   useEffect(() => {
@@ -14,9 +13,9 @@ function Toast({ setToast, text }) {
   }, [setToast]);
 
   return (
-    <S.ToastBody>
+    <ToastBody>
       <p>{text}</p>
-    </S.ToastBody>
+    </ToastBody>
   );
 }
 
