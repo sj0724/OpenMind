@@ -10,8 +10,12 @@ function Main() {
   const userName = useRef('');
   const createUser = async (e) => {
     e.preventDefault();
-    await fetchPostUser(userName.current.value);
-    window.location.href = '/list';
+    if (!userName.current.value) {
+      alert('이름을 입력해주세요!');
+    } else {
+      await fetchPostUser(userName.current.value);
+      window.location.href = '/list';
+    }
   };
 
   return (
