@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Question from '../../components/Question/Question';
 import QuestionContainer from '../../components/QuestionContainer/QuestionContainer';
@@ -28,6 +28,21 @@ function QuestionList() {
     setToast(true);
   };
 
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        setModal(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <S.Header>
@@ -46,7 +61,7 @@ function QuestionList() {
         </S.Body>
         <S.FloatingBtn onClick={handleModalToggle}>질문 작성하기</S.FloatingBtn>
         {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}
-        {modal && <Modal setModal={setModal} />}
+        {modal && <Modal setModal={setModal} ref={modalRef} />}
       </UserContext.Provider>
     </>
   );

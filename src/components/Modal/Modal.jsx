@@ -33,15 +33,9 @@ function Modal({ setModal }) {
             placeholder="내용을 입력해주세요"
           />
         </S.Content>
-        {text.length > 0 ? (
-          <S.Footer color="var(--Brown-40)">
-            <span>질문 보내기</span>
-          </S.Footer>
-        ) : (
-          <S.Footer color="var(--Brown-30)">
-            <span>질문 보내기</span>
-          </S.Footer>
-        )}
+        <S.Footer color={text.length > 0 ? 'var(--Brown-40)' : 'var(--Brown-30)'}>
+          <span>질문 보내기</span>
+        </S.Footer>
       </S.ModalWrapper>
     </S.StyledModal>
   );

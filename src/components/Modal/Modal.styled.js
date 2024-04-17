@@ -96,7 +96,7 @@ export const Content = styled.div`
     font-size: 1.6rem;
     background-color: var(--Grayscale-20);
     color: var(--Grayscale-40);
-    border: none;
+    border: 1px solid var(--brown-40);
     outline: none;
     resize: none;
   }
