@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Nav from '../components/Nav/Nav';
 import Header from '../components/Header/Header';
 // eslint-disable-next-line import/no-named-as-default
@@ -14,14 +14,14 @@ const PageWrapper = styled.div`
   }
 `;
 
+const options = [
+  { label: '최신순', value: 'time' },
+  { label: '이름순', value: 'name' },
+];
+
 function List() {
   const [view, setView] = useState(false);
   const [selectedItem, setSelectedItem] = useState('최신순');
-
-  const options = [
-    { label: '최신순', value: 'time' },
-    { label: '이름순', value: 'name' },
-  ];
 
   const toggleDropdown = () => {
     setView(!view);
@@ -32,10 +32,10 @@ function List() {
     toggleDropdown();
   };
 
-  // eslint-disable-next-line no-shadow
-  const mapSelectedItemToSortValue = (selectedItem) =>
-    // eslint-disable-next-line implicit-arrow-linebreak
-    options.find((option) => option.label === selectedItem).value;
+  const mapSelectedItemToSortValue = useMemo(
+    () => (item) => options.find((option) => option.label === item).value,
+    [],
+  );
 
   return (
     <PageWrapper>
@@ -47,7 +47,7 @@ function List() {
         view={view}
         options={options}
       />
-      <CardList sort={mapSelectedItemToSortValue(selectedItem)} />
+      <CardList limit={8} offset={0} sort={mapSelectedItemToSortValue(selectedItem)} />
     </PageWrapper>
   );
 }

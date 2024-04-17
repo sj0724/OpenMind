@@ -4,11 +4,11 @@ import * as S from './Nav.styled';
 import LinkButton from '../LinkButton/LinkButton';
 
 function Nav() {
-  const storedId = localStorage.getItem('questionId');
+  const questionId = localStorage.getItem('questionId');
 
   const handleAnswerButtonClick = () => {
-    if (storedId) {
-      window.location.href = `/post/${storedId}/answer`;
+    if (questionId) {
+      window.location.href = `/post/${questionId}/answer`;
     } else {
       window.location.href = '/';
     }

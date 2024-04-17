@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import * as S from './DropdownMenu.styled';
 
-// eslint-disable-next-line react/prop-types
 function DropdownMenu({ options, handleItemClick }) {
   return (
     <S.DropdownMenu>
@@ -15,6 +14,12 @@ function DropdownMenu({ options, handleItemClick }) {
 }
 
 DropdownMenu.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   handleItemClick: PropTypes.func.isRequired,
 };
 
