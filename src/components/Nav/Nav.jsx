@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import arrow from '../../assets/arrow-right.svg';
 import logo from '../../assets/logo.svg';
 import * as S from './Nav.styled';
+import LinkButton from '../LinkButton/LinkButton';
 
 function Nav() {
-  const storedId = localStorage.getItem('questionId');
+  const questionId = localStorage.getItem('questionId');
 
   const handleAnswerButtonClick = () => {
-    if (storedId) {
-      window.location.href = `/post/${storedId}/answer`;
+    if (questionId) {
+      window.location.href = `/post/${questionId}/answer`;
     } else {
       window.location.href = '/';
     }
@@ -19,10 +19,9 @@ function Nav() {
       <Link to="/">
         <img src={logo} alt="logo" />
       </Link>
-      <S.Button onClick={handleAnswerButtonClick}>
-        답변하러 가기
-        <img src={arrow} alt="arrow-right" />
-      </S.Button>
+      <S.LinkAnswer onClick={handleAnswerButtonClick}>
+        <LinkButton>답변하러 가기</LinkButton>
+      </S.LinkAnswer>
     </S.NavWrapper>
   );
 }

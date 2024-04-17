@@ -78,6 +78,8 @@ export const Profile = styled.div`
   width: 28px;
   height: 28px;
   background-image: url(${(props) => props.image});
+  background-size: cover;
+  background-position: center;
   border-radius: 9999px;
 `;
 

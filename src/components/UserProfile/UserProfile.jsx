@@ -6,10 +6,15 @@ import linkIcon from '../../assets/Link.svg';
 import facebookIcon from '../../assets/Facebook.svg';
 import * as S from './UserProfile.styled';
 import UserContext from '../../utils/contexts/UserContext';
+import shareKakao from '../../utils/shareKakao';
 
 function UserProfile({ copy }) {
   const user = useContext(UserContext);
   const location = useLocation();
+
+  const handleKakaoBtn = () => {
+    shareKakao();
+  };
 
   return (
     <S.UserInfo>
@@ -21,7 +26,7 @@ function UserProfile({ copy }) {
           $image={linkIcon}
           onClick={() => copy(`${import.meta.env.VITE_API_URL}${location.pathname}`)}
         />
-        <S.SnsBtn color="--Yellow-50" $image={kakaoIcon} />
+        <S.SnsBtn color="--Yellow-50" $image={kakaoIcon} onClick={() => handleKakaoBtn()} />
         <S.SnsBtn color="--Blue-50" $image={facebookIcon} />
       </S.BtnContainer>
     </S.UserInfo>

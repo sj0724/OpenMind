@@ -17,12 +17,21 @@ export const UserInfo = styled.div`
   font-weight: 400;
   line-height: 40px; /* 125% */
   gap: 12px;
+
+  @media (max-width: 769px) {
+    top: 101px;
+  }
 `;
 
 export const UserImage = styled(Profile)`
   width: 136px;
   height: 136px;
   background-image: url(${(props) => props.$image});
+
+  @media (max-width: 769px) {
+    width: 104px;
+    height: 104px;
+  }
 `;
 
 export const BtnContainer = styled.div`

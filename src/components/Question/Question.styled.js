@@ -10,6 +10,10 @@ export const QuestBody = styled.div`
   border-radius: 16px;
   background: var(--Grayscale-10);
   box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+
+  @media (max-width: 1199px) {
+    width: 100%;
+  }
 `;
 
 export const QuestionStatus = styled.div`

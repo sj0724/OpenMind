@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: inline-flex;
+  display: flex;
   padding: 16px;
   flex-direction: column;
   align-items: center;
@@ -9,6 +9,13 @@ export const Container = styled.div`
   border-radius: 16px;
   border: 1px solid var(--Brown-30);
   background: var(--Brown-10);
+  margin: 0 auto;
+
+  @media (max-width: 1199px) {
+    margin: 0 32px;
+    width: 100%;
+    max-width: 684px;
+  }
 `;
 
 export const QuestionCount = styled.span`

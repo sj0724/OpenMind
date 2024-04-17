@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useFetchCardList } from '../../hooks/useFetchCardList';
 import Messages from '../../assets/Messages.svg';
 import Paging from '../Pagination/Pagination';
 import * as S from './CardList.styled';
 
-// eslint-disable-next-line react/prop-types
 function CardList({ limit, offset, sort }) {
   const { cards, loading, currentPage, setCurrentPage } = useFetchCardList(limit, offset, sort);
 
@@ -20,16 +20,17 @@ function CardList({ limit, offset, sort }) {
         ) : (
           cards.map((card) => (
             <S.CardContainer key={card.id}>
-              <Link to={`/question/${card.id}`} style={{ textDecoration: 'none' }} />
-              <S.CardImage src={card.imageSource} alt={card.name} />
-              <S.CardName>{card.name}</S.CardName>
-              <S.CardInfo>
-                <S.QuestionCountMessage>
-                  <img src={Messages} alt="QuestionMessage img" />
-                  <p>받은 질문</p>
-                </S.QuestionCountMessage>
-                <S.QuestionCount>{`${card.questionCount}개`}</S.QuestionCount>
-              </S.CardInfo>
+              <Link to={`/question/${card.id}`} style={{ textDecoration: 'none' }}>
+                <S.CardImage src={card.imageSource} alt={card.name} />
+                <S.CardName>{card.name}</S.CardName>
+                <S.CardInfo>
+                  <S.QuestionCountMessage>
+                    <img src={Messages} alt="QuestionMessage img" />
+                    <p>받은 질문</p>
+                  </S.QuestionCountMessage>
+                  <S.QuestionCount>{`${card.questionCount}개`}</S.QuestionCount>
+                </S.CardInfo>
+              </Link>
             </S.CardContainer>
           ))
         )}
@@ -38,5 +39,11 @@ function CardList({ limit, offset, sort }) {
     </S.OuterContainer>
   );
 }
+
+CardList.propTypes = {
+  limit: PropTypes.number.isRequired,
+  offset: PropTypes.number.isRequired,
+  sort: PropTypes.string.isRequired,
+};
 
 export default CardList;
