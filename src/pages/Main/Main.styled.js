@@ -3,7 +3,7 @@ import Image from '../../assets/backgroundImage-removebg.png';
 
 export const Body = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: var(--Grayscale-20);
   display: flex;
   flex-direction: column;
