@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import useFetchQuestionList from '../../hooks/useFetchQuestionList';
+import { postAnswer } from '../../services/postAnswer';
 import * as S from './AnswerList.styled';
 import emptyIcon from '../../assets/emptyIcon.svg';
 
@@ -8,53 +9,45 @@ import emptyIcon from '../../assets/emptyIcon.svg';
 function AnswerList() {
   const { id } = useParams();
 
-  // questionlist
-  //   {
-  //     "count": 2,
-  //     "next": null,
-  //     "previous": null,
-  //     "results": [
-  //         {
-  //             "id": 8257,
-  //             "subjectId": 4838,
-  //             "content": "테스트 질문 2",
-  //             "like": 0,
-  //             "dislike": 0,
-  //             "createdAt": "2024-04-15T08:22:23.809788Z",
-  //             "answer": {
-  //                 "id": 3739,
-  //                 "questionId": 8257,
-  //                 "content": "테스트 답변",
-  //                 "isRejected": true,
-  //                 "createdAt": "2024-04-16T01:38:50.614766Z"
-  //             }
-  //         },
-  //         {
-  //             "id": 8160,
-  //             "subjectId": 4838,
-  //             "content": "테스트입니다",
-  //             "like": 0,
-  //             "dislike": 0,
-  //             "createdAt": "2024-04-12T05:34:28.212140Z",
-  //             "answer": null
-  //         }
-  //     ]
-  // }
   const { data: list, question } = useFetchQuestionList(id);
 
   const [answerTexts, setAnswerTexts] = useState(Array(question.length).fill(''));
+  const [submittedAnswers, setSubmittedAnswers] = useState([]);
 
+  // 이미 등록된 답변이 있을 경우 submittedAnswers 상태 업데이트
+  useEffect(() => {
+    const initialSubmittedAnswers = question.map((item) => (item.answer ? item.answer : null));
+    setSubmittedAnswers(initialSubmittedAnswers);
+  }, [question]);
+
+  // 입력 된 답변이 있으면 비활성화 된 버튼 활성화 상태로 변경
   const handleAnswerChange = (index, event) => {
     const newTexts = [...answerTexts];
     newTexts[index] = event.target.value;
     setAnswerTexts(newTexts);
   };
 
-  const handleSubmitAnswer = (index) => {
+  // 답변 등록
+  const handleSubmitAnswer = async (index) => {
+    if (!window.confirm('답변을 등록하시겠습니까?')) {
+      console.log('답변 등록이 취소되었습니다.');
+      return false;
+    }
+
     const questionId = question[index].id;
     const answerText = answerTexts[index];
 
-    console.log(`질문 ${questionId}의 답변 : `, answerText);
+    const { error, loading, data } = await postAnswer(questionId, answerText, false);
+
+    if (loading) {
+      console.log('답변 등록 중');
+    } else if (error) {
+      console.error('답변 등록 실패', error);
+    } else if (data) {
+      const newSubmittedAnswers = [...submittedAnswers];
+      newSubmittedAnswers[index] = data;
+      setSubmittedAnswers(newSubmittedAnswers);
+    }
   };
 
   return (
@@ -71,8 +64,8 @@ function AnswerList() {
             </S.QuestionContent>
             <S.AnswerContainer>
               <S.AnswerContent>
-                {item.answer ? (
-                  <p>{item.answer.content}</p>
+                {submittedAnswers[index] ? (
+                  <p>{submittedAnswers[index].content}</p>
                 ) : (
                   <>
                     <S.AnswerText
