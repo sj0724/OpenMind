@@ -7,7 +7,7 @@ import facebookIcon from '../../assets/Facebook.svg';
 import * as S from './UserProfile.styled';
 import UserContext from '../../utils/contexts/UserContext';
 import shareKakao from '../../utils/shareKakao';
-import shareFacebook from '../../utils/\bshareFacebook';
+import shareFacebook from '../../utils/shareFacebook';
 
 function UserProfile({ copy }) {
   const user = useContext(UserContext);
