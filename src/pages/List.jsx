@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useState, useMemo } from 'react';
 import Nav from '../components/Nav/Nav';
 import Header from '../components/Header/Header';
-// eslint-disable-next-line import/no-named-as-default
 import CardList from '../components/Card/CardList';
 
 const PageWrapper = styled.div`
