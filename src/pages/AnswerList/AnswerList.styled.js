@@ -209,7 +209,7 @@ export const AnswerContent = styled.div`
   align-items: flex-start;
   gap: 4px;
   flex: 1 0 0;
-  color: var(--Grayscale-60);
+  color: ${(props) => (props.$rejected ? 'var(--Red-50)' : 'var(--Grayscale-60)')};
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
@@ -247,4 +247,35 @@ export const AnswerButton = styled.button`
   border-radius: 0.8rem;
   color: var(${(props) => props.$color});
   background-color: var(${(props) => props.$bgColor});
+`;
+
+// Answer
+export const WrapAnswerTop = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+`;
+export const WrapKebabButton = styled.div`
+  position: relative;
+`;
+export const KebabButton = styled.button`
+  width: 26px;
+  height: 26px;
+`;
+export const WrapEditModal = styled.div`
+  border: 1px solid black;
+  position: absolute;
+  top: 0;
+  right: -3rem;
+  top: 2rem;
+  left: -3rem;
+  background: var(--Grayscale-10);
+  font-size: 1.4rem;
+  height: 3.5rem;
+`;
+export const EditModalButton = styled.button`
+  width: 100%;
+  height: 100%;
 `;

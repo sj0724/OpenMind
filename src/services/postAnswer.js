@@ -15,10 +15,8 @@ export const postAnswer = async (questionId, answer, isRejected) => {
       isRejected: isRejected,
     });
 
-    // 성공적으로 데이터를 보내고 받았을 때 반환
     return { error: null, loading: false, data: response.data };
   } catch (error) {
-    // 오류 발생 시 오류 객체 반환
     return { error: error, loading: false, data: null };
   }
 };
