@@ -1,17 +1,26 @@
 import { useState, useEffect } from 'react';
 import fetchQuestionList from '../services/fetchQuestionList';
 
-function useFetchQuestionList(id) {
+const LIMIT = 2;
+
+function useFetchQuestionList(id, listOffset) {
   const [data, setData] = useState({});
   const [question, setQuestion] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [next, setNext] = useState('');
 
   useEffect(() => {
+    const option = {
+      subjectsId: id,
+      limit: LIMIT,
+      offset: listOffset,
+    };
     const fetchCardListData = async () => {
       try {
-        const response = await fetchQuestionList(id);
+        const response = await fetchQuestionList(option);
         setData(response);
-        setQuestion(response.results);
+        setQuestion((prev) => [...prev, ...response.results]);
+        setNext(response.next);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -19,9 +28,14 @@ function useFetchQuestionList(id) {
     };
 
     fetchCardListData();
-  }, [id]);
+  }, [id, listOffset]);
 
-  return { data, question, loading };
+  return {
+    data,
+    question,
+    loading,
+    next,
+  };
 }
 
 export default useFetchQuestionList;

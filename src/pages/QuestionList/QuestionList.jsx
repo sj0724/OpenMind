@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Question from '../../components/Question/Question';
 import QuestionContainer from '../../components/QuestionContainer/QuestionContainer';
@@ -16,17 +16,41 @@ function QuestionList() {
   const { id } = useParams();
   const [modal, setModal] = useState(false);
   const { user } = useFetchUser(id);
-  const { data, question } = useFetchQuestionList(id);
+  const [toast, setToast] = useState(false);
+  const endRef = useRef(true);
+  const obsRef = useRef(true);
+  const preventRef = useRef(true);
+  const [listOffset, setListOffset] = useState(0);
+  const { data, question, next } = useFetchQuestionList(id, listOffset);
+
+  const obsHandler = (entries) => {
+    const target = entries[0];
+    if (!next) {
+      return;
+    }
+    if (endRef.current && target.isIntersecting && preventRef.current) {
+      preventRef.current = false;
+      setListOffset((prev) => prev + 2);
+      preventRef.current = true;
+    }
+  };
 
   const handleModalToggle = () => {
     setModal(!modal);
   };
-  const [toast, setToast] = useState(false);
 
   const copyUrl = async (url) => {
     await navigator.clipboard.writeText(url);
     setToast(true);
   };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(obsHandler, { threshold: 0 });
+    if (obsRef.current) observer.observe(obsRef.current);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <>
@@ -45,6 +69,7 @@ function QuestionList() {
             )}
           </QuestionContainer>
         </S.Body>
+        <S.PageEnd ref={obsRef} />
         <S.FloatingBtn onClick={handleModalToggle}>질문 작성하기</S.FloatingBtn>
         {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}
         {modal && <Modal setModal={setModal} />}
