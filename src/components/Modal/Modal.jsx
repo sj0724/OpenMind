@@ -1,6 +1,6 @@
 import { useContext, useState, useRef, useCallback } from 'react';
 import propTypes from 'prop-types';
-import useModal from './useModal';
+import useModal from '../../hooks/useModal';
 import * as S from './Modal.styled';
 import messagesIcon from '../../assets/messages-black.svg';
 import xMark from '../../assets/x-mark.svg';
