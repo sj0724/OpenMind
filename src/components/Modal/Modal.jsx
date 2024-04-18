@@ -1,5 +1,6 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef, useCallback } from 'react';
 import propTypes from 'prop-types';
+import useModal from './useModal';
 import * as S from './Modal.styled';
 import messagesIcon from '../../assets/messages-black.svg';
 import xMark from '../../assets/x-mark.svg';
@@ -8,10 +9,27 @@ import UserContext from '../../utils/contexts/UserContext';
 function Modal({ setModal }) {
   const [text, setText] = useState('');
   const user = useContext(UserContext);
+  const modalRef = useRef();
+
+  useModal(setModal, modalRef);
+
+  const handleSend = useCallback(() => {
+    console.log(text); // 차후 여기에 text를 보내는 로직을 추가 할 예정
+    setModal(false);
+  }, [text, setModal]);
+
+  const handleKeyPress = useCallback(
+    (event) => {
+      if (event.key === 'Enter') {
+        handleSend();
+      }
+    },
+    [handleSend],
+  );
 
   return (
     <S.StyledModal>
-      <S.ModalWrapper>
+      <S.ModalWrapper ref={modalRef}>
         <S.Header>
           <div>
             <img src={messagesIcon} alt="Modal창 header 좌측 메시지모양 아이콘" />
@@ -30,18 +48,15 @@ function Modal({ setModal }) {
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
+            onKeyPress={handleKeyPress}
             placeholder="내용을 입력해주세요"
           />
         </S.Content>
-        {text.length > 0 ? (
-          <S.Footer color="var(--Brown-40)">
-            <span>질문 보내기</span>
-          </S.Footer>
-        ) : (
-          <S.Footer color="var(--Brown-30)">
-            <span>질문 보내기</span>
-          </S.Footer>
-        )}
+        <S.Footer
+          color={text.length > 0 ? 'var(--Brown-40)' : 'var(--Brown-30)'}
+          onClick={handleSend}>
+          <span>질문 보내기</span>
+        </S.Footer>
       </S.ModalWrapper>
     </S.StyledModal>
   );
