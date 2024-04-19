@@ -113,8 +113,8 @@ export const ImageArea = styled.div`
 export const LinkQuestion = styled.div`
   z-index: 10;
   position: absolute;
-  top: 45px;
-  right: 130px;
+  top: 40px;
+  right: 50px;
 
   @media (max-width: 769px) {
     position: static;
