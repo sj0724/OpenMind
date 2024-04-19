@@ -71,7 +71,8 @@ export const FloatingBtn = styled.span`
 
   @media (max-width: 769px) {
     width: 123px;
-    overflow: hidden;
+    font-size: 18px;
+    white-space: nowrap;
   }
 `;
 

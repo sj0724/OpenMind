@@ -17,15 +17,14 @@ function QuestionList() {
   const [modal, setModal] = useState(false);
   const { user } = useFetchUser(id);
   const [toast, setToast] = useState(false);
-  const endRef = useRef(true);
-  const obsRef = useRef(true);
+  const obsRef = useRef(null);
   const preventRef = useRef(true);
   const [listOffset, setListOffset] = useState(0);
-  const { data, question } = useFetchQuestionList(id, listOffset);
+  const { data, question, next } = useFetchQuestionList(id, listOffset);
 
-  const obsHandler = (entries) => {
+  const handleObserver = (entries) => {
     const target = entries[0];
-    if (endRef.current && target.isIntersecting && preventRef.current) {
+    if (next && target.isIntersecting && preventRef.current) {
       preventRef.current = false;
       setListOffset((prev) => prev + 2);
       preventRef.current = true;
@@ -42,12 +41,12 @@ function QuestionList() {
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(obsHandler, { threshold: 0 });
+    const observer = new IntersectionObserver(handleObserver, { threshold: 0 });
     if (obsRef.current) observer.observe(obsRef.current);
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [next]);
 
   return (
     <>
