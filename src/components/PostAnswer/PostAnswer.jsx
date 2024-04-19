@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import thumbsUp from '../../assets/thumbs-up.svg';
-import thumbsUpSelect from '../../assets/thumbs-up-blue.svg';
-import thumbsDown from '../../assets/thumbs-down.svg';
-import thumbsDownSelect from '../../assets/thumbs-down-red.svg';
+import AnswerContent from '../AnswerContent/AnswerContent';
 
 import * as S from '../Question/Question.styled';
 import * as SPA from './PostAnswer.styled';
 
 import calculateDate from '../../utils/calculateDate';
+import UserContext from '../../utils/contexts/UserContext';
 import postLike from '../../services/postLike';
 
 import kebab from '../../assets/kebab.svg';
+import thumbsUp from '../../assets/thumbs-up.svg';
+import thumbsUpSelect from '../../assets/thumbs-up-blue.svg';
+import thumbsDown from '../../assets/thumbs-down.svg';
+import thumbsDownSelect from '../../assets/thumbs-down-red.svg';
 
 function PostAnswer({ question }) {
   const [answer] = useState(question.answer);
@@ -66,10 +68,8 @@ function PostAnswer({ question }) {
   return (
     <S.QuestBody>
       <SPA.WrapAnswerTop>
-        <S.QuestionStatus $complete={question.answer}>
-          {question.answer ? '답변 완료' : '미답변'}
-        </S.QuestionStatus>
-        {(!question.answer || !question.answer.isRejected) && (
+        <S.QuestionStatus $complete={answer}>{answer ? '답변 완료' : '미답변'}</S.QuestionStatus>
+        {(!answer || !answer.isRejected) && (
           <SPA.WrapKebabButton>
             <SPA.KebabButton onClick={() => toggleEditModal(index)}>
               <img src={kebab} alt="더보기" />
@@ -84,7 +84,7 @@ function PostAnswer({ question }) {
         </S.Time>
         <S.QuestionDetail>{question.content}</S.QuestionDetail>
       </S.QuestionContent>
-      <div>답변</div>
+      <AnswerContent answer={answer} />
       <S.QuestionModal>
         <S.ThumbnsBtn onClick={handleLike} color={like ? '--Blue-50' : null}>
           <img src={like ? thumbsUpSelect : thumbsUp} alt="up" />
