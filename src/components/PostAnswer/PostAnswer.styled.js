@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 
-export const AnswerTopLayout = styled.div`
+export const WrapAnswerTop = styled.div`
+  display: flex;
   width: 100%;
-  display: flex;
-  display: flex;
   justify-content: space-between;
+  align-items: center;
+  border: none;
 `;
-export const KebabButton = styled.button``;
+export const WrapKebabButton = styled.div`
+  position: relative;
+`;
+export const KebabButton = styled.button`
+  width: 26px;
+  height: 26px;
+`;
