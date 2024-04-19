@@ -84,7 +84,7 @@ function PostAnswer({ question }) {
         </S.Time>
         <S.QuestionDetail>{question.content}</S.QuestionDetail>
       </S.QuestionContent>
-      <AnswerContent answer={answer} />
+      <AnswerContent answer={answer} questionId={question.id} />
       <S.QuestionModal>
         <S.ThumbnsBtn onClick={handleLike} color={like ? '--Blue-50' : null}>
           <img src={like ? thumbsUpSelect : thumbsUp} alt="up" />
