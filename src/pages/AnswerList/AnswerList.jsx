@@ -66,7 +66,7 @@ function AnswerList() {
         <S.Body>
           <QuestionContainer count={data?.count || 0}>
             {data?.count ? (
-              question.map((item) => <PostAnswer {...item} key={item.id} />)
+              question.map((item) => <PostAnswer question={item} key={item.id} />)
             ) : (
               <S.NoQuestion src={emptyIcon} />
             )}

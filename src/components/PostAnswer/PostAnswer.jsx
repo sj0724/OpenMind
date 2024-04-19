@@ -14,7 +14,7 @@ import postLike from '../../services/postLike';
 
 import kebab from '../../assets/kebab.svg';
 
-function PostAnswer(question) {
+function PostAnswer({ question }) {
   const [answer] = useState(question.answer);
   const [like, setLike] = useState(false);
   const [disLike, setDisLike] = useState(false);
@@ -69,13 +69,13 @@ function PostAnswer(question) {
         <S.QuestionStatus $complete={question.answer}>
           {question.answer ? '답변 완료' : '미답변'}
         </S.QuestionStatus>
-        <SPA.WrapKebabButton>
-          {(!question.answer || !question.answer.isRejected) && (
+        {(!question.answer || !question.answer.isRejected) && (
+          <SPA.WrapKebabButton>
             <SPA.KebabButton onClick={() => toggleEditModal(index)}>
               <img src={kebab} alt="더보기" />
             </SPA.KebabButton>
-          )}
-        </SPA.WrapKebabButton>
+          </SPA.WrapKebabButton>
+        )}
       </SPA.WrapAnswerTop>
       <S.QuestionContent>
         <S.Time>
