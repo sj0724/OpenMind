@@ -26,7 +26,7 @@ export const AnswerContent = styled.div`
   align-items: flex-start;
   gap: 4px;
   flex: 1 0 0;
-  color: ${(props) => (props.$rejected ? 'var(--Grayscale-60)' : 'var(--Red-50)')};
+  color: ${(props) => (props.$rejected ? 'var(--Red-50)' : 'var(--Grayscale-60)')};
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;

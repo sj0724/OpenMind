@@ -21,13 +21,10 @@ function QuestionList() {
   const obsRef = useRef(true);
   const preventRef = useRef(true);
   const [listOffset, setListOffset] = useState(0);
-  const { data, question, next } = useFetchQuestionList(id, listOffset);
+  const { data, question } = useFetchQuestionList(id, listOffset);
 
   const obsHandler = (entries) => {
     const target = entries[0];
-    if (!next) {
-      return;
-    }
     if (endRef.current && target.isIntersecting && preventRef.current) {
       preventRef.current = false;
       setListOffset((prev) => prev + 2);
