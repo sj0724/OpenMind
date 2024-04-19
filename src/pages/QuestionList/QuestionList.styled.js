@@ -82,3 +82,5 @@ export const NoQuestion = styled.img`
     margin: 97px 32px 41px;
   }
 `;
+
+export const PageEnd = styled.div``;
