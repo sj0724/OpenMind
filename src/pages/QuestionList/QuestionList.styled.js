@@ -77,11 +77,18 @@ export const FloatingBtn = styled.span`
   }
 `;
 
-export const UpButton = styled.span`
-  cursor: pointer;
+export const PageButtons = styled.div`
   position: fixed;
   right: 25px;
   bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15px;
+`;
+
+export const UpButton = styled.span`
+  cursor: pointer;
   border-radius: 200px;
   background-color: var(--Grayscale-30);
   width: 40px;
@@ -89,6 +96,22 @@ export const UpButton = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const PrevButton = styled.span`
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 200px;
+  padding: 10px 20px;
+  background-color: var(--Grayscale-30);
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    margin-right: 8px;
+  }
 `;
 
 export const NoQuestion = styled.img`
