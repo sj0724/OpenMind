@@ -5,8 +5,8 @@ import axiosinstance from '../utils/axios';
  *
  * @author yum
  * @date 23.04
- * @param
- * @return { id, name, imageSource, qeustionCount, createdAt }
+ * @param questionId, answer, isRejected
+ * @return { id, questionId, content, isRejected, createdAt }
  */
 export const postAnswer = async (questionId, answer, isRejected) => {
   try {

@@ -10,6 +10,7 @@ import * as SA from '../Answer/Answer.styled';
 import { MESSAGE } from './constant';
 
 import { postAnswer } from '../../services/postAnswer';
+import { deleteAnswer } from '../../services/deleteAnswer';
 
 import calculateDate from '../../utils/calculateDate';
 import UserContext from '../../utils/contexts/UserContext';
@@ -22,6 +23,9 @@ function PostAnswer({ question }) {
   const user = useContext(UserContext);
 
   const [answer] = useState(question.answer);
+
+  // 답변 id
+  const [answerId, setAnswerId] = useState(0);
   // 답변 등록 여부
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
 
@@ -48,6 +52,7 @@ function PostAnswer({ question }) {
       setAnswerText('');
       setIsRejected(answer.isRejected);
       setIsAnswerSubmitted(true);
+      setAnswerId(answer.id);
     }
   }, [answer]);
 
@@ -72,9 +77,9 @@ function PostAnswer({ question }) {
     const { error, loading, data } = await postAnswer(question.id, answerContentText, isReject);
 
     if (loading) {
-      console.log('답변 등록 중');
+      console.log(`답변 ${isReject ? MESSAGE.reject : MESSAGE.submit} 중`);
     } else if (error) {
-      console.error('답변 등록 실패', error);
+      console.error(`답변 ${isReject ? MESSAGE.reject : MESSAGE.submit} 실패`, error);
     } else if (data) {
       // 등록된 답변의 내용으로 업데이트
       setSubmittedAnswer(data.content || '');
@@ -84,6 +89,29 @@ function PostAnswer({ question }) {
       setIsAnswerSubmitted(true);
       // 답변 거절 상태 변경
       setIsRejected(isReject);
+      // 답변 id
+      setAnswerId(data.id || 0);
+    }
+  };
+
+  // 답변 삭제
+  const handleDeleteAnswer = async () => {
+    if (!window.confirm(`답변을 ${MESSAGE.delete}하시겠습니까?`)) {
+      return false;
+    }
+
+    const { error, loading } = await deleteAnswer(answerId);
+
+    if (loading) {
+      console.log(`답변 ${MESSAGE.delete} 중`);
+    } else if (error) {
+      console.error(`답변 ${MESSAGE.delete} 실패`, error);
+    } else {
+      setSubmittedAnswer('');
+      setAnswerText('');
+      setIsAnswerSubmitted(false);
+      setIsRejected(false);
+      setAnswerId(0);
     }
   };
 
@@ -135,7 +163,7 @@ function PostAnswer({ question }) {
             </S.EditIconButton>
           )}
           {/* 아이콘 표시 */}
-          <S.EditIconButton>
+          <S.EditIconButton onClick={() => handleDeleteAnswer()}>
             <img src={deleteIcon} alt="삭제버튼" />
           </S.EditIconButton>
         </S.WrapEditIcons>
