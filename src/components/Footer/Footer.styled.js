@@ -2,27 +2,37 @@ import styled from 'styled-components';
 
 export const Body = styled.div`
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: Pretendard;
-  background-color: var(--Grayscale-20);
+  background-color: var(--Brown-30);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: end;
   padding: 25px;
+  color: var(--Brown-40);
+
   img {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     margin-right: 20px;
   }
 `;
 
 export const LinkContainer = styled.div`
   display: flex;
+  gap: 20px;
+`;
+
+export const Container = styled.div`
+  font-weight: 600;
+  display: flex;
   flex-direction: column;
-  gap: 5px;
+  justify-content: space-between;
+  height: 90px;
+  margin-right: 20px;
 `;
 
 export const Content = styled.a`
+  font-size: 16px;
   text-decoration: none;
   color: var(--Brown-40);
 `;

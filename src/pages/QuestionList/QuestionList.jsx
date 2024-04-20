@@ -12,7 +12,6 @@ import Modal from '../../components/Modal/Modal';
 import useFetchUser from '../../hooks/useFetchUser';
 import useFetchQuestionList from '../../hooks/useFetchQuestionList';
 import UserContext from '../../utils/contexts/UserContext';
-import Footer from '../../components/Footer/Footer';
 
 function QuestionList() {
   const { id } = useParams();
@@ -71,7 +70,6 @@ function QuestionList() {
             )}
           </QuestionContainer>
         </S.Body>
-        <Footer />
         <S.PageEnd ref={obsRef} />
         <S.UpButton onClick={moveTop}>
           <img src={arrowUp} alt="화살표" />
