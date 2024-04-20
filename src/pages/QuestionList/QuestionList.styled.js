@@ -41,7 +41,8 @@ export const Body = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 189px 0 136px 0;
+  flex-direction: column;
+  padding: 189px 0 30px 0;
 
   @media (max-width: 769px) {
     padding: 176px 0 126px 0;

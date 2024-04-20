@@ -11,6 +11,7 @@ import Modal from '../../components/Modal/Modal';
 import useFetchUser from '../../hooks/useFetchUser';
 import useFetchQuestionList from '../../hooks/useFetchQuestionList';
 import UserContext from '../../utils/contexts/UserContext';
+import Footer from '../../components/Footer/Footer';
 
 function QuestionList() {
   const { id } = useParams();
@@ -65,6 +66,7 @@ function QuestionList() {
             )}
           </QuestionContainer>
         </S.Body>
+        <Footer />
         <S.PageEnd ref={obsRef} />
         <S.FloatingBtn onClick={handleModalToggle}>질문 작성하기</S.FloatingBtn>
         {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}
