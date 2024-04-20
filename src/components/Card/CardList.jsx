@@ -21,15 +21,17 @@ function CardList({ limit, offset, sort }) {
           cards.map((card) => (
             <S.CardContainer key={card.id}>
               <Link to={`/question/${card.id}`} style={{ textDecoration: 'none' }}>
-                <S.CardImage src={card.imageSource} alt={card.name} />
-                <S.CardName>{card.name}</S.CardName>
-                <S.CardInfo>
-                  <S.QuestionCountMessage>
-                    <img src={Messages} alt="QuestionMessage img" />
-                    <p>받은 질문</p>
-                  </S.QuestionCountMessage>
-                  <S.QuestionCount>{`${card.questionCount}개`}</S.QuestionCount>
-                </S.CardInfo>
+                <S.CardWraper>
+                  <S.CardImage src={card.imageSource} alt={card.name} />
+                  <S.CardName>{card.name}</S.CardName>
+                  <S.CardInfo>
+                    <S.QuestionCountMessage>
+                      <img src={Messages} alt="QuestionMessage img" />
+                      <p>받은 질문</p>
+                    </S.QuestionCountMessage>
+                    <S.QuestionCount>{`${card.questionCount}개`}</S.QuestionCount>
+                  </S.CardInfo>
+                </S.CardWraper>
               </Link>
             </S.CardContainer>
           ))

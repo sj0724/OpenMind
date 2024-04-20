@@ -1,133 +1,80 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+import useFetchUser from '../../hooks/useFetchUser';
 import useFetchQuestionList from '../../hooks/useFetchQuestionList';
-import { postAnswer } from '../../services/postAnswer';
-import * as S from './AnswerList.styled';
+
+import QuestionContainer from '../../components/QuestionContainer/QuestionContainer';
+import PostAnswer from '../../components/PostAnswer/PostAnswer';
+import UserProfile from '../../components/UserProfile/UserProfile';
+import Toast from '../../components/Toast/Toast';
+
+import * as S from '../QuestionList/QuestionList.styled';
+
+import UserContext from '../../utils/contexts/UserContext';
+
 import emptyIcon from '../../assets/emptyIcon.svg';
-import kebab from '../../assets/kebab.svg';
+import mainLogo from '../../assets/logo.svg';
 
 /** 작업완료 후 주석은 다 지울 예정 */
 function AnswerList() {
   const { id } = useParams();
-  const { data: list, question } = useFetchQuestionList(id);
 
-  const [answerTexts, setAnswerTexts] = useState(Array(question.length).fill(''));
-  const [submittedAnswers, setSubmittedAnswers] = useState([]);
+  // 유저정보
+  const { user } = useFetchUser(id);
 
-  const [editModal, setEditModal] = useState(false);
+  const endRef = useRef(true);
+  const obsRef = useRef(true);
+  const preventRef = useRef(true);
+  const [listOffset, setListOffset] = useState(0);
+  const { data, question } = useFetchQuestionList(id, listOffset);
 
-  // 이미 등록된 답변이 있을 경우 submittedAnswers 상태 업데이트
+  const obsHandler = (entries) => {
+    const target = entries[0];
+    if (endRef.current && target.isIntersecting && preventRef.current) {
+      preventRef.current = false;
+      setListOffset((prev) => prev + 2);
+      preventRef.current = true;
+    }
+  };
+
+  // 질문 및 답변 목록
+  const [toast, setToast] = useState(false);
+
+  // 링크 공유
+  const copyUrl = async (url) => {
+    await navigator.clipboard.writeText(url);
+    setToast(true);
+  };
+
   useEffect(() => {
-    if (question.length > 0) {
-      setAnswerTexts(Array(question.length).fill(''));
-      setSubmittedAnswers(question.map((item) => item.answer || null));
-    }
-  }, [question]);
-
-  // 입력 된 답변이 있으면 비활성화 된 버튼 활성화 상태로 변경
-  const handleAnswerChange = (index, event) => {
-    const newTexts = [...answerTexts];
-    newTexts[index] = event.target.value;
-    setAnswerTexts(newTexts);
-  };
-
-  // 답변 등록
-  const handleSubmitAnswer = async (index) => {
-    if (!window.confirm('답변을 등록하시겠습니까?')) {
-      return false;
-    }
-
-    const questionId = question[index].id;
-    const answerText = answerTexts[index];
-
-    const { error, loading, data } = await postAnswer(questionId, answerText, false);
-
-    if (loading) {
-      console.log('답변 등록 중');
-    } else if (error) {
-      console.error('답변 등록 실패', error);
-    } else if (data) {
-      const newSubmittedAnswers = [...submittedAnswers];
-      newSubmittedAnswers[index] = data;
-      setSubmittedAnswers(newSubmittedAnswers);
-
-      // 등록된 답변이 즉시 UI에 반영되도록 추가
-      setAnswerTexts((newTexts) => newTexts.map((text, i) => (i === index ? '' : text)));
-    }
-  };
-
-  // 케밥버튼 클릭
-  const toggleEditModal = (index) => {
-    setEditModal(index === editModal ? null : index);
-  };
-
-  // 수정하기 버튼 클릭
-  const editAnswerContent = (index) => {
-    console.log(question[index].id);
-  };
-
-  if (!list || list.count === 0) {
-    return (
-      <S.QuestBody>
-        <S.NoQuestion src={emptyIcon} />
-      </S.QuestBody>
-    );
-  }
+    const observer = new IntersectionObserver(obsHandler, { threshold: 0 });
+    if (obsRef.current) observer.observe(obsRef.current);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <>
-      {question.map((item, index) => (
-        <S.QuestBody key={index}>
-          <S.WrapAnswerTop>
-            <S.QuestionStatus $complete={item.answer}>
-              {item.answer ? '답변 완료' : '미답변'}
-            </S.QuestionStatus>
-            <S.WrapKebabButton>
-              <S.KebabButton onClick={() => toggleEditModal(index)}>
-                <img src={kebab} alt="더보기" />
-              </S.KebabButton>
-              {editModal === index && (
-                <S.WrapEditModal>
-                  <S.EditModalButton onClick={() => editAnswerContent(index)}>
-                    수정하기
-                  </S.EditModalButton>
-                </S.WrapEditModal>
-              )}
-            </S.WrapKebabButton>
-          </S.WrapAnswerTop>
-          <S.QuestionContent>
-            <S.Time>질문 (id : {item.id})</S.Time>
-            <S.QuestionDetail>{item.content}</S.QuestionDetail>
-          </S.QuestionContent>
-          <S.AnswerContainer>
-            <S.AnswerContent $rejected={submittedAnswers[index]?.isRejected}>
-              {submittedAnswers[index] ? (
-                <p>
-                  {submittedAnswers[index].isRejected
-                    ? '답변 거절'
-                    : submittedAnswers[index].content}
-                </p>
-              ) : (
-                <>
-                  <S.AnswerText
-                    $bgColor="--Grayscale-20"
-                    $color="--Grayscale-40"
-                    placeholder="답변을 입력해주세요"
-                    value={answerTexts[index] || ''}
-                    onChange={(event) => handleAnswerChange(index, event)}></S.AnswerText>
-                  <S.AnswerButton
-                    $color="--Grayscale-10"
-                    $bgColor={answerTexts[index]?.trim() ? '--Brown-40' : '--Brown-30'}
-                    onClick={() => handleSubmitAnswer(index)}
-                    disabled={!answerTexts[index]?.trim()}>
-                    답변 완료
-                  </S.AnswerButton>
-                </>
-              )}
-            </S.AnswerContent>
-          </S.AnswerContainer>
-        </S.QuestBody>
-      ))}
+      <S.Header>
+        <S.HeaderLogo src={mainLogo} alt="mainLogo" />
+        <S.HeaderImage />
+      </S.Header>
+      <UserContext.Provider value={user}>
+        <UserProfile copy={copyUrl} />
+        <S.Body>
+          <QuestionContainer count={data?.count || 0}>
+            {data?.count ? (
+              question.map((item) => <PostAnswer question={item} key={item.id} />)
+            ) : (
+              <S.NoQuestion src={emptyIcon} />
+            )}
+          </QuestionContainer>
+        </S.Body>
+        <S.PageEnd ref={obsRef} />
+        {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}
+      </UserContext.Provider>
     </>
   );
 }

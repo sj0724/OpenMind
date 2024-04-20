@@ -41,10 +41,11 @@ export const Body = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 189px 0 136px 0;
+  flex-direction: column;
+  padding: 189px 0 30px 0;
 
   @media (max-width: 769px) {
-    padding: 176px 0 126px 0;
+    padding: 176px 0 30px 0;
   }
 `;
 
@@ -71,7 +72,45 @@ export const FloatingBtn = styled.span`
 
   @media (max-width: 769px) {
     width: 123px;
-    overflow: hidden;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+`;
+
+export const PageButtons = styled.div`
+  position: fixed;
+  right: 25px;
+  bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15px;
+`;
+
+export const UpButton = styled.span`
+  cursor: pointer;
+  border-radius: 200px;
+  background-color: var(--Grayscale-30);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PrevButton = styled.span`
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 200px;
+  padding: 10px 20px;
+  background-color: var(--Grayscale-30);
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    margin-right: 8px;
   }
 `;
 

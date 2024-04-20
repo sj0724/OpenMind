@@ -8,9 +8,12 @@ export const useFetchCardList = (limit, offset, sort) => {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // 현재 페이지를 URL의 쿼리 매개변수에서 가져옴
-  const currentPage = parseInt(searchParams.get('page'), 10) || 1;
+  useEffect(() => {
+    const page = parseInt(searchParams.get('page'), 10) || 1;
+    setCurrentPage(page); // 페이지가 변경되면 현재 페이지를 업데이트
+  }, [searchParams]);
 
   useEffect(() => {
     const fetchCardListData = async () => {
@@ -33,6 +36,7 @@ export const useFetchCardList = (limit, offset, sort) => {
     cards,
     loading,
     currentPage,
+    setCurrentPage,
   };
 };
 

@@ -5,19 +5,23 @@ const StyledPagination = styled.div`
   justify-content: center;
   padding-bottom: 7rem;
 
-  .pagination ul {
+  ul.pagination {
     display: flex;
+    text-align: center;
     list-style: none;
     padding: 0;
   }
 
   ul.pagination li {
-    display: inline-block;
+    cursor: pointer;
     width: 4rem;
     height: 4rem;
     border: none;
     font-size: 2rem;
     font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   ul.pagination li a {

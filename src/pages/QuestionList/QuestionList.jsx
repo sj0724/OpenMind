@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Question from '../../components/Question/Question';
 import QuestionContainer from '../../components/QuestionContainer/QuestionContainer';
 import * as S from './QuestionList.styled';
 import emptyIcon from '../../assets/emptyIcon.svg';
 import mainLogo from '../../assets/logo.svg';
+import arrowUp from '../../assets/Arrow-up.svg';
+import arrowLeft from '../../assets/Arrow-left.svg';
 import UserProfile from '../../components/UserProfile/UserProfile';
 import Toast from '../../components/Toast/Toast';
 import Modal from '../../components/Modal/Modal';
@@ -17,15 +19,15 @@ function QuestionList() {
   const [modal, setModal] = useState(false);
   const { user } = useFetchUser(id);
   const [toast, setToast] = useState(false);
-  const endRef = useRef(true);
-  const obsRef = useRef(true);
+  const obsRef = useRef(null);
   const preventRef = useRef(true);
   const [listOffset, setListOffset] = useState(0);
-  const { data, question, addQuestion } = useFetchQuestionList(id, listOffset);
+  const { data, question, next, addQuestion } = useFetchQuestionList(id, listOffset);
+  const navigate = useNavigate();
 
-  const obsHandler = (entries) => {
+  const handleObserver = (entries) => {
     const target = entries[0];
-    if (endRef.current && target.isIntersecting && preventRef.current) {
+    if (next && target.isIntersecting && preventRef.current) {
       preventRef.current = false;
       setListOffset((prev) => prev + 2);
       preventRef.current = true;
@@ -45,13 +47,21 @@ function QuestionList() {
     setToast(true);
   };
 
+  const moveTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+  const movePrev = () => {
+    navigate(-1);
+  };
+
   useEffect(() => {
-    const observer = new IntersectionObserver(obsHandler, { threshold: 0 });
+    const observer = new IntersectionObserver(handleObserver, { threshold: 0 });
     if (obsRef.current) observer.observe(obsRef.current);
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [next]);
 
   return (
     <>
@@ -71,6 +81,15 @@ function QuestionList() {
           </QuestionContainer>
         </S.Body>
         <S.PageEnd ref={obsRef} />
+        <S.PageButtons>
+          <S.UpButton onClick={moveTop}>
+            <img src={arrowUp} alt="위로가기화살표" />
+          </S.UpButton>
+          <S.PrevButton onClick={movePrev}>
+            <img src={arrowLeft} alt="뒤로가기화살표" />
+            <p>뒤로가기</p>
+          </S.PrevButton>
+        </S.PageButtons>
         <S.FloatingBtn onClick={handleModalToggle}>질문 작성하기</S.FloatingBtn>
         {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}
         {modal && <Modal setModal={setModal} onNewQuestion={handleNewQuestion} />}
