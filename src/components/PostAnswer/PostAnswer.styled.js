@@ -7,15 +7,3 @@ export const WrapAnswerTop = styled.div`
   align-items: center;
   border: none;
 `;
-
-export const WrapEditIcons = styled.div`
-  display: flex;
-  gap: 0.5rem;
-`;
-
-export const EditIconButton = styled.button`
-  img {
-    width: 2.4rem;
-    height: 2.4rem;
-  }
-`;
