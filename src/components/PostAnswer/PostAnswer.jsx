@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Reaction from '../Reaction/Reaction';
-import EditIcons from '../EditIcons/EditIcons';
 
 import * as S from './PostAnswer.styled';
 import * as SQ from '../Question/Question.styled';
@@ -12,6 +11,10 @@ import { postAnswer } from '../../services/postAnswer';
 
 import calculateDate from '../../utils/calculateDate';
 import UserContext from '../../utils/contexts/UserContext';
+
+import deleteIcon from '../../assets/delete.svg';
+import editIcon from '../../assets/edit.svg';
+import rejectionIcon from '../../assets/rejection.svg';
 
 function PostAnswer({ question }) {
   const user = useContext(UserContext);
@@ -108,7 +111,26 @@ function PostAnswer({ question }) {
         <SQ.QuestionStatus $complete={isAnswerSubmitted}>
           {isAnswerSubmitted ? '답변 완료' : '미답변'}
         </SQ.QuestionStatus>
-        <EditIcons hasAnswer={isAnswerSubmitted} isRejected={isRejected} />
+        {/* 아이콘 표시 */}
+        <S.WrapEditIcons>
+          {isAnswerSubmitted ? (
+            <>
+              {!isRejected && (
+                <S.EditIconButton>
+                  <img src={editIcon} alt="Edit" />
+                </S.EditIconButton>
+              )}
+            </>
+          ) : (
+            <S.EditIconButton>
+              <img src={rejectionIcon} alt="Rejection" />
+            </S.EditIconButton>
+          )}
+          {/* 아이콘 표시 */}
+          <S.EditIconButton>
+            <img src={deleteIcon} alt="Delete" />
+          </S.EditIconButton>
+        </S.WrapEditIcons>
       </S.WrapAnswerTop>
       <SQ.QuestionContent>
         <SQ.Time>

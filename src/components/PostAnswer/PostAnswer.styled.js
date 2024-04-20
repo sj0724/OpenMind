@@ -43,3 +43,16 @@ export const AnswerButton = styled.button`
 export const AnswerText = styled.p`
   color: ${(props) => (props.$rejected ? 'var(--Red-50)' : 'var(--Grayscale-60)')};
 `;
+
+export const WrapEditIcons = styled.div`
+  display: flex;
+  gap: 0.8rem;
+`;
+
+export const EditIconButton = styled.button`
+  img {
+    width: 2.2rem;
+    height: 2.2rem;
+    fill: var(--Grayscale-50);
+  }
+`;
