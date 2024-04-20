@@ -11,6 +11,7 @@ import { MESSAGE } from './constant';
 
 import { postAnswer } from '../../services/postAnswer';
 import { deleteAnswer } from '../../services/deleteAnswer';
+import { patchAnswer } from '../../services/patchAnswer';
 
 import calculateDate from '../../utils/calculateDate';
 import UserContext from '../../utils/contexts/UserContext';
@@ -44,6 +45,9 @@ function PostAnswer({ question }) {
 
   // 답변 거절 여부
   const [isRejected, setIsRejected] = useState(false);
+
+  // 수정 중 여부
+  const [isEdit, setIsEdit] = useState(false);
 
   // 등록 된 답변이 있다면 출력
   useEffect(() => {
@@ -90,7 +94,7 @@ function PostAnswer({ question }) {
       // 답변 거절 상태 변경
       setIsRejected(isReject);
       // 답변 id
-      setAnswerId(data.id || 0);
+      setAnswerId(data.id);
     }
   };
 
@@ -112,6 +116,40 @@ function PostAnswer({ question }) {
       setIsAnswerSubmitted(false);
       setIsRejected(false);
       setAnswerId(0);
+    }
+  };
+
+  // 수정 버튼 클릭
+  const handleEditAnswerStatus = async () => {
+    setIsEdit(true);
+    setAnswerText(submittedAnswer);
+  };
+
+  // 답변 수정
+  const handleEditAnswer = async () => {
+    if (!window.confirm(`답변을 ${MESSAGE.edit}하시겠습니까?`)) {
+      return false;
+    }
+
+    const { error, loading, data } = await patchAnswer(answerId, answerText, false);
+
+    if (loading) {
+      console.log(`답변 ${MESSAGE.edit} 중`);
+    } else if (error) {
+      console.error(`답변 ${MESSAGE.edit} 실패`, error);
+    } else if (data) {
+      // 등록된 답변의 내용으로 업데이트
+      setSubmittedAnswer(data.content);
+      // 등록된 답변이 즉시 UI에 반영되도록 추가
+      setAnswerText('');
+      // 답변 등록 상태 변경
+      setIsAnswerSubmitted(true);
+      // 답변 거절 상태 변경
+      setIsRejected(false);
+      // 답변 id
+      setAnswerId(data.id);
+      // 수정 상태
+      setIsEdit(false);
     }
   };
 
@@ -152,7 +190,7 @@ function PostAnswer({ question }) {
           {isAnswerSubmitted ? (
             <>
               {!isRejected && (
-                <S.EditIconButton>
+                <S.EditIconButton onClick={() => handleEditAnswerStatus()}>
                   <img src={editIcon} alt="수정버튼" />
                 </S.EditIconButton>
               )}
@@ -188,7 +226,7 @@ function PostAnswer({ question }) {
 
           {/* 답변 내용 출력 및 입력 창 */}
           <S.WrapAnswerContent>
-            {submittedAnswer ? (
+            {submittedAnswer && !isEdit ? (
               <S.AnswerText $rejected={isRejected}>
                 {isRejected ? '답변 거절' : submittedAnswer}
               </S.AnswerText>
@@ -198,12 +236,21 @@ function PostAnswer({ question }) {
                   placeholder="답변을 입력해주세요"
                   value={answerText || ''}
                   onChange={(event) => handleAnswerChange(event)}></S.AnswerTextarea>
-                <S.AnswerButton
-                  $bgColor={answerText?.trim() ? '--Brown-40' : '--Brown-30'}
-                  onClick={() => handleSubmitAnswer(false)}
-                  disabled={!answerText?.trim()}>
-                  답변 완료
-                </S.AnswerButton>
+                {!isEdit ? (
+                  <S.AnswerButton
+                    $bgColor={answerText?.trim() ? '--Brown-40' : '--Brown-30'}
+                    onClick={() => handleSubmitAnswer(false)}
+                    disabled={!answerText?.trim()}>
+                    답변 완료
+                  </S.AnswerButton>
+                ) : (
+                  <S.AnswerButton
+                    $bgColor={answerText?.trim() ? '--Brown-40' : '--Brown-30'}
+                    onClick={() => handleEditAnswer()}
+                    disabled={!answerText?.trim()}>
+                    수정 완료
+                  </S.AnswerButton>
+                )}
               </>
             )}
           </S.WrapAnswerContent>
