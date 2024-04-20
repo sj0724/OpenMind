@@ -1,6 +1,6 @@
 const calculateDate = (date) => {
   if (date < 60) {
-    return { result: '방금' };
+    return { time: '', result: '방금' };
   }
   if (date < 60 * 60) {
     const minute = Math.floor(date / 60);

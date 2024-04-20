@@ -1,102 +1,80 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+import useFetchUser from '../../hooks/useFetchUser';
 import useFetchQuestionList from '../../hooks/useFetchQuestionList';
-import * as S from './AnswerList.styled';
+
+import QuestionContainer from '../../components/QuestionContainer/QuestionContainer';
+import PostAnswer from '../../components/PostAnswer/PostAnswer';
+import UserProfile from '../../components/UserProfile/UserProfile';
+import Toast from '../../components/Toast/Toast';
+
+import * as S from '../QuestionList/QuestionList.styled';
+
+import UserContext from '../../utils/contexts/UserContext';
+
 import emptyIcon from '../../assets/emptyIcon.svg';
+import mainLogo from '../../assets/logo.svg';
 
 /** 작업완료 후 주석은 다 지울 예정 */
 function AnswerList() {
   const { id } = useParams();
 
-  // questionlist
-  //   {
-  //     "count": 2,
-  //     "next": null,
-  //     "previous": null,
-  //     "results": [
-  //         {
-  //             "id": 8257,
-  //             "subjectId": 4838,
-  //             "content": "테스트 질문 2",
-  //             "like": 0,
-  //             "dislike": 0,
-  //             "createdAt": "2024-04-15T08:22:23.809788Z",
-  //             "answer": {
-  //                 "id": 3739,
-  //                 "questionId": 8257,
-  //                 "content": "테스트 답변",
-  //                 "isRejected": true,
-  //                 "createdAt": "2024-04-16T01:38:50.614766Z"
-  //             }
-  //         },
-  //         {
-  //             "id": 8160,
-  //             "subjectId": 4838,
-  //             "content": "테스트입니다",
-  //             "like": 0,
-  //             "dislike": 0,
-  //             "createdAt": "2024-04-12T05:34:28.212140Z",
-  //             "answer": null
-  //         }
-  //     ]
-  // }
-  const { data: list, question } = useFetchQuestionList(id);
+  // 유저정보
+  const { user } = useFetchUser(id);
 
-  const [answerTexts, setAnswerTexts] = useState(Array(question.length).fill(''));
+  const endRef = useRef(true);
+  const obsRef = useRef(true);
+  const preventRef = useRef(true);
+  const [listOffset, setListOffset] = useState(0);
+  const { data, question } = useFetchQuestionList(id, listOffset);
 
-  const handleAnswerChange = (index, event) => {
-    const newTexts = [...answerTexts];
-    newTexts[index] = event.target.value;
-    setAnswerTexts(newTexts);
+  const obsHandler = (entries) => {
+    const target = entries[0];
+    if (endRef.current && target.isIntersecting && preventRef.current) {
+      preventRef.current = false;
+      setListOffset((prev) => prev + 2);
+      preventRef.current = true;
+    }
   };
 
-  const handleSubmitAnswer = (index) => {
-    const questionId = question[index].id;
-    const answerText = answerTexts[index];
+  // 질문 및 답변 목록
+  const [toast, setToast] = useState(false);
 
-    console.log(`질문 ${questionId}의 답변 : `, answerText);
+  // 링크 공유
+  const copyUrl = async (url) => {
+    await navigator.clipboard.writeText(url);
+    setToast(true);
   };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(obsHandler, { threshold: 0 });
+    if (obsRef.current) observer.observe(obsRef.current);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <>
-      {list.count ? (
-        question.map((item, index) => (
-          <S.QuestBody key={index}>
-            <S.QuestionStatus $complete={item.answer}>
-              {item.answer ? '답변 완료' : '미답변'}
-            </S.QuestionStatus>
-            <S.QuestionContent>
-              <S.Time>질문 (id : {item.id})</S.Time>
-              <S.QuestionDetail>{item.content}</S.QuestionDetail>
-            </S.QuestionContent>
-            <S.AnswerContainer>
-              <S.AnswerContent>
-                {item.answer ? (
-                  <p>{item.answer.content}</p>
-                ) : (
-                  <>
-                    <S.AnswerText
-                      $bgColor="--Grayscale-20"
-                      $color="--Grayscale-40"
-                      placeholder="답변을 입력해주세요"
-                      value={answerTexts[index] || ''}
-                      onChange={(event) => handleAnswerChange(index, event)}></S.AnswerText>
-                    <S.AnswerButton
-                      $color="--Grayscale-10"
-                      $bgColor={answerTexts[index]?.trim() ? '--Brown-40' : '--Brown-30'}
-                      onClick={() => handleSubmitAnswer(index)}
-                      disabled={!answerTexts[index]?.trim()}>
-                      답변 완료
-                    </S.AnswerButton>
-                  </>
-                )}
-              </S.AnswerContent>
-            </S.AnswerContainer>
-          </S.QuestBody>
-        ))
-      ) : (
-        <S.NoQuestion src={emptyIcon} />
-      )}
+      <S.Header>
+        <S.HeaderLogo src={mainLogo} alt="mainLogo" />
+        <S.HeaderImage />
+      </S.Header>
+      <UserContext.Provider value={user}>
+        <UserProfile copy={copyUrl} />
+        <S.Body>
+          <QuestionContainer count={data?.count || 0}>
+            {data?.count ? (
+              question.map((item) => <PostAnswer question={item} key={item.id} />)
+            ) : (
+              <S.NoQuestion src={emptyIcon} />
+            )}
+          </QuestionContainer>
+        </S.Body>
+        <S.PageEnd ref={obsRef} />
+        {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}
+      </UserContext.Provider>
     </>
   );
 }

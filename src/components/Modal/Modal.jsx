@@ -1,30 +1,36 @@
 import { useContext, useState, useRef, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import propTypes from 'prop-types';
-import useModal from './useModal';
+import useModal from '../../hooks/useModal';
 import * as S from './Modal.styled';
 import messagesIcon from '../../assets/messages-black.svg';
 import xMark from '../../assets/x-mark.svg';
 import UserContext from '../../utils/contexts/UserContext';
+import handleSend from '../../services/fetchPostQuestion';
 
 function Modal({ setModal }) {
   const [text, setText] = useState('');
+  const [send, setSend] = useState(false);
   const user = useContext(UserContext);
   const modalRef = useRef();
 
   useModal(setModal, modalRef);
 
-  const handleSend = useCallback(() => {
-    console.log(text); // 차후 여기에 text를 보내는 로직을 추가 할 예정
-    setModal(false);
-  }, [text, setModal]);
+  const { id: subjectId } = useParams();
+
+  const sendQuestion = useCallback(() => {
+    handleSend(text, setModal, subjectId).then(() => {
+      setSend(!send);
+    });
+  }, [text, setModal, subjectId, send]);
 
   const handleKeyPress = useCallback(
     (event) => {
-      if (event.key === 'Enter') {
-        handleSend();
+      if (event.key === 'Enter' && !event.shiftKey) {
+        sendQuestion();
       }
     },
-    [handleSend],
+    [sendQuestion],
   );
 
   return (
@@ -54,7 +60,7 @@ function Modal({ setModal }) {
         </S.Content>
         <S.Footer
           color={text.length > 0 ? 'var(--Brown-40)' : 'var(--Brown-30)'}
-          onClick={handleSend}>
+          onClick={sendQuestion}>
           <span>질문 보내기</span>
         </S.Footer>
       </S.ModalWrapper>

@@ -25,7 +25,7 @@ function Answer({ answer }) {
           <S.UserName>{user.name}</S.UserName>
           <S.AnswerTime>{createdText}</S.AnswerTime>
         </S.Answerinfo>
-        <p>{answer.isRejected ? answer.content : '답변 거절'}</p>
+        <p>{answer.isRejected ? '답변 거절' : answer.content}</p>
       </S.AnswerContent>
     </S.AnswerContainer>
   );
