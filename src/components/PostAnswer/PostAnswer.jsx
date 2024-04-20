@@ -7,6 +7,8 @@ import * as S from './PostAnswer.styled';
 import * as SQ from '../Question/Question.styled';
 import * as SA from '../Answer/Answer.styled';
 
+import { MESSAGE } from './constant';
+
 import { postAnswer } from '../../services/postAnswer';
 
 import calculateDate from '../../utils/calculateDate';
@@ -56,12 +58,18 @@ function PostAnswer({ question }) {
   };
 
   // 답변 등록
-  const handleSubmitAnswer = async () => {
-    if (!window.confirm('답변을 등록하시겠습니까?')) {
+  const handleSubmitAnswer = async (isReject) => {
+    if (!window.confirm(`답변을 ${isReject ? MESSAGE.reject : MESSAGE.submit}하시겠습니까?`)) {
       return false;
     }
 
-    const { error, loading, data } = await postAnswer(question.id, answerText, false);
+    let answerContentText = '답변거절';
+
+    if (!isReject) {
+      answerContentText = answerText;
+    }
+
+    const { error, loading, data } = await postAnswer(question.id, answerContentText, isReject);
 
     if (loading) {
       console.log('답변 등록 중');
@@ -75,7 +83,7 @@ function PostAnswer({ question }) {
       // 답변 등록 상태 변경
       setIsAnswerSubmitted(true);
       // 답변 거절 상태 변경
-      setIsRejected(false);
+      setIsRejected(isReject);
     }
   };
 
@@ -117,18 +125,18 @@ function PostAnswer({ question }) {
             <>
               {!isRejected && (
                 <S.EditIconButton>
-                  <img src={editIcon} alt="Edit" />
+                  <img src={editIcon} alt="수정버튼" />
                 </S.EditIconButton>
               )}
             </>
           ) : (
-            <S.EditIconButton>
-              <img src={rejectionIcon} alt="Rejection" />
+            <S.EditIconButton onClick={() => handleSubmitAnswer(true)}>
+              <img src={rejectionIcon} alt="답변거절버튼" />
             </S.EditIconButton>
           )}
           {/* 아이콘 표시 */}
           <S.EditIconButton>
-            <img src={deleteIcon} alt="Delete" />
+            <img src={deleteIcon} alt="삭제버튼" />
           </S.EditIconButton>
         </S.WrapEditIcons>
       </S.WrapAnswerTop>
@@ -164,7 +172,7 @@ function PostAnswer({ question }) {
                   onChange={(event) => handleAnswerChange(event)}></S.AnswerTextarea>
                 <S.AnswerButton
                   $bgColor={answerText?.trim() ? '--Brown-40' : '--Brown-30'}
-                  onClick={() => handleSubmitAnswer()}
+                  onClick={() => handleSubmitAnswer(false)}
                   disabled={!answerText?.trim()}>
                   답변 완료
                 </S.AnswerButton>
