@@ -10,7 +10,11 @@ import calculateDate from '../../utils/calculateDate';
 import UserContext from '../../utils/contexts/UserContext';
 import postLike from '../../services/postLike';
 
-import kebab from '../../assets/kebab.svg';
+import deleteIcon from '../../assets/delete.svg';
+
+import editIcon from '../../assets/edit.svg';
+import rejectionIcon from '../../assets/rejection.svg';
+
 import thumbsUp from '../../assets/thumbs-up.svg';
 import thumbsUpSelect from '../../assets/thumbs-up-blue.svg';
 import thumbsDown from '../../assets/thumbs-down.svg';
@@ -69,13 +73,24 @@ function PostAnswer({ question }) {
     <S.QuestBody>
       <SPA.WrapAnswerTop>
         <S.QuestionStatus $complete={answer}>{answer ? '답변 완료' : '미답변'}</S.QuestionStatus>
-        {(!answer || !answer.isRejected) && (
+        {/* {(!answer || !answer.isRejected) && (
           <SPA.WrapKebabButton>
             <SPA.KebabButton onClick={() => toggleEditModal(index)}>
               <img src={kebab} alt="더보기" />
             </SPA.KebabButton>
           </SPA.WrapKebabButton>
-        )}
+        )} */}
+        <SPA.WrapEditIcons>
+          <SPA.EditIconButton>
+            <img src={rejectionIcon} alt="Rejection" />
+          </SPA.EditIconButton>
+          <SPA.EditIconButton>
+            <img src={editIcon} alt="Edit" />
+          </SPA.EditIconButton>
+          <SPA.EditIconButton>
+            <img src={deleteIcon} alt="Delete" />
+          </SPA.EditIconButton>
+        </SPA.WrapEditIcons>
       </SPA.WrapAnswerTop>
       <S.QuestionContent>
         <S.Time>

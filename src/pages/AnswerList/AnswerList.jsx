@@ -10,6 +10,7 @@ import UserProfile from '../../components/UserProfile/UserProfile';
 import Toast from '../../components/Toast/Toast';
 
 import * as S from '../QuestionList/QuestionList.styled';
+import * as SAL from './AnswerList.styled';
 
 import UserContext from '../../utils/contexts/UserContext';
 
@@ -64,6 +65,9 @@ function AnswerList() {
       <UserContext.Provider value={user}>
         <UserProfile copy={copyUrl} />
         <S.Body>
+          <SAL.WrapDeleteButton>
+            <SAL.DeleteButton>삭제하기</SAL.DeleteButton>
+          </SAL.WrapDeleteButton>
           <QuestionContainer count={data?.count || 0}>
             {data?.count ? (
               question.map((item) => <PostAnswer question={item} key={item.id} />)

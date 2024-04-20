@@ -7,10 +7,15 @@ export const WrapAnswerTop = styled.div`
   align-items: center;
   border: none;
 `;
-export const WrapKebabButton = styled.div`
-  position: relative;
+
+export const WrapEditIcons = styled.div`
+  display: flex;
+  gap: 0.5rem;
 `;
-export const KebabButton = styled.button`
-  width: 26px;
-  height: 26px;
+
+export const EditIconButton = styled.button`
+  img {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
 `;
