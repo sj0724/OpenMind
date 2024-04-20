@@ -22,7 +22,7 @@ function QuestionList() {
   const obsRef = useRef(null);
   const preventRef = useRef(true);
   const [listOffset, setListOffset] = useState(0);
-  const { data, question, next } = useFetchQuestionList(id, listOffset);
+  const { data, question, next, addQuestion } = useFetchQuestionList(id, listOffset);
   const navigate = useNavigate();
 
   const handleObserver = (entries) => {
@@ -36,6 +36,10 @@ function QuestionList() {
 
   const handleModalToggle = () => {
     setModal(!modal);
+  };
+
+  const handleNewQuestion = (newQuestion) => {
+    addQuestion(newQuestion); // Modify this line
   };
 
   const copyUrl = async (url) => {
@@ -88,7 +92,7 @@ function QuestionList() {
         </S.PageButtons>
         <S.FloatingBtn onClick={handleModalToggle}>질문 작성하기</S.FloatingBtn>
         {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}
-        {modal && <Modal setModal={setModal} />}
+        {modal && <Modal setModal={setModal} onNewQuestion={handleNewQuestion} />}
       </UserContext.Provider>
     </>
   );
