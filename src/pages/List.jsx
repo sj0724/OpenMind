@@ -6,11 +6,8 @@ import Header from '../components/Header/Header';
 import CardList from '../components/Card/CardList';
 
 const PageWrapper = styled.div`
+  width: 100%;
   background-color: var(--Grayscale-20);
-  margin: 0;
-  @media (max-width: 1199px) {
-    margin: 0 auto;
-  }
 `;
 
 const options = [

@@ -40,6 +40,7 @@ function CardList({ limit, offset, sort }) {
   );
 }
 
+
 CardList.propTypes = {
   limit: PropTypes.number.isRequired,
   offset: PropTypes.number.isRequired,
