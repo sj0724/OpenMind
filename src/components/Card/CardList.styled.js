@@ -41,7 +41,6 @@ export const CardContainer = styled.div`
   width: 100%;
   max-width: 22rem;
   height: 18.7rem;
-  padding: 2rem;
   border-radius: 1.6rem;
   border: 0.1rem solid var(--Grayscale-40);
   z-index: 1;
@@ -58,6 +57,13 @@ export const CardContainer = styled.div`
   @media (max-width: 769px) {
     min-width: 16rem;
   }
+`;
+
+export const CardWraper = styled.div`
+  border-radius: 1.6rem;
+  height: 100%;
+  width: 100%;
+  padding: 2rem;
 `;
 
 export const CardImage = styled.img`
