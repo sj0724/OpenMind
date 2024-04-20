@@ -65,9 +65,6 @@ function AnswerList() {
       <UserContext.Provider value={user}>
         <UserProfile copy={copyUrl} />
         <S.Body>
-          <SAL.WrapDeleteButton>
-            <SAL.DeleteButton>삭제하기</SAL.DeleteButton>
-          </SAL.WrapDeleteButton>
           <QuestionContainer count={data?.count || 0}>
             {data?.count ? (
               question.map((item) => <PostAnswer question={item} key={item.id} />)

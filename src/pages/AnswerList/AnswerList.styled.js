@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-export const WrapDeleteButton = styled.div`
-  width: 716px;
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
-`;
 export const DeleteButton = styled.button`
   width: 10rem;
   height: 3.5rem;
