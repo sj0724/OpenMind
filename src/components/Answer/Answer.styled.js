@@ -3,7 +3,7 @@ import { QuestionDetail, Time } from '../Question/Question.styled';
 
 export const AnswerContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1.2rem;
   align-self: stretch;
 `;
