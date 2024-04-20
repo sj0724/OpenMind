@@ -26,7 +26,7 @@ export const ModalWrapper = styled.div`
   margin-bottom: 5rem;
   gap: 0.6rem;
 
-  @media (max-width: 375px) {
+  @media (max-width: 767px) {
     height: 56.8rem;
     margin-bottom: 2rem;
   }
@@ -51,7 +51,7 @@ export const Header = styled.div`
     color: var(--Grayscale-90);
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 767px) {
     margin-bottom: 1rem;
   }
 `;
@@ -103,11 +103,11 @@ export const Content = styled.div`
     resize: none;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 767px) {
     height: 35.8rem;
     margin-bottom: 2rem;
     textarea {
-      height: 35.8rem;
+      height: 100%;
     }
   }
 `;
