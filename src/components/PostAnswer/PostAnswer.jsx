@@ -8,6 +8,8 @@ import * as S from './PostAnswer.styled';
 import * as SQ from '../Question/Question.styled';
 import * as SA from '../Answer/Answer.styled';
 
+import { postAnswer } from '../../services/postAnswer';
+
 import calculateDate from '../../utils/calculateDate';
 import UserContext from '../../utils/contexts/UserContext';
 
@@ -15,6 +17,8 @@ function PostAnswer({ question }) {
   const user = useContext(UserContext);
 
   const [answer] = useState(question.answer);
+  // 답변 등록 여부
+  const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
 
   // 질문 시간 선언
   const [createdQuestionTime, setCreatedQuestionTime] = useState({});
@@ -25,6 +29,54 @@ function PostAnswer({ question }) {
   // 질문 시간 출력
   const createdQuestionText = ` ・ ${createdQuestionTime.time}${createdQuestionTime.result}전`;
 
+  // 답변 내용
+  const [answerText, setAnswerText] = useState('');
+  const [submittedAnswer, setSubmittedAnswer] = useState('');
+
+  // 답변 거절 여부
+  const [isRejected, setIsRejected] = useState(false);
+
+  // 등록 된 답변이 있다면 출력
+  useEffect(() => {
+    if (answer) {
+      setSubmittedAnswer(answer.content || '');
+      setAnswerText('');
+      setIsRejected(answer.isRejected);
+      setIsAnswerSubmitted(true);
+    }
+  }, [answer]);
+
+  // 입력된 답변이 있으면 비활성화된 버튼 활성화 상태로 변경
+  const handleAnswerChange = (event) => {
+    const newText = event.target.value;
+    setAnswerText(newText);
+  };
+
+  // 답변 등록
+  const handleSubmitAnswer = async () => {
+    if (!window.confirm('답변을 등록하시겠습니까?')) {
+      return false;
+    }
+
+    const { error, loading, data } = await postAnswer(question.id, answerText, false);
+
+    if (loading) {
+      console.log('답변 등록 중');
+    } else if (error) {
+      console.error('답변 등록 실패', error);
+    } else if (data) {
+      // 등록된 답변의 내용으로 업데이트
+      setSubmittedAnswer(data.content || '');
+      // 등록된 답변이 즉시 UI에 반영되도록 추가
+      setAnswerText('');
+      // 답변 등록 상태 변경
+      setIsAnswerSubmitted(true);
+      // 답변 거절 상태 변경
+      setIsRejected(false);
+    }
+  };
+
+  // 질문 시간 출력
   useEffect(() => {
     const nowDate = new Date();
     const createdDate = new Date(question.createdAt);
@@ -53,8 +105,10 @@ function PostAnswer({ question }) {
   return (
     <SQ.QuestBody>
       <S.WrapAnswerTop>
-        <SQ.QuestionStatus $complete={answer}>{answer ? '답변 완료' : '미답변'}</SQ.QuestionStatus>
-        <EditIcons hasAnswer={true} isRejected={false} />
+        <SQ.QuestionStatus $complete={isAnswerSubmitted}>
+          {isAnswerSubmitted ? '답변 완료' : '미답변'}
+        </SQ.QuestionStatus>
+        <EditIcons hasAnswer={isAnswerSubmitted} isRejected={isRejected} />
       </S.WrapAnswerTop>
       <SQ.QuestionContent>
         <SQ.Time>
@@ -65,14 +119,37 @@ function PostAnswer({ question }) {
       </SQ.QuestionContent>
       {/* 답변 입력 or 출력하는 곳 */}
       <SA.AnswerContainer>
+        {/* 답변 입력 유저 정보 및 답변 입력 시간 */}
         <SA.Profile $image={user.imageSource} />
         <SA.AnswerContent>
           <SA.Answerinfo>
             <SA.UserName>{user.name}</SA.UserName>
             <SA.AnswerTime>{createdAnswerText}</SA.AnswerTime>
           </SA.Answerinfo>
+          {/* 답변 입력 유저 정보 및 답변 입력 시간 */}
 
-          <S.WrapAnswerContent></S.WrapAnswerContent>
+          {/* 답변 내용 출력 및 입력 창 */}
+          <S.WrapAnswerContent>
+            {submittedAnswer ? (
+              <S.AnswerText $rejected={isRejected}>
+                {isRejected ? '답변 거절' : submittedAnswer}
+              </S.AnswerText>
+            ) : (
+              <>
+                <S.AnswerTextarea
+                  placeholder="답변을 입력해주세요"
+                  value={answerText || ''}
+                  onChange={(event) => handleAnswerChange(event)}></S.AnswerTextarea>
+                <S.AnswerButton
+                  $bgColor={answerText?.trim() ? '--Brown-40' : '--Brown-30'}
+                  onClick={() => handleSubmitAnswer()}
+                  disabled={!answerText?.trim()}>
+                  답변 완료
+                </S.AnswerButton>
+              </>
+            )}
+          </S.WrapAnswerContent>
+          {/* 답변 내용 출력 및 입력 창 */}
         </SA.AnswerContent>
       </SA.AnswerContainer>
       {/* 답변 입력 or 출력하는 곳 */}
