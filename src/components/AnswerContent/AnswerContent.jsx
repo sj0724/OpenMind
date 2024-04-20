@@ -9,8 +9,6 @@ import calculateDate from '../../utils/calculateDate';
 import { postAnswer } from '../../services/postAnswer';
 
 function PostAnswer({ answer, questionId }) {
-  const user = useContext(UserContext);
-
   const [createdTime, setCreatedTime] = useState({});
   const [createdText, setCreatedText] = useState('');
 
