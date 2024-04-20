@@ -5,6 +5,7 @@ import QuestionContainer from '../../components/QuestionContainer/QuestionContai
 import * as S from './QuestionList.styled';
 import emptyIcon from '../../assets/emptyIcon.svg';
 import mainLogo from '../../assets/logo.svg';
+import arrowUp from '../../assets/Arrow-up.svg';
 import UserProfile from '../../components/UserProfile/UserProfile';
 import Toast from '../../components/Toast/Toast';
 import Modal from '../../components/Modal/Modal';
@@ -41,6 +42,10 @@ function QuestionList() {
     setToast(true);
   };
 
+  const moveTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver, { threshold: 0 });
     if (obsRef.current) observer.observe(obsRef.current);
@@ -68,6 +73,9 @@ function QuestionList() {
         </S.Body>
         <Footer />
         <S.PageEnd ref={obsRef} />
+        <S.UpButton onClick={moveTop}>
+          <img src={arrowUp} alt="화살표" />
+        </S.UpButton>
         <S.FloatingBtn onClick={handleModalToggle}>질문 작성하기</S.FloatingBtn>
         {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}
         {modal && <Modal setModal={setModal} />}

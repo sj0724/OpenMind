@@ -45,7 +45,7 @@ export const Body = styled.div`
   padding: 189px 0 30px 0;
 
   @media (max-width: 769px) {
-    padding: 176px 0 126px 0;
+    padding: 176px 0 30px 0;
   }
 `;
 
@@ -75,6 +75,20 @@ export const FloatingBtn = styled.span`
     font-size: 18px;
     white-space: nowrap;
   }
+`;
+
+export const UpButton = styled.span`
+  cursor: pointer;
+  position: fixed;
+  right: 25px;
+  bottom: 100px;
+  border-radius: 200px;
+  background-color: var(--Grayscale-30);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const NoQuestion = styled.img`
