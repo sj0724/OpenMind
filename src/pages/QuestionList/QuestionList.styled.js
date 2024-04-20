@@ -42,10 +42,10 @@ export const Body = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 189px 0 30px 0;
+  padding: 189px 0 60px 0;
 
   @media (max-width: 769px) {
-    padding: 176px 0 30px 0;
+    padding: 176px 0 60px 0;
   }
 `;
 
