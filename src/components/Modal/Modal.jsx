@@ -8,9 +8,8 @@ import xMark from '../../assets/x-mark.svg';
 import UserContext from '../../utils/contexts/UserContext';
 import handleSend from '../../services/fetchPostQuestion';
 
-function Modal({ setModal }) {
+function Modal({ setModal, onNewQuestion }) {
   const [text, setText] = useState('');
-  const [send, setSend] = useState(false);
   const user = useContext(UserContext);
   const modalRef = useRef();
 
@@ -19,10 +18,10 @@ function Modal({ setModal }) {
   const { id: subjectId } = useParams();
 
   const sendQuestion = useCallback(() => {
-    handleSend(text, setModal, subjectId).then(() => {
-      setSend(!send);
+    handleSend(text, setModal, subjectId).then((newQuestion) => {
+      onNewQuestion(newQuestion);
     });
-  }, [text, setModal, subjectId, send]);
+  }, [text, setModal, subjectId, onNewQuestion]);
 
   const handleKeyPress = useCallback(
     (event) => {
@@ -70,6 +69,7 @@ function Modal({ setModal }) {
 
 Modal.propTypes = {
   setModal: propTypes.func.isRequired,
+  onNewQuestion: propTypes.func.isRequired,
 };
 
 export default Modal;
