@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Question from '../../components/Question/Question';
 import QuestionContainer from '../../components/QuestionContainer/QuestionContainer';
 import * as S from './QuestionList.styled';
@@ -66,7 +66,9 @@ function QuestionList() {
   return (
     <>
       <S.Header>
-        <S.HeaderLogo src={mainLogo} alt="mainLogo" />
+        <Link to="/">
+          <S.HeaderLogo src={mainLogo} alt="mainLogo" />
+        </Link>
         <S.HeaderImage />
       </S.Header>
       <UserContext.Provider value={user}>
