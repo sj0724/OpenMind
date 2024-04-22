@@ -18,7 +18,7 @@ export const QuestionHeading = styled.h1`
 
   @media (max-width: 769px) {
     font-size: 2.4rem;
-    margin-left: 2.4rem;
+    margin: 2.4rem;
     white-space: nowrap;
   }
 `;
