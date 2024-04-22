@@ -1,16 +1,20 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: 769px) {
     flex-direction: row;
+    justify-content: space-between;
   }
 `;
 
 export const QuestionHeading = styled.h1`
+  width: fit-content;
   font-size: 4rem;
   display: flex;
   justify-content: center;
@@ -18,12 +22,14 @@ export const QuestionHeading = styled.h1`
 
   @media (max-width: 769px) {
     font-size: 2.4rem;
-    margin: 2.4rem;
+    margin-bottom: 0;
+    margin-left: 2.4rem;
     white-space: nowrap;
   }
 `;
 
 export const DropdownWrapper = styled.ul`
+  width: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -9,6 +9,11 @@ function useFetchQuestionList(id, listOffset) {
   const [loading, setLoading] = useState(true);
   const [next, setNext] = useState(true);
 
+  const addQuestion = (newQuestion) => {
+    setQuestion((prev) => [newQuestion, ...prev]);
+    setData((prevData) => ({ ...prevData, count: prevData.count + 1 }));
+  };
+
   useEffect(() => {
     const option = {
       subjectsId: id,
@@ -36,6 +41,7 @@ function useFetchQuestionList(id, listOffset) {
     data,
     question,
     loading,
+    addQuestion,
     next,
   };
 }

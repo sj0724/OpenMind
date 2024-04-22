@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Question from '../../components/Question/Question';
 import QuestionContainer from '../../components/QuestionContainer/QuestionContainer';
 import * as S from './QuestionList.styled';
 import emptyIcon from '../../assets/emptyIcon.svg';
 import mainLogo from '../../assets/logo.svg';
+import arrowUp from '../../assets/Arrow-up.svg';
+import arrowLeft from '../../assets/Arrow-left.svg';
 import UserProfile from '../../components/UserProfile/UserProfile';
 import Toast from '../../components/Toast/Toast';
 import Modal from '../../components/Modal/Modal';
 import useFetchUser from '../../hooks/useFetchUser';
 import useFetchQuestionList from '../../hooks/useFetchQuestionList';
 import UserContext from '../../utils/contexts/UserContext';
-import Footer from '../../components/Footer/Footer';
 
 function QuestionList() {
   const { id } = useParams();
@@ -21,7 +22,8 @@ function QuestionList() {
   const obsRef = useRef(null);
   const preventRef = useRef(true);
   const [listOffset, setListOffset] = useState(0);
-  const { data, question, next } = useFetchQuestionList(id, listOffset);
+  const { data, question, next, addQuestion } = useFetchQuestionList(id, listOffset);
+  const navigate = useNavigate();
 
   const handleObserver = (entries) => {
     const target = entries[0];
@@ -36,9 +38,21 @@ function QuestionList() {
     setModal(!modal);
   };
 
+  const handleNewQuestion = (newQuestion) => {
+    addQuestion(newQuestion); // Modify this line
+  };
+
   const copyUrl = async (url) => {
     await navigator.clipboard.writeText(url);
     setToast(true);
+  };
+
+  const moveTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+  const movePrev = () => {
+    navigate(-1);
   };
 
   useEffect(() => {
@@ -66,11 +80,19 @@ function QuestionList() {
             )}
           </QuestionContainer>
         </S.Body>
-        <Footer />
         <S.PageEnd ref={obsRef} />
+        <S.PageButtons>
+          <S.UpButton onClick={moveTop}>
+            <img src={arrowUp} alt="위로가기화살표" />
+          </S.UpButton>
+          <S.PrevButton onClick={movePrev}>
+            <img src={arrowLeft} alt="뒤로가기화살표" />
+            <p>뒤로가기</p>
+          </S.PrevButton>
+        </S.PageButtons>
         <S.FloatingBtn onClick={handleModalToggle}>질문 작성하기</S.FloatingBtn>
         {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}
-        {modal && <Modal setModal={setModal} />}
+        {modal && <Modal setModal={setModal} onNewQuestion={handleNewQuestion} />}
       </UserContext.Provider>
     </>
   );

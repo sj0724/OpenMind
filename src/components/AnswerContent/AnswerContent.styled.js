@@ -6,7 +6,7 @@ export const WrapAnswerContent = styled.div`
   align-items: flex-start;
   gap: 0.8rem;
   flex: 1 0 0;
-  width: 100%;
+  width: 56rem;
 `;
 
 export const AnswerTextarea = styled.textarea`

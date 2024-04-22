@@ -1,16 +1,16 @@
 import axiosinstance from '../utils/axios';
 
 /**
- * 답변 작성하기
+ * 답변 수정하기
  *
  * @author yum
  * @date 23.04
- * @param questionId, answer, isRejected
+ * @param answerId, answer, isRejected
  * @return { id, questionId, content, isRejected, createdAt }
  */
-export const postAnswer = async (questionId, answer, isRejected) => {
+export const patchAnswer = async (answerId, answer, isRejected) => {
   try {
-    const response = await axiosinstance.post(`/questions/${questionId}/answers/`, {
+    const response = await axiosinstance.patch(`/answers/${answerId}/`, {
       content: answer,
       isRejected: isRejected,
     });

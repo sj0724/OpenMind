@@ -13,6 +13,7 @@ export const NavWrapper = styled.nav`
 
 export const LinkAnswer = styled.div`
   position: static;
+  height: 100%;
 
   @media (max-width: 769px) {
     margin-top: 20px;
