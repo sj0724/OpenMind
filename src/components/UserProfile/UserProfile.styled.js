@@ -51,7 +51,6 @@ export const SnsBtn = styled.span`
   align-items: center;
   border-radius: 20rem;
   background-color: var(${(props) => props.color});
-  background-image: url(${(props) => props.$image});
   background-repeat: no-repeat;
   background-position: center;
 `;
