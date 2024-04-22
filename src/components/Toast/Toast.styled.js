@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const ToastBody = styled.div`
+export const ToastBody = styled.div`
   position: fixed;
   bottom: 60px;
   left: 50%;
@@ -21,5 +21,3 @@ const ToastBody = styled.div`
     line-height: 18px; /* 128.571% */
   }
 `;
-
-export default ToastBody;

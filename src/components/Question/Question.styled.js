@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const QuestBody = styled.div`
   display: flex;
@@ -10,10 +10,6 @@ export const QuestBody = styled.div`
   border-radius: 16px;
   background: var(--Grayscale-10);
   box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
-
-  @media (max-width: 1199px) {
-    width: 100%;
-  }
 `;
 
 export const QuestionStatus = styled.div`
@@ -23,9 +19,11 @@ export const QuestionStatus = styled.div`
   align-items: center;
   gap: 10px;
   border-radius: 8px;
-  border: 1px solid ${(props) => (props.$complete ? 'var(--Brown-40)' : 'var(--Grayscale-40)')};
+  border: 1px solid
+    ${(props) => (props.complete ? "var(--Brown-40)" : "var(--Grayscale-40)")};
   background: var(--Grayscale-10);
-  color: ${(props) => (props.$complete ? 'var(--Brown-40)' : 'var(--Grayscale-40)')};
+  color: ${(props) =>
+    props.complete ? "var(--Brown-40)" : "var(--Grayscale-40)"};
   font-family: Pretendard;
   font-size: 14px;
   font-style: normal;
@@ -79,5 +77,5 @@ export const ThumbnsBtn = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 18px; /* 128.571% */
-  color: var(${(props) => (props.color ? props.color : '--Grayscale-40')});
+  color: var(${(props) => (props.color ? props.color : "--Grayscale-40")});
 `;

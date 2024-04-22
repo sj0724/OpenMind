@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { QuestionDetail, Time } from '../Question/Question.styled';
+import styled from "styled-components";
+import { QuestionDetail, Time } from "../Question/Question.styled";
 
 export const AnswerContainer = styled.div`
   display: flex;
@@ -14,9 +14,7 @@ export const Profile = styled.div`
   height: 48px;
   justify-content: center;
   align-items: center;
-  background-image: url(${(props) => props.$image});
-  background-size: cover;
-  background-position: center;
+  background-color: gray;
   border-radius: 9999px;
 `;
 
@@ -26,12 +24,16 @@ export const AnswerContent = styled.div`
   align-items: flex-start;
   gap: 4px;
   flex: 1 0 0;
-  color: ${(props) => (props.$rejected ? 'var(--Red-50)' : 'var(--Grayscale-60)')};
+  color: var(--Grayscale-60);
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px; /* 137.5% */
+
+  p {
+    font-size: 16px;
+  }
 `;
 
 export const Answerinfo = styled.div`
