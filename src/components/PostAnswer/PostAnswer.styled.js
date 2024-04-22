@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const WrapAnswerTop = styled.div`
+export const QuestionStatus = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -47,12 +47,21 @@ export const AnswerText = styled.p`
 export const WrapEditIcons = styled.div`
   display: flex;
   gap: 0.8rem;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 
 export const EditIconButton = styled.button`
   img {
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2rem;
+    height: 2rem;
     fill: var(--Grayscale-50);
   }
+`;
+
+export const WrapAnswerTop = styled.div`
+  width: 56rem;
+  position: relative;
+}
 `;
