@@ -23,12 +23,16 @@ export const AnswerTextarea = styled.textarea`
   padding: 1.6rem;
   resize: none;
   border-radius: 0.8rem;
-  border: none;
   color: var(--Grayscale-40);
   background-color: var(--Grayscale-20);
   margin-bottom: 0.8rem;
 
-  border: 1px solid black;
+  border: 1px solid var(--Grayscale-30);
+
+  &:focus {
+    outline: none;
+    border-color: var(--Grayscale-40);
+  }
 `;
 
 export const AnswerButton = styled.button`
