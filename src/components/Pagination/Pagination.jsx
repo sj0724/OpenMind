@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 import StyledPagination from './Pagination.styled';
 
-function Paging({ page, setPage }) {
+function Paging({ page, setPage, total }) {
   const navigate = useNavigate();
 
   const handlePageChange = (newPage) => {
@@ -16,7 +16,7 @@ function Paging({ page, setPage }) {
       <Pagination
         activePage={page}
         itemsCountPerPage={8}
-        totalItemsCount={450}
+        totalItemsCount={total}
         pageRangeDisplayed={5}
         prevPageText="<"
         nextPageText=">"
@@ -30,6 +30,7 @@ function Paging({ page, setPage }) {
 Paging.propTypes = {
   page: PropTypes.number.isRequired,
   setPage: PropTypes.func.isRequired,
+  total: PropTypes.number.isRequired,
 };
 
 export default Paging;

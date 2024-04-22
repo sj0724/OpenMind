@@ -6,7 +6,11 @@ import Paging from '../Pagination/Pagination';
 import * as S from './CardList.styled';
 
 function CardList({ limit, offset, sort }) {
-  const { cards, loading, currentPage, setCurrentPage } = useFetchCardList(limit, offset, sort);
+  const { cards, loading, currentPage, totalPage, setCurrentPage } = useFetchCardList(
+    limit,
+    offset,
+    sort,
+  );
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -37,7 +41,7 @@ function CardList({ limit, offset, sort }) {
           ))
         )}
       </S.Container>
-      <Paging page={currentPage} setPage={handlePageChange} />
+      <Paging page={currentPage} setPage={handlePageChange} total={totalPage} />
     </S.OuterContainer>
   );
 }

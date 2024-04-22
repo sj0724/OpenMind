@@ -9,6 +9,7 @@ export const useFetchCardList = (limit, offset, sort) => {
   const [loading, setLoading] = useState(true);
   const [searchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
 
   useEffect(() => {
     const page = parseInt(searchParams.get('page'), 10) || 1;
@@ -22,6 +23,7 @@ export const useFetchCardList = (limit, offset, sort) => {
 
         const response = await fetchCardList(limit, calculatedOffset, sort);
         setCards(response.results);
+        setTotalPage(response.count);
         setLoading(false);
       } catch (error) {
         // console.log('Error fetching card list:', error);
@@ -36,6 +38,7 @@ export const useFetchCardList = (limit, offset, sort) => {
     cards,
     loading,
     currentPage,
+    totalPage,
     setCurrentPage,
   };
 };
