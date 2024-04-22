@@ -1,100 +1,41 @@
-import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import { useState } from "react";
+import * as S from "../Question/Question.styled";
+import * as SA from "../PostAnswer/PostAnswer.styled";
+import thumbsUp from "../../assets/thumbs-up.svg";
+import thumbsDown from "../../assets/thumbs-down.svg";
+import kebab from "../../assets/kebab.svg";
+import { useGetSubjects } from "../../api/useGetSubject";
 
-import AnswerContent from '../AnswerContent/AnswerContent';
+function PostAnswer() {
+  const [answerStatus, setAnswerStatus] = useState();
+  const [answer, setAnswer] = useState(true);
 
-import * as S from '../Question/Question.styled';
-import * as SPA from './PostAnswer.styled';
+  const { data } = useGetSubjects();
 
-import calculateDate from '../../utils/calculateDate';
-import UserContext from '../../utils/contexts/UserContext';
-import postLike from '../../services/postLike';
-
-import kebab from '../../assets/kebab.svg';
-import thumbsUp from '../../assets/thumbs-up.svg';
-import thumbsUpSelect from '../../assets/thumbs-up-blue.svg';
-import thumbsDown from '../../assets/thumbs-down.svg';
-import thumbsDownSelect from '../../assets/thumbs-down-red.svg';
-
-function PostAnswer({ question }) {
-  const [answer] = useState(question.answer);
-  const [like, setLike] = useState(false);
-  const [disLike, setDisLike] = useState(false);
-  const [createdTime, setCreatedTime] = useState({});
-  const [likeCount, setLikeCount] = useState(question.like);
-  const [disLikeCount, setDisLikeCount] = useState(question.dislike);
-
-  const toggleThumbs = () => {
-    if (like) {
-      setLike(!like);
-      setDisLike(like);
-    } else if (disLike) {
-      setDisLike(!disLike);
-      setLike(disLike);
-    }
-  };
-
-  const handleLike = () => {
-    if (like) {
-      setLike(!like);
-      return;
-    }
-    setLikeCount(likeCount + 1);
-    setLike(!like);
-    toggleThumbs();
-    postLike({ id: question.id, type: 'like' });
-  };
-
-  const handleDisLike = () => {
-    if (disLike) {
-      setDisLike(!disLike);
-      return;
-    }
-    setDisLikeCount(disLikeCount + 1);
-    setDisLike(!disLike);
-    toggleThumbs();
-    postLike({ id: question.id, type: 'dislike' });
-  };
-
-  const createdText = ` ・ ${createdTime.time}${createdTime.result}전`;
-
-  useEffect(() => {
-    const nowDate = new Date();
-    const createdDate = new Date(question.createdAt);
-    const date = (nowDate - createdDate) / 1000;
-    setCreatedTime(calculateDate(date));
-  }, [question.createdAt]);
+  console.log(data);
 
   return (
     <S.QuestBody>
-      <SPA.WrapAnswerTop>
-        <S.QuestionStatus $complete={answer}>{answer ? '답변 완료' : '미답변'}</S.QuestionStatus>
-        {(!answer || !answer.isRejected) && (
-          <SPA.WrapKebabButton>
-            <SPA.KebabButton onClick={() => toggleEditModal(index)}>
-              <img src={kebab} alt="더보기" />
-            </SPA.KebabButton>
-          </SPA.WrapKebabButton>
-        )}
-      </SPA.WrapAnswerTop>
+      <SA.AnswerTopLayout>
+        <S.QuestionStatus complete={answerStatus}>
+          {answerStatus ? "답변 완료" : "미답변"}
+        </S.QuestionStatus>
+        <SA.KebabButton onClick={(event) => event.preventDefault()}>
+          <img src={kebab} alt="더보기" />
+        </SA.KebabButton>
+      </SA.AnswerTopLayout>
       <S.QuestionContent>
-        <S.Time>
-          질문
-          {createdText}
-        </S.Time>
-        <S.QuestionDetail>{question.content}</S.QuestionDetail>
+        <S.Time>질문 시간</S.Time>
+        <S.QuestionDetail>질문내용</S.QuestionDetail>
       </S.QuestionContent>
-      <AnswerContent answer={answer} questionId={question.id} />
       <S.QuestionModal>
-        <S.ThumbnsBtn onClick={handleLike} color={like ? '--Blue-50' : null}>
-          <img src={like ? thumbsUpSelect : thumbsUp} alt="up" />
-          <span>좋아요</span>
-          {likeCount}
+        <S.ThumbnsBtn>
+          <img src={thumbsUp} alt="up" />
+          좋아요
         </S.ThumbnsBtn>
-        <S.ThumbnsBtn onClick={handleDisLike} color={disLike ? '--Red-50' : null}>
-          <img src={disLike ? thumbsDownSelect : thumbsDown} alt="down" />
-          <span>싫어요</span>
-          {disLikeCount}
+        <S.ThumbnsBtn>
+          <img src={thumbsDown} alt="down" />
+          좋아요
         </S.ThumbnsBtn>
       </S.QuestionModal>
     </S.QuestBody>
