@@ -16,7 +16,7 @@ export const OuterContainer = styled.div`
 export const Container = styled.div`
   min-height: 39.4vh;
   display: grid;
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
   position: relative;
   margin: 5rem auto;

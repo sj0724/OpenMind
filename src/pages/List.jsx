@@ -7,6 +7,7 @@ import CardList from '../components/Card/CardList';
 
 const PageWrapper = styled.div`
   width: 100%;
+  min-height: 100vh;
   background-color: var(--Grayscale-20);
 `;
 
