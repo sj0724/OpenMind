@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Question from '../../components/Question/Question';
 import QuestionContainer from '../../components/QuestionContainer/QuestionContainer';
 import * as S from './QuestionList.styled';
@@ -13,6 +13,7 @@ import Modal from '../../components/Modal/Modal';
 import useFetchUser from '../../hooks/useFetchUser';
 import useFetchQuestionList from '../../hooks/useFetchQuestionList';
 import UserContext from '../../utils/contexts/UserContext';
+import Loading from '../../components/Loading/Loading';
 
 function QuestionList() {
   const { id } = useParams();
@@ -22,7 +23,7 @@ function QuestionList() {
   const obsRef = useRef(null);
   const preventRef = useRef(true);
   const [listOffset, setListOffset] = useState(0);
-  const { data, question, next, addQuestion } = useFetchQuestionList(id, listOffset);
+  const { data, question, loading, next, addQuestion } = useFetchQuestionList(id, listOffset);
   const navigate = useNavigate();
 
   const handleObserver = (entries) => {
@@ -66,19 +67,25 @@ function QuestionList() {
   return (
     <>
       <S.Header>
-        <S.HeaderLogo src={mainLogo} alt="mainLogo" />
+        <Link to="/">
+          <S.HeaderLogo src={mainLogo} alt="mainLogo" />
+        </Link>
         <S.HeaderImage />
       </S.Header>
       <UserContext.Provider value={user}>
         <UserProfile copy={copyUrl} />
         <S.Body>
-          <QuestionContainer count={data.count}>
-            {data.count ? (
-              question.map((item) => <Question question={item} key={item.id} />)
-            ) : (
-              <S.NoQuestion src={emptyIcon} />
-            )}
-          </QuestionContainer>
+          {loading ? (
+            <Loading />
+          ) : (
+            <QuestionContainer count={data.count}>
+              {data.count ? (
+                question.map((item) => <Question question={item} key={item.id} />)
+              ) : (
+                <S.NoQuestion src={emptyIcon} />
+              )}
+            </QuestionContainer>
+          )}
         </S.Body>
         <S.PageEnd ref={obsRef} />
         <S.PageButtons>

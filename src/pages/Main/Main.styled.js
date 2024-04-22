@@ -8,6 +8,10 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 769px) {
+    padding: 0 3.5rem;
+  }
 `;
 
 export const MainLogo = styled.img`
@@ -44,6 +48,12 @@ export const UserForm = styled.form`
     border: none;
     width: 100%;
   }
+
+  @media (max-width: 769px) {
+    max-width: 40rem;
+    width: 100%;
+    padding: 2.4rem;
+  }
 `;
 
 export const UserInput = styled.label`
@@ -57,6 +67,10 @@ export const UserInput = styled.label`
   border: 1px solid var(--Grayscale-40);
   background: var(--Grayscale-10);
   position: relative;
+
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 `;
 
 export const UserSubmitBtn = styled.button`
@@ -91,12 +105,15 @@ export const Background = styled.div`
   bottom: 0;
   width: 100%;
   background-color: var(--Grayscale-20);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
 `;
 
 export const ImageArea = styled.div`
   width: 120rem;
   height: 62.7rem;
-  margin: 0 auto;
   background: url(${Image}) var(--Grayscale-20) 0px 0px / 100% 191.388% no-repeat;
 
   @media (max-width: 1199px) {

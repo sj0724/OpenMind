@@ -8,13 +8,22 @@ export const Header = styled.div`
   align-items: center;
   margin: 0 auto;
   overflow: hidden;
+
+  a {
+    position: absolute;
+    top: 5rem;
+  }
+
+  @media (max-width: 769px) {
+    a {
+      top: 4rem;
+    }
+  }
 `;
 
 export const HeaderLogo = styled.img`
-  position: absolute;
   width: 17rem;
   height: 6.7rem;
-  top: 5rem;
 
   @media (max-width: 769px) {
     top: 4rem;
@@ -45,7 +54,7 @@ export const Body = styled.div`
   padding: 19rem 0 6rem 0;
 
   @media (max-width: 769px) {
-    padding: 19rem 0 6rem 0;
+    padding: 19rem 2.4rem 6rem;
   }
 `;
 

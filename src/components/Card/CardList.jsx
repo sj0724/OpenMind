@@ -4,9 +4,14 @@ import { useFetchCardList } from '../../hooks/useFetchCardList';
 import Messages from '../../assets/Messages.svg';
 import Paging from '../Pagination/Pagination';
 import * as S from './CardList.styled';
+import Loading from '../Loading/Loading';
 
 function CardList({ limit, offset, sort }) {
-  const { cards, loading, currentPage, setCurrentPage } = useFetchCardList(limit, offset, sort);
+  const { cards, loading, currentPage, totalPage, setCurrentPage } = useFetchCardList(
+    limit,
+    offset,
+    sort,
+  );
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -16,7 +21,7 @@ function CardList({ limit, offset, sort }) {
     <S.OuterContainer>
       <S.Container>
         {loading ? (
-          <p>Loading...</p>
+          <Loading />
         ) : (
           cards.map((card) => (
             <S.CardContainer key={card.id}>
@@ -37,7 +42,7 @@ function CardList({ limit, offset, sort }) {
           ))
         )}
       </S.Container>
-      <Paging page={currentPage} setPage={handlePageChange} />
+      <Paging page={currentPage} setPage={handlePageChange} total={totalPage} />
     </S.OuterContainer>
   );
 }
