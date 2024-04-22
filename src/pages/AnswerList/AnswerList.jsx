@@ -86,7 +86,7 @@ function AnswerList() {
           </QuestionContainer>
         </S.Body>
         <S.PageEnd ref={obsRef} />
-        <S.PageButtons>
+        <S.PageButtons $isBottom={true}>
           <S.UpButton onClick={moveTop}>
             <img src={arrowUp} alt="위로가기화살표" />
           </S.UpButton>
