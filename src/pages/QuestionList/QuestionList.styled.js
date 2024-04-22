@@ -54,7 +54,7 @@ export const Body = styled.div`
   padding: 19rem 0 6rem 0;
 
   @media (max-width: 769px) {
-    padding: 19rem 0 6rem 0;
+    padding: 19rem 2.4rem 6rem;
   }
 `;
 
