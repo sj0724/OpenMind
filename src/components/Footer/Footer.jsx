@@ -4,6 +4,13 @@ import gitHubLogo from '../../assets/github-mark.svg';
 function Footer() {
   return (
     <S.Body>
+      <S.Container>
+        <p>Codeit Sprint BootCamp</p>
+        <p>Part2 11Team</p>
+        <S.Content href="https://github.com/sj0724/Part2-project" target="_blank">
+          Project Github
+        </S.Content>
+      </S.Container>
       <img src={gitHubLogo} alt="깃허브로고" />
       <S.LinkContainer>
         <S.Content href="https://github.com/khs0727" target="_blank">

@@ -10,6 +10,7 @@ import UserProfile from '../../components/UserProfile/UserProfile';
 import Toast from '../../components/Toast/Toast';
 
 import * as S from '../QuestionList/QuestionList.styled';
+import * as SAL from './AnswerList.styled';
 
 import UserContext from '../../utils/contexts/UserContext';
 

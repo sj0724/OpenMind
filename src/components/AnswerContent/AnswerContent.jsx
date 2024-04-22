@@ -9,8 +9,6 @@ import calculateDate from '../../utils/calculateDate';
 import { postAnswer } from '../../services/postAnswer';
 
 function PostAnswer({ answer, questionId }) {
-  const user = useContext(UserContext);
-
   const [createdTime, setCreatedTime] = useState({});
   const [createdText, setCreatedText] = useState('');
 
@@ -77,7 +75,9 @@ function PostAnswer({ answer, questionId }) {
         </S.Answerinfo>
         <SAC.WrapAnswerContent>
           {submittedAnswer ? (
-            <SAC.AnswerText>{submittedAnswer}</SAC.AnswerText>
+            <SAC.AnswerText $rejected={answer.isRejected}>
+              {answer.isRejected ? '답변 거절' : submittedAnswer}
+            </SAC.AnswerText>
           ) : (
             <>
               <SAC.AnswerTextarea
