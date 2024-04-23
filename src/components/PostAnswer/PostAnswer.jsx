@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import Reaction from '../Reaction/Reaction';
-import Toast from '../Toast/Toast';
+import SendToast from '..//SendToast/SendToast';
 
 import * as S from './PostAnswer.styled';
 import * as SQ from '../Question/Question.styled';
@@ -25,6 +25,8 @@ function PostAnswer({ question }) {
   const user = useContext(UserContext);
 
   const [answer] = useState(question.answer);
+
+  const [text, setText] = useState('');
 
   // 답변 id
   const [answerId, setAnswerId] = useState(0);
@@ -51,7 +53,7 @@ function PostAnswer({ question }) {
   const [isEdit, setIsEdit] = useState(false);
 
   // 토스트 메세지
-  const [toast, setToast] = useState(false);
+  const [sendToast, setSendToast] = useState([]);
 
   // 등록 된 답변이 있다면 출력
   useEffect(() => {
@@ -64,10 +66,27 @@ function PostAnswer({ question }) {
     }
   }, [answer]);
 
+  // 토스트 추가
+  const addToast = (text) => {
+    setSendToast((prevToasts) => {
+      if (prevToasts.length >= 5) {
+        return [{ id: Date.now(), text }];
+      }
+      return [...prevToasts, { id: Date.now(), text }];
+    });
+  };
+
+  // 토스트 삭제
+  const removeToast = (toastId) => {
+    setSendToast((prevToasts) => prevToasts.filter((sendtoast) => sendtoast.id !== toastId));
+  };
+
   // 입력된 답변이 있으면 비활성화된 버튼 활성화 상태로 변경
   const handleAnswerChange = (event) => {
     const newText = event.target.value;
-    setAnswerText(newText);
+    if (newText.length <= 400) {
+      setAnswerText(newText);
+    }
   };
 
   // 답변 등록
@@ -100,7 +119,7 @@ function PostAnswer({ question }) {
       // 답변 id
       setAnswerId(data.id);
       // 토스트 메세지
-      setToast(`답변이 ${isReject ? MESSAGE.reject : MESSAGE.submit}되었습니다.`);
+      addToast(`답변이 ${isReject ? MESSAGE.reject : MESSAGE.submit}되었습니다.`);
     }
   };
 
@@ -122,7 +141,7 @@ function PostAnswer({ question }) {
       setIsAnswerSubmitted(false);
       setIsRejected(false);
       setAnswerId(0);
-      setToast(`답변이 ${MESSAGE.delete}되었습니다.`);
+      addToast(`답변이 ${MESSAGE.delete}되었습니다.`);
     }
   };
 
@@ -158,9 +177,29 @@ function PostAnswer({ question }) {
       // 수정 상태
       setIsEdit(false);
       // 토스트 메세지
-      setToast(`답변이 ${MESSAGE.edit}되었습니다.`);
+      addToast(`답변이 ${MESSAGE.edit}되었습니다.`);
     }
   };
+
+  // 답변 등록/수정/삭제 핸들러
+  const handleEnterKey = useCallback(
+    (event) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+
+        if (!answerText.trim()) {
+          return;
+        }
+
+        if (isEdit) {
+          handleEditAnswer();
+        } else {
+          handleSubmitAnswer(false);
+        }
+      }
+    },
+    [handleEditAnswer, handleSubmitAnswer, answerText, isEdit],
+  );
 
   // 질문 시간 출력
   useEffect(() => {
@@ -205,7 +244,7 @@ function PostAnswer({ question }) {
       {/* 답변 입력 or 출력하는 곳 */}
       <SA.AnswerContainer>
         {/* 답변 입력 유저 정보 및 답변 입력 시간 */}
-        <SA.Profile $image={user.imageSource} />
+        <SA.Profile src={user.imageSource} />
         <SA.AnswerContent>
           <SA.Answerinfo>
             <S.WrapAnswerTop>
@@ -243,11 +282,15 @@ function PostAnswer({ question }) {
               </S.AnswerText>
             ) : (
               <>
-                <S.AnswerTextarea
-                  placeholder="답변을 입력해주세요"
-                  value={answerText || ''}
-                  onChange={(event) => handleAnswerChange(event)}
-                />
+                <S.WrapTextarea>
+                  <S.AnswerTextarea
+                    placeholder="답변을 입력해주세요"
+                    value={answerText || ''}
+                    onChange={(event) => handleAnswerChange(event)}
+                    onKeyPress={(event) => handleEnterKey(event)}
+                  />
+                  <S.CharacterCount>{`${answerText.length}/400`}</S.CharacterCount>
+                </S.WrapTextarea>
                 {!isEdit ? (
                   <S.AnswerButton
                     $bgColor={answerText?.trim() ? '--Brown-40' : '--Brown-30'}
@@ -271,19 +314,26 @@ function PostAnswer({ question }) {
       </SA.AnswerContainer>
       {/* 답변 입력 or 출력하는 곳 */}
       <Reaction question={question} />
-      {toast && <Toast setToast={setToast} text={toast} />}
+      {sendToast.map((sendtoast, index) => (
+        <SendToast
+          key={sendtoast.id}
+          setToast={() => removeToast(sendtoast.id)}
+          text={sendtoast.text}
+          index={index}
+        />
+      ))}
     </SQ.QuestBody>
   );
 }
 
 PostAnswer.propTypes = {
   question: PropTypes.shape({
-    content: PropTypes.string.isRequired,
+    content: PropTypes.string,
     like: PropTypes.number.isRequired,
     dislike: PropTypes.number.isRequired,
     createdAt: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-    answer: PropTypes.object.isRequired,
+    answer: PropTypes.object,
   }).isRequired,
 };
 

@@ -48,6 +48,7 @@ export const Time = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
+  white-space: nowrap;
 `;
 
 export const QuestionDetail = styled.p`
@@ -57,6 +58,7 @@ export const QuestionDetail = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+  word-break: break-all;
 `;
 
 export const QuestionModal = styled.div`
@@ -80,4 +82,9 @@ export const ThumbnsBtn = styled.div`
   font-weight: 500;
   line-height: 18px;
   color: var(${(props) => (props.color ? props.color : '--Grayscale-40')});
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
 `;

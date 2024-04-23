@@ -8,13 +8,12 @@ export const AnswerContainer = styled.div`
   align-self: stretch;
 `;
 
-export const Profile = styled.div`
+export const Profile = styled.img`
   display: flex;
   width: 4.8rem;
   height: 4.8rem;
   justify-content: center;
   align-items: center;
-  background-image: url(${(props) => props.$image});
   background-size: cover;
   background-position: center;
   border-radius: 9999px;
@@ -31,14 +30,18 @@ export const AnswerContent = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 2.2rem;
+  width: 100%;
 `;
 
 export const Answerinfo = styled.div`
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  width: 100%;
 `;
 
 export const UserName = styled(QuestionDetail)``;
 
-export const AnswerTime = styled(Time)``;
+export const AnswerTime = styled(Time)`
+  white-space: nowrap;
+`;

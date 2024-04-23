@@ -15,6 +15,10 @@ export const WrapAnswerContent = styled.div`
   gap: 0.8rem;
   flex: 1 0 0;
   width: 56rem;
+
+  @media (max-width: 1199px) {
+    width: 100%;
+  }
 `;
 
 export const AnswerTextarea = styled.textarea`
@@ -67,5 +71,27 @@ export const EditIconButton = styled.button`
 export const WrapAnswerTop = styled.div`
   width: 56rem;
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+
+  @media (max-width: 1199px) {
+    width: 100%;
+  }
 }
+`;
+
+export const WrapTextarea = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+
+export const CharacterCount = styled.div`
+  position: absolute;
+  bottom: 2.5rem;
+  right: 1rem;
+  font-size: 1.2rem;
+  color: var(--Grayscale-50);
 `;

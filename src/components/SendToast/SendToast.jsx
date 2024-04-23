@@ -26,7 +26,7 @@ function SendToast({ setToast, text, index }) {
   }, []);
 
   return (
-    <ToastBody className={fade} top={`${(index + 1) * 6 - 4}rem`}>
+    <ToastBody className={fade} $top={`${(index + 1) * 6 - 4}rem`}>
       <p>{text}</p>
     </ToastBody>
   );

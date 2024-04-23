@@ -73,11 +73,11 @@ function QuestionList() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver, { threshold: 0 });
-    if (obsRef.current) observer.observe(obsRef.current);
+    if (obsRef.current && !loading) observer.observe(obsRef.current);
     return () => {
       observer.disconnect();
     };
-  }, [next]);
+  }, [data]);
 
   return (
     <>

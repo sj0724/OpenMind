@@ -28,4 +28,9 @@ export const QuestionCount = styled.span`
   font-style: normal;
   font-weight: 400;
   line-height: 2.5rem;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
 `;
