@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import styled from 'styled-components';
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Nav from '../components/Nav/Nav';
 import Header from '../components/Header/Header';
 import CardList from '../components/Card/CardList';
@@ -18,14 +18,22 @@ const options = [
 
 function List() {
   const [view, setView] = useState(false);
-  const [selectedItem, setSelectedItem] = useState('최신순');
+  const [selectedItem, setSelectedItem] = useState(
+    () => localStorage.getItem('selectedItem') || '최신순',
+  );
+
+  useEffect(() => {
+    localStorage.setItem('selectedItem', selectedItem);
+  }, [selectedItem]);
 
   const toggleDropdown = () => {
     setView(!view);
   };
 
   const handleItemClick = (value) => {
-    setSelectedItem(options.find((option) => option.value === value).label);
+    const selectedLabel = options.find((option) => option.value === value).label;
+    setSelectedItem(selectedLabel);
+    localStorage.setItem('selectedItem', selectedLabel); // 이전 선택된 값을 저장
     toggleDropdown();
   };
 
