@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const ToastBody = styled.div`
   position: fixed;
   right: 2rem;
-  top: ${(props) => (props.top !== undefined ? props.top : '2rem')};
+  top: ${(props) => (props.$top !== undefined ? props.$top : '2rem')};
   width: 200px;
   height: 50px;
   padding: 1.2rem 2rem;

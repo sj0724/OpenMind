@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import Reaction from '../Reaction/Reaction';
-import Toast from '../Toast/Toast';
+import SendToast from '..//SendToast/SendToast';
 
 import * as S from './PostAnswer.styled';
 import * as SQ from '../Question/Question.styled';
@@ -51,7 +51,7 @@ function PostAnswer({ question }) {
   const [isEdit, setIsEdit] = useState(false);
 
   // 토스트 메세지
-  const [toast, setToast] = useState(false);
+  const [sendToast, setSendToast] = useState([]);
 
   // 등록 된 답변이 있다면 출력
   useEffect(() => {
@@ -63,6 +63,21 @@ function PostAnswer({ question }) {
       setAnswerId(answer.id);
     }
   }, [answer]);
+
+  // 토스트 추가
+  const addToast = (text) => {
+    setSendToast((prevToasts) => {
+      if (prevToasts.length >= 5) {
+        return [{ id: Date.now(), text }];
+      }
+      return [...prevToasts, { id: Date.now(), text }];
+    });
+  };
+
+  // 토스트 삭제
+  const removeToast = (toastId) => {
+    setSendToast((prevToasts) => prevToasts.filter((sendtoast) => sendtoast.id !== toastId));
+  };
 
   // 입력된 답변이 있으면 비활성화된 버튼 활성화 상태로 변경
   const handleAnswerChange = (event) => {
@@ -100,7 +115,7 @@ function PostAnswer({ question }) {
       // 답변 id
       setAnswerId(data.id);
       // 토스트 메세지
-      setToast(`답변이 ${isReject ? MESSAGE.reject : MESSAGE.submit}되었습니다.`);
+      addToast(`답변이 ${isReject ? MESSAGE.reject : MESSAGE.submit}되었습니다.`);
     }
   };
 
@@ -122,7 +137,7 @@ function PostAnswer({ question }) {
       setIsAnswerSubmitted(false);
       setIsRejected(false);
       setAnswerId(0);
-      setToast(`답변이 ${MESSAGE.delete}되었습니다.`);
+      addToast(`답변이 ${MESSAGE.delete}되었습니다.`);
     }
   };
 
@@ -158,7 +173,7 @@ function PostAnswer({ question }) {
       // 수정 상태
       setIsEdit(false);
       // 토스트 메세지
-      setToast(`답변이 ${MESSAGE.edit}되었습니다.`);
+      addToast(`답변이 ${MESSAGE.edit}되었습니다.`);
     }
   };
 
@@ -292,7 +307,14 @@ function PostAnswer({ question }) {
       </SA.AnswerContainer>
       {/* 답변 입력 or 출력하는 곳 */}
       <Reaction question={question} />
-      {toast && <Toast setToast={setToast} text={toast} />}
+      {sendToast.map((sendtoast, index) => (
+        <SendToast
+          key={sendtoast.id}
+          setToast={() => removeToast(sendtoast.id)}
+          text={sendtoast.text}
+          index={index}
+        />
+      ))}
     </SQ.QuestBody>
   );
 }
@@ -304,7 +326,7 @@ PostAnswer.propTypes = {
     dislike: PropTypes.number.isRequired,
     createdAt: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-    answer: PropTypes.object.isRequired,
+    answer: PropTypes.object,
   }).isRequired,
 };
 
