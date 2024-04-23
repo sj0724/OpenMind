@@ -19,11 +19,16 @@ function Modal({ setModal, onNewQuestion }) {
 
   const sendQuestion = useCallback(() => {
     if (text.trim().length > 0) {
+      if (text.trim().length === 400) {
+        alert('글자수는 최대 400자 입니다. 질문을 확인해주세요.');
+        return;
+      }
       handleSend(text, setModal, subjectId).then((newQuestion) => {
         onNewQuestion(newQuestion);
       });
     }
   }, [text, setModal, subjectId, onNewQuestion]);
+
   const handleKeyPress = useCallback(
     (event) => {
       if (event.key === 'Enter' && !event.shiftKey) {
