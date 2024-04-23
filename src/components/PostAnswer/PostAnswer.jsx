@@ -2,13 +2,13 @@ import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Reaction from '../Reaction/Reaction';
-import Toast from '../../components/Toast/Toast';
+import Toast from '../Toast/Toast';
 
 import * as S from './PostAnswer.styled';
 import * as SQ from '../Question/Question.styled';
 import * as SA from '../Answer/Answer.styled';
 
-import { MESSAGE } from './constant';
+import MESSAGE from './constant';
 
 import { postAnswer } from '../../services/postAnswer';
 import { deleteAnswer } from '../../services/deleteAnswer';
@@ -73,7 +73,7 @@ function PostAnswer({ question }) {
   // 답변 등록
   const handleSubmitAnswer = async (isReject) => {
     if (!window.confirm(`답변을 ${isReject ? MESSAGE.reject : MESSAGE.submit}하시겠습니까?`)) {
-      return false;
+      return;
     }
 
     let answerContentText = '답변거절';
@@ -107,7 +107,7 @@ function PostAnswer({ question }) {
   // 답변 삭제
   const handleDeleteAnswer = async () => {
     if (!window.confirm(`답변을 ${MESSAGE.delete}하시겠습니까?`)) {
-      return false;
+      return;
     }
 
     const { error, loading } = await deleteAnswer(answerId);
@@ -135,7 +135,7 @@ function PostAnswer({ question }) {
   // 답변 수정
   const handleEditAnswer = async () => {
     if (!window.confirm(`답변을 ${MESSAGE.edit}하시겠습니까?`)) {
-      return false;
+      return;
     }
 
     const { error, loading, data } = await patchAnswer(answerId, answerText, false);
@@ -246,7 +246,8 @@ function PostAnswer({ question }) {
                 <S.AnswerTextarea
                   placeholder="답변을 입력해주세요"
                   value={answerText || ''}
-                  onChange={(event) => handleAnswerChange(event)}></S.AnswerTextarea>
+                  onChange={(event) => handleAnswerChange(event)}
+                />
                 {!isEdit ? (
                   <S.AnswerButton
                     $bgColor={answerText?.trim() ? '--Brown-40' : '--Brown-30'}
@@ -274,5 +275,16 @@ function PostAnswer({ question }) {
     </SQ.QuestBody>
   );
 }
+
+PostAnswer.propTypes = {
+  question: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    like: PropTypes.number.isRequired,
+    dislike: PropTypes.number.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    answer: PropTypes.object.isRequired,
+  }).isRequired,
+};
 
 export default PostAnswer;
