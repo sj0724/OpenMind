@@ -19,7 +19,7 @@ function Answer({ answer }) {
 
   return (
     <S.AnswerContainer>
-      <S.Profile $image={user.imageSource} />
+      <S.Profile src={user.imageSource} />
       <S.AnswerContent $rejected={answer.isRejected}>
         <S.Answerinfo>
           <S.UserName>{user.name}</S.UserName>

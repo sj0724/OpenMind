@@ -8,13 +8,12 @@ export const AnswerContainer = styled.div`
   align-self: stretch;
 `;
 
-export const Profile = styled.div`
+export const Profile = styled.img`
   display: flex;
   width: 4.8rem;
   height: 4.8rem;
   justify-content: center;
   align-items: center;
-  background-image: url(${(props) => props.$image});
   background-size: cover;
   background-position: center;
   border-radius: 9999px;

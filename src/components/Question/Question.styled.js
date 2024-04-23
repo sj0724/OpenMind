@@ -48,6 +48,7 @@ export const Time = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
+  white-space: nowrap;
 `;
 
 export const QuestionDetail = styled.p`
@@ -57,6 +58,8 @@ export const QuestionDetail = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+  width: 100%;
+  word-break: break-all;
 `;
 
 export const QuestionModal = styled.div`

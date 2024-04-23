@@ -18,6 +18,10 @@ export const UserInfo = styled.div`
   line-height: 40px;
   gap: 12px;
 
+  span {
+    white-space: nowrap;
+  }
+
   @media (max-width: 769px) {
     top: 10rem;
   }
