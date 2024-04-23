@@ -205,7 +205,7 @@ function PostAnswer({ question }) {
       {/* 답변 입력 or 출력하는 곳 */}
       <SA.AnswerContainer>
         {/* 답변 입력 유저 정보 및 답변 입력 시간 */}
-        <SA.Profile $image={user.imageSource} />
+        <SA.Profile src={user.imageSource} />
         <SA.AnswerContent>
           <SA.Answerinfo>
             <S.WrapAnswerTop>
