@@ -30,12 +30,14 @@ export const AnswerContent = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 2.2rem;
+  width: 100%;
 `;
 
 export const Answerinfo = styled.div`
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  width: 100%;
 `;
 
 export const UserName = styled(QuestionDetail)``;

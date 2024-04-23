@@ -15,6 +15,10 @@ export const WrapAnswerContent = styled.div`
   gap: 0.8rem;
   flex: 1 0 0;
   width: 56rem;
+
+  @media (max-width: 1199px) {
+    width: 100%;
+  }
 `;
 
 export const AnswerTextarea = styled.textarea`
@@ -67,5 +71,13 @@ export const EditIconButton = styled.button`
 export const WrapAnswerTop = styled.div`
   width: 56rem;
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+
+  @media (max-width: 1199px) {
+    width: 100%;
+  }
 }
 `;

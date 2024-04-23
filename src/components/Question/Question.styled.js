@@ -58,7 +58,6 @@ export const QuestionDetail = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
-  width: 100%;
   word-break: break-all;
 `;
 
