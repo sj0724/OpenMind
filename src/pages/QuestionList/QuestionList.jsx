@@ -79,6 +79,15 @@ function QuestionList() {
     };
   }, [data]);
 
+  useEffect(() => {
+    if (modal) {
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [modal]);
+
   return (
     <>
       <S.Header>
