@@ -14,12 +14,14 @@ import useFetchUser from '../../hooks/useFetchUser';
 import useFetchQuestionList from '../../hooks/useFetchQuestionList';
 import UserContext from '../../utils/contexts/UserContext';
 import Loading from '../../components/Loading/Loading';
+import SendToast from '../../components/SendToast/SendToast';
 
 function QuestionList() {
   const { id } = useParams();
   const [modal, setModal] = useState(false);
   const { user } = useFetchUser(id);
   const [toast, setToast] = useState(false);
+  const [sendToast, setSendToast] = useState([]);
   const obsRef = useRef(null);
   const preventRef = useRef(true);
   const [listOffset, setListOffset] = useState(0);
@@ -39,8 +41,21 @@ function QuestionList() {
     setModal(!modal);
   };
 
+  const addToast = (text) => {
+    setSendToast((prevToasts) => {
+      if (prevToasts.length >= 5) {
+        return [{ id: Date.now(), text }];
+      }
+      return [...prevToasts, { id: Date.now(), text }];
+    });
+  };
+  const removeToast = (toastId) => {
+    setSendToast((prevToasts) => prevToasts.filter((sendtoast) => sendtoast.id !== toastId));
+  };
+
   const handleNewQuestion = (newQuestion) => {
-    addQuestion(newQuestion); // Modify this line
+    addQuestion(newQuestion);
+    addToast('질문이 등록되었습니다.'); // 새 토스트 추가
   };
 
   const copyUrl = async (url) => {
@@ -100,6 +115,14 @@ function QuestionList() {
         <S.FloatingBtn onClick={handleModalToggle}>질문 작성하기</S.FloatingBtn>
         {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}
         {modal && <Modal setModal={setModal} onNewQuestion={handleNewQuestion} />}
+        {sendToast.map((sendtoast, index) => (
+          <SendToast
+            key={sendtoast.id}
+            setToast={() => removeToast(sendtoast.id)}
+            text={sendtoast.text}
+            index={index}
+          />
+        ))}
       </UserContext.Provider>
     </>
   );

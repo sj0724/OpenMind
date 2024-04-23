@@ -18,14 +18,16 @@ function Modal({ setModal, onNewQuestion }) {
   const { id: subjectId } = useParams();
 
   const sendQuestion = useCallback(() => {
-    handleSend(text, setModal, subjectId).then((newQuestion) => {
-      onNewQuestion(newQuestion);
-    });
+    if (text.trim().length > 0) {
+      handleSend(text, setModal, subjectId).then((newQuestion) => {
+        onNewQuestion(newQuestion);
+      });
+    }
   }, [text, setModal, subjectId, onNewQuestion]);
-
   const handleKeyPress = useCallback(
     (event) => {
       if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
         sendQuestion();
       }
     },
@@ -50,15 +52,22 @@ function Modal({ setModal, onNewQuestion }) {
           <p>{user.name}</p>
         </S.ToUser>
         <S.Content>
-          <textarea
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="내용을 입력해주세요"
-          />
+          <S.TextareaContainer>
+            <textarea
+              value={text}
+              onChange={(e) => {
+                if (e.target.value.length <= 400) {
+                  setText(e.target.value);
+                }
+              }}
+              onKeyPress={handleKeyPress}
+              placeholder="내용을 입력해주세요"
+            />
+            <S.CharacterCount>{`${text.length}/400`}</S.CharacterCount>
+          </S.TextareaContainer>
         </S.Content>
         <S.Footer
-          color={text.length > 0 ? 'var(--Brown-40)' : 'var(--Brown-30)'}
+          color={text.trim().length > 0 ? 'var(--Brown-40)' : 'var(--Brown-30)'}
           onClick={sendQuestion}>
           <span>질문 보내기</span>
         </S.Footer>

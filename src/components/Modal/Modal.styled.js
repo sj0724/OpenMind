@@ -126,3 +126,16 @@ export const Footer = styled.button`
   font-size: 1.6rem;
   color: var(--Grayscale-10);
 `;
+
+export const TextareaContainer = styled.div`
+  height: 100%;
+  position: relative;
+`;
+
+export const CharacterCount = styled.div`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 0.8em;
+  color: var(--Grayscale-50);
+`;
