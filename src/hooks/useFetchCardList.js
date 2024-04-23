@@ -8,8 +8,15 @@ export const useFetchCardList = (limit, offset, sort) => {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchParams] = useSearchParams();
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(() => {
+    const storedPage = localStorage.getItem('currentPage');
+    return storedPage ? parseInt(storedPage, 10) : 1;
+  });
   const [totalPage, setTotalPage] = useState(0);
+
+  useEffect(() => {
+    localStorage.setItem('currentPage', currentPage); // 현재 페이지를 로컬 스토리지에 저장
+  }, [currentPage]);
 
   useEffect(() => {
     const page = parseInt(searchParams.get('page'), 10) || 1;
