@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import useFetchUser from '../../hooks/useFetchUser';
 import useFetchQuestionList from '../../hooks/useFetchQuestionList';
@@ -10,7 +10,6 @@ import UserProfile from '../../components/UserProfile/UserProfile';
 import Toast from '../../components/Toast/Toast';
 
 import * as S from '../QuestionList/QuestionList.styled';
-import * as SAL from './AnswerList.styled';
 
 import UserContext from '../../utils/contexts/UserContext';
 
@@ -26,15 +25,16 @@ function AnswerList() {
   // 유저정보
   const { user } = useFetchUser(id);
 
-  const endRef = useRef(true);
   const obsRef = useRef(true);
   const preventRef = useRef(true);
   const [listOffset, setListOffset] = useState(0);
-  const { data, question } = useFetchQuestionList(id, listOffset);
+  const { data, question, next } = useFetchQuestionList(id, listOffset);
+
+  const navigate = useNavigate();
 
   const obsHandler = (entries) => {
     const target = entries[0];
-    if (endRef.current && target.isIntersecting && preventRef.current) {
+    if (next && target.isIntersecting && preventRef.current) {
       preventRef.current = false;
       setListOffset((prev) => prev + 2);
       preventRef.current = true;
@@ -64,7 +64,7 @@ function AnswerList() {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [next]);
 
   return (
     <>
