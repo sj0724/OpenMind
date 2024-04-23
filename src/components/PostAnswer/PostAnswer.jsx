@@ -26,6 +26,8 @@ function PostAnswer({ question }) {
 
   const [answer] = useState(question.answer);
 
+  const [text, setText] = useState('');
+
   // 답변 id
   const [answerId, setAnswerId] = useState(0);
   // 답변 등록 여부
@@ -82,7 +84,9 @@ function PostAnswer({ question }) {
   // 입력된 답변이 있으면 비활성화된 버튼 활성화 상태로 변경
   const handleAnswerChange = (event) => {
     const newText = event.target.value;
-    setAnswerText(newText);
+    if (newText.length <= 400) {
+      setAnswerText(newText);
+    }
   };
 
   // 답변 등록
@@ -278,12 +282,15 @@ function PostAnswer({ question }) {
               </S.AnswerText>
             ) : (
               <>
-                <S.AnswerTextarea
-                  placeholder="답변을 입력해주세요"
-                  value={answerText || ''}
-                  onChange={(event) => handleAnswerChange(event)}
-                  onKeyPress={(event) => handleEnterKey(event)}
-                />
+                <S.WrapTextarea>
+                  <S.AnswerTextarea
+                    placeholder="답변을 입력해주세요"
+                    value={answerText || ''}
+                    onChange={(event) => handleAnswerChange(event)}
+                    onKeyPress={(event) => handleEnterKey(event)}
+                  />
+                  <S.CharacterCount>{`${answerText.length}/400`}</S.CharacterCount>
+                </S.WrapTextarea>
                 {!isEdit ? (
                   <S.AnswerButton
                     $bgColor={answerText?.trim() ? '--Brown-40' : '--Brown-30'}

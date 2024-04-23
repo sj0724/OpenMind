@@ -81,3 +81,17 @@ export const WrapAnswerTop = styled.div`
   }
 }
 `;
+
+export const WrapTextarea = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+
+export const CharacterCount = styled.div`
+  position: absolute;
+  bottom: 2.5rem;
+  right: 1rem;
+  font-size: 1.2rem;
+  color: var(--Grayscale-50);
+`;
