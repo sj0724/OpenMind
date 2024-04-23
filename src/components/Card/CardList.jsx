@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { memo } from 'react';
 import { useFetchCardList } from '../../hooks/useFetchCardList';
 import Messages from '../../assets/Messages.svg';
 import Paging from '../Pagination/Pagination';
@@ -53,4 +54,4 @@ CardList.propTypes = {
   sort: PropTypes.string.isRequired,
 };
 
-export default CardList;
+export default memo(CardList);

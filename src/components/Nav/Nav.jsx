@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { memo } from 'react';
 import logo from '../../assets/logo.svg';
 import * as S from './Nav.styled';
 import LinkButton from '../LinkButton/LinkButton';
@@ -26,4 +27,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+export default memo(Nav);

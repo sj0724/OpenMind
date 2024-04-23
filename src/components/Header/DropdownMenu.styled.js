@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const DropdownMenu = styled.div`
+export const DropdownMenu = styled.ul`
   display: flex;
   flex-direction: column;
   background-color: var(--Grayscale-10);
