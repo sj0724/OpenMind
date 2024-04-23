@@ -18,6 +18,7 @@ const LinkBtn = styled.span`
   font-weight: 400;
   line-height: 2.2rem;
   cursor: pointer;
+  white-space: nowrap;
 
   img {
     width: 1.8rem;
