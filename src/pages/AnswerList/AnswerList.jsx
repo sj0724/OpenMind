@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import useFetchUser from '../../hooks/useFetchUser';
 import useFetchQuestionList from '../../hooks/useFetchQuestionList';
@@ -16,6 +16,8 @@ import UserContext from '../../utils/contexts/UserContext';
 
 import emptyIcon from '../../assets/emptyIcon.svg';
 import mainLogo from '../../assets/logo.svg';
+import arrowUp from '../../assets/Arrow-up.svg';
+import arrowLeft from '../../assets/Arrow-left.svg';
 
 /** 작업완료 후 주석은 다 지울 예정 */
 function AnswerList() {
@@ -39,13 +41,21 @@ function AnswerList() {
     }
   };
 
-  // 질문 및 답변 목록
+  // 토스트 메세지
   const [toast, setToast] = useState(false);
 
   // 링크 공유
   const copyUrl = async (url) => {
     await navigator.clipboard.writeText(url);
     setToast(true);
+  };
+
+  const moveTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+  const movePrev = () => {
+    navigate(-1);
   };
 
   useEffect(() => {
@@ -59,7 +69,9 @@ function AnswerList() {
   return (
     <>
       <S.Header>
-        <S.HeaderLogo src={mainLogo} alt="mainLogo" />
+        <Link to="/">
+          <S.HeaderLogo src={mainLogo} alt="mainLogo" />
+        </Link>
         <S.HeaderImage />
       </S.Header>
       <UserContext.Provider value={user}>
@@ -74,6 +86,15 @@ function AnswerList() {
           </QuestionContainer>
         </S.Body>
         <S.PageEnd ref={obsRef} />
+        <S.PageButtons $isBottom={true}>
+          <S.UpButton onClick={moveTop}>
+            <img src={arrowUp} alt="위로가기화살표" />
+          </S.UpButton>
+          <S.PrevButton onClick={movePrev}>
+            <img src={arrowLeft} alt="뒤로가기화살표" />
+            <p>뒤로가기</p>
+          </S.PrevButton>
+        </S.PageButtons>
         {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}
       </UserContext.Provider>
     </>

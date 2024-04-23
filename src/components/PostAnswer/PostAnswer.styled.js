@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const WrapAnswerTop = styled.div`
+export const QuestionStatus = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -23,12 +23,16 @@ export const AnswerTextarea = styled.textarea`
   padding: 1.6rem;
   resize: none;
   border-radius: 0.8rem;
-  border: none;
   color: var(--Grayscale-40);
   background-color: var(--Grayscale-20);
   margin-bottom: 0.8rem;
 
-  border: 1px solid black;
+  border: 1px solid var(--Grayscale-30);
+
+  &:focus {
+    outline: none;
+    border-color: var(--Grayscale-40);
+  }
 `;
 
 export const AnswerButton = styled.button`
@@ -47,12 +51,21 @@ export const AnswerText = styled.p`
 export const WrapEditIcons = styled.div`
   display: flex;
   gap: 0.8rem;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 
 export const EditIconButton = styled.button`
   img {
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2rem;
+    height: 2rem;
     fill: var(--Grayscale-50);
   }
+`;
+
+export const WrapAnswerTop = styled.div`
+  width: 56rem;
+  position: relative;
+}
 `;

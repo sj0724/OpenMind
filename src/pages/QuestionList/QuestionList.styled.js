@@ -89,7 +89,7 @@ export const FloatingBtn = styled.span`
 export const PageButtons = styled.div`
   position: fixed;
   right: 2.5rem;
-  bottom: 10rem;
+  bottom: ${(props) => (props.$isBottom ? '1rem' : '10rem')};
   display: flex;
   flex-direction: column;
   align-items: flex-end;

@@ -2,12 +2,13 @@ import { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Reaction from '../Reaction/Reaction';
+import Toast from '../Toast/Toast';
 
 import * as S from './PostAnswer.styled';
 import * as SQ from '../Question/Question.styled';
 import * as SA from '../Answer/Answer.styled';
 
-import { MESSAGE } from './constant';
+import MESSAGE from './constant';
 
 import { postAnswer } from '../../services/postAnswer';
 import { deleteAnswer } from '../../services/deleteAnswer';
@@ -49,6 +50,9 @@ function PostAnswer({ question }) {
   // 수정 중 여부
   const [isEdit, setIsEdit] = useState(false);
 
+  // 토스트 메세지
+  const [toast, setToast] = useState(false);
+
   // 등록 된 답변이 있다면 출력
   useEffect(() => {
     if (answer) {
@@ -69,7 +73,7 @@ function PostAnswer({ question }) {
   // 답변 등록
   const handleSubmitAnswer = async (isReject) => {
     if (!window.confirm(`답변을 ${isReject ? MESSAGE.reject : MESSAGE.submit}하시겠습니까?`)) {
-      return false;
+      return;
     }
 
     let answerContentText = '답변거절';
@@ -95,13 +99,15 @@ function PostAnswer({ question }) {
       setIsRejected(isReject);
       // 답변 id
       setAnswerId(data.id);
+      // 토스트 메세지
+      setToast(`답변이 ${isReject ? MESSAGE.reject : MESSAGE.submit}되었습니다.`);
     }
   };
 
   // 답변 삭제
   const handleDeleteAnswer = async () => {
     if (!window.confirm(`답변을 ${MESSAGE.delete}하시겠습니까?`)) {
-      return false;
+      return;
     }
 
     const { error, loading } = await deleteAnswer(answerId);
@@ -116,6 +122,7 @@ function PostAnswer({ question }) {
       setIsAnswerSubmitted(false);
       setIsRejected(false);
       setAnswerId(0);
+      setToast(`답변이 ${MESSAGE.delete}되었습니다.`);
     }
   };
 
@@ -128,7 +135,7 @@ function PostAnswer({ question }) {
   // 답변 수정
   const handleEditAnswer = async () => {
     if (!window.confirm(`답변을 ${MESSAGE.edit}하시겠습니까?`)) {
-      return false;
+      return;
     }
 
     const { error, loading, data } = await patchAnswer(answerId, answerText, false);
@@ -150,6 +157,8 @@ function PostAnswer({ question }) {
       setAnswerId(data.id);
       // 수정 상태
       setIsEdit(false);
+      // 토스트 메세지
+      setToast(`답변이 ${MESSAGE.edit}되었습니다.`);
     }
   };
 
@@ -181,31 +190,11 @@ function PostAnswer({ question }) {
 
   return (
     <SQ.QuestBody>
-      <S.WrapAnswerTop>
+      <S.QuestionStatus>
         <SQ.QuestionStatus $complete={isAnswerSubmitted}>
           {isAnswerSubmitted ? '답변 완료' : '미답변'}
         </SQ.QuestionStatus>
-        {/* 아이콘 표시 */}
-        <S.WrapEditIcons>
-          {isAnswerSubmitted ? (
-            <>
-              {!isRejected && (
-                <S.EditIconButton onClick={() => handleEditAnswerStatus()}>
-                  <img src={editIcon} alt="수정버튼" />
-                </S.EditIconButton>
-              )}
-            </>
-          ) : (
-            <S.EditIconButton onClick={() => handleSubmitAnswer(true)}>
-              <img src={rejectionIcon} alt="답변거절버튼" />
-            </S.EditIconButton>
-          )}
-          {/* 아이콘 표시 */}
-          <S.EditIconButton onClick={() => handleDeleteAnswer()}>
-            <img src={deleteIcon} alt="삭제버튼" />
-          </S.EditIconButton>
-        </S.WrapEditIcons>
-      </S.WrapAnswerTop>
+      </S.QuestionStatus>
       <SQ.QuestionContent>
         <SQ.Time>
           질문
@@ -219,8 +208,30 @@ function PostAnswer({ question }) {
         <SA.Profile $image={user.imageSource} />
         <SA.AnswerContent>
           <SA.Answerinfo>
-            <SA.UserName>{user.name}</SA.UserName>
-            <SA.AnswerTime>{createdAnswerText}</SA.AnswerTime>
+            <S.WrapAnswerTop>
+              <SA.UserName>{user.name}</SA.UserName>
+              <SA.AnswerTime>{createdAnswerText}</SA.AnswerTime>
+              {/* 아이콘 표시 */}
+              <S.WrapEditIcons>
+                {isAnswerSubmitted ? (
+                  <>
+                    {!isRejected && (
+                      <S.EditIconButton onClick={() => handleEditAnswerStatus()}>
+                        <img src={editIcon} alt="수정버튼" />
+                      </S.EditIconButton>
+                    )}
+                    <S.EditIconButton onClick={() => handleDeleteAnswer()}>
+                      <img src={deleteIcon} alt="삭제버튼" />
+                    </S.EditIconButton>
+                  </>
+                ) : (
+                  <S.EditIconButton onClick={() => handleSubmitAnswer(true)}>
+                    <img src={rejectionIcon} alt="답변거절버튼" />
+                  </S.EditIconButton>
+                )}
+              </S.WrapEditIcons>
+              {/* 아이콘 표시 */}
+            </S.WrapAnswerTop>
           </SA.Answerinfo>
           {/* 답변 입력 유저 정보 및 답변 입력 시간 */}
 
@@ -235,7 +246,8 @@ function PostAnswer({ question }) {
                 <S.AnswerTextarea
                   placeholder="답변을 입력해주세요"
                   value={answerText || ''}
-                  onChange={(event) => handleAnswerChange(event)}></S.AnswerTextarea>
+                  onChange={(event) => handleAnswerChange(event)}
+                />
                 {!isEdit ? (
                   <S.AnswerButton
                     $bgColor={answerText?.trim() ? '--Brown-40' : '--Brown-30'}
@@ -259,8 +271,20 @@ function PostAnswer({ question }) {
       </SA.AnswerContainer>
       {/* 답변 입력 or 출력하는 곳 */}
       <Reaction question={question} />
+      {toast && <Toast setToast={setToast} text={toast} />}
     </SQ.QuestBody>
   );
 }
+
+PostAnswer.propTypes = {
+  question: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    like: PropTypes.number.isRequired,
+    dislike: PropTypes.number.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    answer: PropTypes.object.isRequired,
+  }).isRequired,
+};
 
 export default PostAnswer;
