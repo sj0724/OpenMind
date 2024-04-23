@@ -29,7 +29,7 @@ function Main() {
       <S.UserForm onSubmit={createUser}>
         <S.UserInput htmlFor="name">
           <img src={personIcon} alt="userlogo" />
-          <input placeholder="이름을 입력해주세요." id="name" ref={userName} />
+          <input placeholder="이름을 입력해주세요." id="name" ref={userName} maxLength={10} />
         </S.UserInput>
         <S.UserSubmitBtn type="submit">질문 받기</S.UserSubmitBtn>
       </S.UserForm>
