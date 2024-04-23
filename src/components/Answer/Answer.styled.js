@@ -40,4 +40,6 @@ export const Answerinfo = styled.div`
 
 export const UserName = styled(QuestionDetail)``;
 
-export const AnswerTime = styled(Time)``;
+export const AnswerTime = styled(Time)`
+  white-space: nowrap;
+`;

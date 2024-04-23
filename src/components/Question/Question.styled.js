@@ -83,4 +83,9 @@ export const ThumbnsBtn = styled.div`
   font-weight: 500;
   line-height: 18px;
   color: var(${(props) => (props.color ? props.color : '--Grayscale-40')});
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
 `;
