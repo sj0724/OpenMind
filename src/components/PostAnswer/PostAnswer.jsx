@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import Reaction from '../Reaction/Reaction';
@@ -162,6 +162,26 @@ function PostAnswer({ question }) {
     }
   };
 
+  // 답변 등록/수정/삭제 핸들러
+  const handleEnterKey = useCallback(
+    (event) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+
+        if (!answerText.trim()) {
+          return;
+        }
+
+        if (isEdit) {
+          handleEditAnswer();
+        } else {
+          handleSubmitAnswer(false);
+        }
+      }
+    },
+    [handleEditAnswer, handleSubmitAnswer, answerText, isEdit],
+  );
+
   // 질문 시간 출력
   useEffect(() => {
     const nowDate = new Date();
@@ -247,6 +267,7 @@ function PostAnswer({ question }) {
                   placeholder="답변을 입력해주세요"
                   value={answerText || ''}
                   onChange={(event) => handleAnswerChange(event)}
+                  onKeyPress={(event) => handleEnterKey(event)}
                 />
                 {!isEdit ? (
                   <S.AnswerButton
@@ -278,7 +299,7 @@ function PostAnswer({ question }) {
 
 PostAnswer.propTypes = {
   question: PropTypes.shape({
-    content: PropTypes.string.isRequired,
+    content: PropTypes.string,
     like: PropTypes.number.isRequired,
     dislike: PropTypes.number.isRequired,
     createdAt: PropTypes.string.isRequired,
