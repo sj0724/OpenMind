@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import styled from 'styled-components';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Nav from '../components/Nav/Nav';
 import Header from '../components/Header/Header';
 import CardList from '../components/Card/CardList';
@@ -24,6 +24,19 @@ function List() {
     setView(!view);
   };
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (view && !event.target.closest('.dropdown-menu')) {
+        toggleDropdown();
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [view]);
+
   const handleItemClick = (value) => {
     setSelectedItem(options.find((option) => option.value === value).label);
     toggleDropdown();
@@ -31,7 +44,7 @@ function List() {
 
   const mapSelectedItemToSortValue = useMemo(
     () => (item) => options.find((option) => option.label === item).value,
-    [],
+    [options],
   );
 
   return (

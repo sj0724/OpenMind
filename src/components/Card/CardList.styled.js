@@ -9,10 +9,6 @@ export const OuterContainer = styled.div`
   }
 `;
 
-/* width: 100%;
-  max-width: 120rem;
-
-   max-width: 40rem; */
 export const Container = styled.div`
   min-height: 39.4vh;
   display: grid;
@@ -77,6 +73,10 @@ export const CardName = styled.p`
   color: #000;
   margin-top: 1rem;
   font-size: 2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 18rem;
 `;
 
 export const CardInfo = styled.div`
