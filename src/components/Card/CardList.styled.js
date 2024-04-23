@@ -73,6 +73,10 @@ export const CardName = styled.p`
   color: #000;
   margin-top: 1rem;
   font-size: 2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 18rem;
 `;
 
 export const CardInfo = styled.div`
