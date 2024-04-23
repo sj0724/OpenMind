@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 import StyledPagination from './Pagination.styled';
@@ -33,4 +34,4 @@ Paging.propTypes = {
   total: PropTypes.number.isRequired,
 };
 
-export default Paging;
+export default memo(Paging);
