@@ -42,7 +42,7 @@ export const UserForm = styled.form`
 
   img {
     position: absolute;
-    top: 4.4rem;
+    top: 4.6rem;
     left: 4.8rem;
     height: 2rem;
     width: 2rem;
