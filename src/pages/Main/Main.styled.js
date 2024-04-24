@@ -30,6 +30,7 @@ export const MainLogo = styled.img`
 `;
 
 export const UserForm = styled.form`
+  position: relative;
   display: flex;
   padding: 3.2rem;
   flex-direction: column;
@@ -40,13 +41,11 @@ export const UserForm = styled.form`
   z-index: 10;
 
   img {
+    position: absolute;
+    top: 4.4rem;
+    left: 4.8rem;
     height: 2rem;
     width: 2rem;
-  }
-
-  input {
-    border: none;
-    width: 100%;
   }
 
   @media (max-width: 769px) {
@@ -56,7 +55,18 @@ export const UserForm = styled.form`
   }
 `;
 
-export const UserInput = styled.label`
+export const UserInput = styled.input`
+  position: absolute;
+  border: none;
+  top: 4.8rem;
+  left: 7rem;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const UserInputLabel = styled.label`
   display: flex;
   width: 33.6rem;
   height: 4.6rem;
@@ -66,7 +76,10 @@ export const UserInput = styled.label`
   border-radius: 0.8rem;
   border: 1px solid var(--Grayscale-40);
   background: var(--Grayscale-10);
-  position: relative;
+
+  ${UserInput}:focus ~ & {
+    border: 2px solid var(--Brown-40);
+  }
 
   @media (max-width: 769px) {
     width: 100%;
