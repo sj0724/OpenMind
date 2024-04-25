@@ -39,14 +39,13 @@ export const useFetchCardList = (limit, offset, sort) => {
     };
 
     fetchCardListData();
-  }, [limit, sort, currentPage, searchParams]);
+  }, [limit, sort, currentPage]);
 
   return {
     cards,
     loading,
     currentPage,
     totalPage,
-    setCurrentPage,
   };
 };
 

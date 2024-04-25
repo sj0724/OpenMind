@@ -5,12 +5,11 @@ import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 import StyledPagination from './Pagination.styled';
 
-function Paging({ page, setPage, total }) {
+function Paging({ page, total }) {
   const navigate = useNavigate();
 
   const handlePageChange = (newPage) => {
     navigate(`/list/?page=${newPage}`);
-    setPage(newPage);
   };
 
   return (
