@@ -8,15 +8,7 @@ import * as S from './CardList.styled';
 import Loading from '../Loading/Loading';
 
 function CardList({ limit, offset, sort }) {
-  const { cards, loading, currentPage, totalPage, setCurrentPage } = useFetchCardList(
-    limit,
-    offset,
-    sort,
-  );
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
+  const { cards, loading, currentPage, totalPage } = useFetchCardList(limit, offset, sort);
 
   return (
     <S.OuterContainer>
@@ -43,7 +35,7 @@ function CardList({ limit, offset, sort }) {
           ))
         )}
       </S.Container>
-      <Paging page={currentPage} setPage={handlePageChange} total={totalPage} />
+      <Paging page={currentPage} total={totalPage} />
     </S.OuterContainer>
   );
 }
