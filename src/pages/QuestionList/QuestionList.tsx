@@ -78,7 +78,7 @@ function QuestionList() {
       observer.disconnect();
     };
   }, [data]);
-
+  ㄴ;
   useEffect(() => {
     if (modal) {
       document.body.style.overflow = 'hidden';

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import Reaction from '../Reaction/Reaction';
-import SendToast from '..//SendToast/SendToast';
+import SendToast from '../SendToast/SendToast';
 
 import * as S from './PostAnswer.styled';
 import * as SQ from '../Question/Question.styled';
