@@ -2,6 +2,10 @@
 
 나의 생각과 궁금점을 자유롭게 질문해보세요! 익명으로 질문하고 답변 할 수 있습니다!
 
+## 배포 링크
+
+<a href='https://openmind-5-2.netlify.app/'>https://openmind-5-2.netlify.app/</a>
+
 ## Team
 |<img src="https://avatars.githubusercontent.com/u/137033202?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/40783675?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/160032149?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/151392186?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/101908750?v=4" width="150" height="150"/>|
 |:-:|:-:|:-:|:-:|:-:|
